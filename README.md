@@ -1,3 +1,3 @@
-Hello World. My favorite emoji is ¯\_(ツ)_/¯
+Hello World. My favorite emoji is ¯&#92;_(ツ)_/¯
 
 - Signed Jesse :)
