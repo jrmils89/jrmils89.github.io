@@ -1,0 +1,79 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+
+body {
+	background: #222930;
+	background-size: cover;
+	background-position: center;
+	font-family: 'Lato', sans-serif;
+	color: #E9E9E9;
+	margin: 0px;
+	font-size: 12px;
+}
+
+img {
+	margin: 40px 0px 0px 0px;
+	border: 1px solid #E9E9E9;
+	border-radius: 20px;
+	height: 150px;
+}
+section	{
+	margin: 0 10px;
+	padding: 0px 15px;
+}
+
+header	{
+	text-align: center;
+}
+
+@media (max-width: 800px) {
+
+}
+
+.about-me {
+	margin: 0 auto;
+	max-width: 800px;
+	text-align: center;
+}
+.about-me .li {
+  padding: 0px 10px 0px 10px;
+}
+
+/* unvisited link */
+a:link {
+    color: white;
+}
+
+/* visited link */
+a:visited {
+    color: #B7B7B7;
+}
+
+/* mouse over link */
+a:hover {
+    color: #E9E9E9;
+}
+
+/* selected link */
+a:active {
+    color: #E9E9E9;
+}
+
+.nav-bar {
+	background: #6699CC;
+	font-family: 'Lato', sans-serif;
+	vertical-align: middle;
+	padding: 5px;
+	height: 30px;
+}
+.nav-bar .item {
+	display: inline;
+	padding: 5px 5px 5px 5px;
+	font-family: 'Lato', sans-serif;
+}
+
+.image-logo {
+	height: 25px;
+	margin: 0px 0px 0px 0px;
+	border: 1px solid #E9E9E9;
+	border-radius: 5px;
+}
