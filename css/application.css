@@ -1,0 +1,110 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+
+body {
+	background: #bcbec0;
+	background-size: cover;
+	background-position: center;
+	font-family: 'Lato', sans-serif;
+	color: #4B4C4C;
+	margin: 0px;
+	font-size: 12px;
+}
+
+img {
+	margin: 40px 0px 0px 0px;
+	border: 1px solid #E9E9E9;
+	border-radius: 20px;
+	height: 150px;
+}
+section	{
+	margin: 0 0px;
+	padding: 0px 0px;
+}
+
+header	{
+	text-align: center;
+}
+
+.about-me {
+	text-align: left;
+	float: left;
+	width: 45%;
+	background-color: #E8E9EA;
+	margin: 20px;
+	padding: 10px;
+	box-shadow: 0px 0px 2px 0px #383E44;
+}
+
+.resume {
+	float: right;
+	width: 45%;
+	background-color: #E8E9EA;
+	margin: 20px;
+	padding: 10px;
+	box-shadow: 0px 0px 2px 0px #383E44;
+}
+
+.about-me .li {
+  padding: 0px 10px 0px 10px;
+}
+
+/* unvisited link */
+a:link {
+    color: #4B4C4C;
+}
+
+/* visited link */
+a:visited {
+    color: #1e1e1e;
+}
+
+/* mouse over link */
+a:hover {
+    color: #818181;
+}
+
+/* selected link */
+a:active {
+    color: #4B4C4C;
+}
+
+.nav-bar {
+	background: #6699CC;
+	font-family: 'Lato', sans-serif;
+	vertical-align: middle;
+	padding: 5px;
+	height: 30px;
+}
+.nav-bar .item {
+	display: inline;
+	padding: 5px 5px 5px 5px;
+	font-family: 'Lato', sans-serif;
+}
+
+.image-logo {
+	height: 25px;
+	margin: 0px 0px 0px 0px;
+	border: 1px solid #E9E9E9;
+	border-radius: 5px;
+}
+
+@media (max-width: 1200px) {
+	.resume {
+	float: none;
+	width: 90%;
+	background-color: #E8E9EA;
+	margin: 20px auto;
+	padding: 10px;
+	box-shadow: 0px 0px 2px 0px #383E44;
+	}
+
+	.about-me {
+	float: none;
+	width: 90%;
+	background-color: #E8E9EA;
+	margin: 20px auto;
+	padding: 10px;
+	box-shadow: 0px 0px 2px 0px #383E44;
+	}
+
+}

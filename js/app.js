@@ -1,4 +1,4 @@
-// $(function() {
+$(function() {
 
 // Create some HTML el's / grab needed el's
 var $gameBoardContainer = $('<div>').attr('id','game-board-container').addClass('board');
@@ -134,11 +134,14 @@ var setDropSquaresClick = function() {
 						var $rowNum = parseInt($cols.eq(i).attr('row'));
 						// Set the a color played var
 						var colorPlayed = 'red';
+						// Display other player's turn
+						$header.html("It is "+ playerTwoName +"'s turn!");
 						// Check the winner and set it to var (so we can use it later perhaps)
 						var winner = checkIfWinner($rowNum,$colNum,colorPlayed,checkLeft,checkRight,checkUp,checkDown,checkDiagUpRight,checkDiagDownRight,checkDiagUpLeft,checkDiagDownLeft);
 						// Check to see if there's a tie
 						isTie(winner);
 						// Change player's turn
+
 						playerTurn = !playerTurn;
 						// Break the loop since it doesn't need to keep playing up the empty spaces
 						break;
@@ -149,6 +152,7 @@ var setDropSquaresClick = function() {
 						var $colNum = parseInt($cols.eq(i).attr('col'));
 						var $rowNum = parseInt($cols.eq(i).attr('row'));
 						var colorPlayed = 'black';
+						$header.html("It is "+ playerOneName +"'s turn!");
 						var winner = checkIfWinner($rowNum,$colNum,colorPlayed,checkLeft,checkRight,checkUp,checkDown,checkDiagUpRight,checkDiagDownRight,checkDiagUpLeft,checkDiagDownLeft);
 						isTie(winner);
 
@@ -451,7 +455,7 @@ var playAgain = function() {
 	// Set default els back to default
 	$gameBoardContainer = $('<div>').attr('id','game-board-container').addClass('board');
 	$playRowButtons = $('.play-row .column');
-	$header = $('.game-header').html("Connect Four");
+	$header = $('.game-header').html("It is "+ playerOneName +"'s turn!");
 	// Append HTML el's to the body
 	$gameBoardContainer.appendTo($body);
 
@@ -483,9 +487,9 @@ var resetGame = function() {
 	// Create some new vars
 	$gameBoardContainer = $('<div>').attr('id','game-board-container').addClass('board');
 	$playRowButtons = $('.play-row .column');
-
+	playerTurn = true;
 	// Resetting the header text
-	$header = $('.game-header').html("Connect Four");
+	$header = $('.game-header').html("It is "+ playerOneName +"'s turn!");
 	// Append HTML el's to the body
 	$gameBoardContainer.appendTo($body);
 };
@@ -500,6 +504,7 @@ $("button.play-button").click( function() {
 	// Hide the elements in the overlay
 	$(this).siblings().fadeOut(200);
 	$(this).parent().fadeOut(200);
+	$('.game-header').html("It is "+ playerOneName +"'s turn!");
 });
 
 var addPlayAgainResetButtons = function() {
@@ -521,4 +526,4 @@ var addPlayAgainResetButtons = function() {
 
 
 
-// })
+})
