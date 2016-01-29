@@ -25,18 +25,24 @@ h1 {
 	font-style: italic;
 	color: white;
 }
+#non-game-board-container {
+	height: 14%;
+	font-size: 1em;
+}
 
 .board {
-	width: 75%;
-	height: 75%;
+	width: 55%;
+	height: 85%;
 	margin: 0 auto;
 	box-sizing: border-box;
 }
 
 .column {
-	border: solid 10px yellow;
+	border: solid 1px black;
 	border-radius: 5em;
 	height: 100%;
+	margin-left: 1%;
+	margin-right: 1%;
 	display: inline-block;
 	box-sizing: border-box;
 	background-color: #5D90C9;
@@ -48,8 +54,7 @@ h1 {
 .row {
 	width: 100%;
 	box-sizing: border-box;
-	border: solid 1px yellow;
-	background-color: yellow;
+	/*border: solid 1px black;*/
 
 }
 
@@ -60,18 +65,32 @@ h1 {
 }
 
 .play-row .column {
-	border: solid 1px black;
 	border-radius: 50px;
-	padding: 20px;
-	font-family: 'Icons';
-	font-size: 1em;
-	text-align: center;
+	background-color: transparent;
+	background-image: url('../images/downArrow.svg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	border-color: transparent;
+	box-sizing: border-box;
 }
 
-.red {
+.column.red {
 	color: red;
+	background-color: transparent;
+	background-image: url('../images/red.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	border-color: transparent;
 }
 
-.black {
+.column.black {
 	color: black;
+	background-color: transparent;
+	background-image: url('../images/black.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	border-color: transparent;
 }
