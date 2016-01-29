@@ -78,7 +78,7 @@ h1 {
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
-	animation: fall .15s ease-in-out;
+	animation: fall .15s cubic-bezier(.5,1.49,.92,.83);
 }
 
 .black {
@@ -87,7 +87,7 @@ h1 {
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
-	animation: fall .15s ease-in-out;
+	animation: fall .15s cubic-bezier(.5,1.49,.92,.83);
 }
 
 @keyframes fall {
