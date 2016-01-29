@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 $(function() {
+=======
+// $(function() {
+>>>>>>> 50fcd3ff6f3556909d001551184bcec27a312171
 
 // Create some HTML el's / grab needed el's
 var $gameBoardContainer = $('<div>').attr('id','game-board-container').addClass('board');
@@ -526,4 +530,8 @@ var addPlayAgainResetButtons = function() {
 
 
 
+<<<<<<< HEAD
 })
+=======
+// })
+>>>>>>> 50fcd3ff6f3556909d001551184bcec27a312171
