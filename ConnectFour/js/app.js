@@ -398,12 +398,12 @@ $(function() {
     var $playRowButtons = $('.play-row .column');
     // Return true if one of the callbacks returns true
     if (left || right || up || down || diagUpRight || diagDownRight || diagUpLeft || diagDownLeft) {
-      // Set the header to let the user know someone won!
-      $header.html('Congrats! ' + color.toUpperCase() + ' won!');
 
       if (color === 'red') {
         // Add a win to red
         redWins += 1;
+        // Set the header to let the user know someone won!
+        $header.html('Congrats! ' + playerOneName + ' won!');
         $('.player-score span').eq(0).html(redWins);
         $playRowButtons.off("click");
         addPlayAgainResetButtons();
@@ -411,6 +411,7 @@ $(function() {
       else {
         // Add a win to black
         blackWins += 1;
+        $header.html('Congrats! ' + playerTwoName + ' won!');
         $('.player-score span').eq(1).html(blackWins);
         $playRowButtons.off("click");
         addPlayAgainResetButtons();
@@ -506,6 +507,24 @@ $(function() {
     $(this).parent().fadeOut(200);
     $('.game-header').html("It is " + playerOneName + "'s turn!");
   });
+
+  $("input.player-input").keypress(function() {
+    
+    // Run the same functions that clicking the play button does if you hit enter in the inputs
+
+    if (event.code === 'Enter') {    
+    // Get the player names
+    getPlayerNames();
+    // Setup the board
+    initialGameSetup();
+    // Hide the elements in the overlay
+    $(this).siblings().fadeOut(200);
+    $(this).parent().fadeOut(200);
+    $('.game-header').html("It is " + playerOneName + "'s turn!");
+    }
+  });
+
+
 
   var addPlayAgainResetButtons = function() {
     var $playAgainButton = $("<button>").attr("id", "play-again").html("Play Again");
