@@ -92,7 +92,7 @@ h1 {
 	border-radius: 50px;
 	background-color: transparent;
 	background-image: url('../images/downArrow.svg');
-	background-size: cover;
+	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
 	border-color: transparent;
@@ -188,13 +188,6 @@ h1 {
 	99% 	{border: none;}
 	100% 	{transform: translateY(0);}
 }
-
-@keyframes fall {
-	0% 		{transform: translateY(-900px); border: none;}
-	99% 	{border: none;}
-	100% 	{transform: translateY(0);}
-}
-
 
 
 

@@ -1,4 +1,4 @@
-$(function() {
+// $(function() {
 
   // Create some HTML el's / grab needed el's
   var $gameBoardContainer = $('<div>').attr('id', 'game-board-container').addClass('board');
@@ -110,59 +110,61 @@ $(function() {
 
     // Set a click function on each play button
     $playRowButtons.each(function() {
-        $(this).click(function() {
-
-            // Get the column and rown number clicked
-            var $col = $(this).attr('col');
-            var $row = $(this).attr('row');
-
-            // Get the all the column numbers with that column number
-            var $cols = $("[col=" + $col + "]");
-
-            // Loop through the columns to play the lowest (visually) column
-
-            for (var i = $cols.length; i > 0; i--) {
-              // If it's empty...
-              if ($cols.eq(i).html() === '') {
-                // If it's player = True's true ('Red'))
-                if (playerTurn) {
-                  // Play Red
-                  $cols.eq(i).html(' ');
-                  $cols.eq(i).addClass('red');
-                  // Get the row and column numbers played
-                  var $colNum = parseInt($cols.eq(i).attr('col'));
-                  var $rowNum = parseInt($cols.eq(i).attr('row'));
-                  // Set the a color played var
-                  var colorPlayed = 'red';
-                  // Display other player's turn
-                  $header.html("It is " + playerTwoName + "'s turn!");
-                  // Check the winner and set it to var (so we can use it later perhaps)
-                  var winner = checkIfWinner($rowNum, $colNum, colorPlayed, checkLeft, checkRight, checkUp, checkDown, checkDiagUpRight, checkDiagDownRight, checkDiagUpLeft, checkDiagDownLeft);
-                  // Check to see if there's a tie
-                  isTie(winner);
-                  // Change player's turn
-
-                  playerTurn = !playerTurn;
-                  // Break the loop since it doesn't need to keep playing up the empty spaces
-                  break;
-                } else {
-                  // Doing the same thing for black
-                  $cols.eq(i).html(' ');
-                  $cols.eq(i).addClass('black');
-                  var $colNum = parseInt($cols.eq(i).attr('col'));
-                  var $rowNum = parseInt($cols.eq(i).attr('row'));
-                  var colorPlayed = 'black';
-                  $header.html("It is " + playerOneName + "'s turn!");
-                  var winner = checkIfWinner($rowNum, $colNum, colorPlayed, checkLeft, checkRight, checkUp, checkDown, checkDiagUpRight, checkDiagDownRight, checkDiagUpLeft, checkDiagDownLeft);
-                  isTie(winner);
-
-                  playerTurn = !playerTurn;
-                  break;
-                }
-              }; // end of if statement
-            } // end of for loop
-          }) // end click parens
+        $(this).click(playClick)// end click parens
       }) // end each parens
+  };
+
+  var playClick = function() {
+
+    // Get the column and rown number clicked
+    var $col = $(this).attr('col');
+    var $row = $(this).attr('row');
+
+    // Get the all the column numbers with that column number
+    var $cols = $("[col=" + $col + "]");
+
+    // Loop through the columns to play the lowest (visually) column
+
+    for (var i = $cols.length; i > 0; i--) {
+      // If it's empty...
+      if ($cols.eq(i).html() === '') {
+        // If it's player = True's true ('Red'))
+        if (playerTurn) {
+          // Play Red
+          $cols.eq(i).html(' ');
+          $cols.eq(i).addClass('red');
+          // Get the row and column numbers played
+          var $colNum = parseInt($cols.eq(i).attr('col'));
+          var $rowNum = parseInt($cols.eq(i).attr('row'));
+          // Set the a color played var
+          var colorPlayed = 'red';
+          // Display other player's turn
+          $header.html("It is " + playerTwoName + "'s turn!");
+          // Check the winner and set it to var (so we can use it later perhaps)
+          var winner = checkIfWinner($rowNum, $colNum, colorPlayed, checkLeft, checkRight, checkUp, checkDown, checkDiagUpRight, checkDiagDownRight, checkDiagUpLeft, checkDiagDownLeft);
+          // Check to see if there's a tie
+          isTie(winner);
+          // Change player's turn
+
+          playerTurn = !playerTurn;
+          // Break the loop since it doesn't need to keep playing up the empty spaces
+          break;
+        } else {
+          // Doing the same thing for black
+          $cols.eq(i).html(' ');
+          $cols.eq(i).addClass('black');
+          var $colNum = parseInt($cols.eq(i).attr('col'));
+          var $rowNum = parseInt($cols.eq(i).attr('row'));
+          var colorPlayed = 'black';
+          $header.html("It is " + playerOneName + "'s turn!");
+          var winner = checkIfWinner($rowNum, $colNum, colorPlayed, checkLeft, checkRight, checkUp, checkDown, checkDiagUpRight, checkDiagDownRight, checkDiagUpLeft, checkDiagDownLeft);
+          isTie(winner);
+
+          playerTurn = !playerTurn;
+          break;
+        }
+      }; // end of if statement
+    } // end of for loop
   };
 
   // Check Four Pieces To The Right
@@ -170,7 +172,7 @@ $(function() {
       var fourRight = col + 3;
       var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
       var $pieceFourRight = $("[row=" + row + "] [col=" + fourRight + "]");
-      var count = 1;
+      rightCount = 1;
       // check red
       if ($piecePlayed.hasClass(color) && $pieceFourRight.hasClass(color)) {
         // Go Right To Left checking 4 pieces
@@ -180,11 +182,11 @@ $(function() {
           // If the piece has the right class
           if ($pieceRight.hasClass(color)) {
             // Increment the count of the number of played pieces by 1
-            count += 1;
+            rightCount += 1;
           }; // End inner if loop
         }; // End For Loop
       }; // end if loop
-      if (count === 4) {
+      if (rightCount === 4) {
         // If there are 4 in a row, return true
         return true;
       };
@@ -198,7 +200,7 @@ $(function() {
       var fourLeft = col - 3;
       var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
       var $pieceFourLeft = $("[row=" + row + "] [col=" + fourLeft + "]");
-      var count = 1;
+      leftCount = 1;
 
       // check if first and last position needed have the color class needed
       if ($piecePlayed.hasClass(color) && $pieceFourLeft.hasClass(color)) {
@@ -209,11 +211,11 @@ $(function() {
           // If the piece has the right class
           if ($pieceLeft.hasClass(color)) {
             // Increment the count of the number of played pieces by 1
-            count += 1;
+            leftCount += 1;
           }; // End inner if loop
         }; // End For Loop
       }; // end if loop
-      if (count === 4) {
+      if (leftCount === 4) {
         // If there are 4 in a row, return true
         return true;
       };
@@ -226,7 +228,7 @@ $(function() {
       var fourUp = row - 3;
       var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
       var $pieceFourUp = $("[row=" + fourUp + "] [col=" + col + "]");
-      var count = 1;
+      upCount = 1;
 
       // check if first and last position needed have the color class needed
       if ($piecePlayed.hasClass(color) && $pieceFourUp.hasClass(color)) {
@@ -237,11 +239,11 @@ $(function() {
           // If the piece has the right class
           if ($pieceUp.hasClass(color)) {
             // Increment the count of the number of played pieces by 1
-            count += 1;
+            upCount += 1;
           }; // End inner if loop
         }; // End For Loop
       }; // end if loop
-      if (count === 4) {
+      if (upCount === 4) {
         // If there are 4 in a row, return true
         return true;
       };
@@ -253,7 +255,7 @@ $(function() {
       var fourDown = row + 3;
       var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
       var $pieceFourDown = $("[row=" + fourDown + "] [col=" + col + "]");
-      var count = 1;
+      downCount = 1;
 
       // check if first and last position needed have the color class needed
       if ($piecePlayed.hasClass(color) && $pieceFourDown.hasClass(color)) {
@@ -264,11 +266,11 @@ $(function() {
           // If the piece has the right class
           if ($pieceDown.hasClass(color)) {
             // Increment the count of the number of played pieces by 1
-            count += 1;
+            downCount += 1;
           }; // End inner if loop
         }; // End For Loop
       }; // end if loop
-      if (count === 4) {
+      if (downCount === 4) {
         // If there are 4 in a row, return true
         return true;
       };
@@ -281,7 +283,7 @@ $(function() {
     var fourRight = col + 3;
     var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
     var $pieceDiagonal = $("[row=" + fourUp + "] [col=" + fourRight + "]");
-    var count = 1;
+    diagUpRightCount = 1;
 
     if ($piecePlayed.hasClass(color) && $pieceDiagonal.hasClass(color)) {
       while (fourUp < row && fourRight > col) {
@@ -289,13 +291,13 @@ $(function() {
         // If the piece has the right class
         if ($pieceCheck.hasClass(color)) {
           // Increment the count of the number of played pieces by 1
-          count += 1;
+          diagUpRightCount += 1;
         }; // End inner if loop
         fourUp++;
         fourRight--;
       }; // Close while loop
     }; // Close if statement
-    if (count === 4) {
+    if (diagUpRightCount === 4) {
       // If there are 4 in a row, return true
       return true;
     };
@@ -308,7 +310,7 @@ $(function() {
     var fourLeft = col - 3;
     var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
     var $pieceDiagonal = $("[row=" + fourUp + "] [col=" + fourLeft + "]");
-    var count = 1;
+    diagUpLeftCount = 1;
 
     if ($piecePlayed.hasClass(color) && $pieceDiagonal.hasClass(color)) {
       while (fourUp < row && fourLeft < col) {
@@ -316,13 +318,13 @@ $(function() {
         // If the piece has the right class
         if ($pieceCheck.hasClass(color)) {
           // Increment the count of the number of played pieces by 1
-          count += 1;
+          diagUpLeftCount += 1;
         }; // End inner if loop
         fourUp++;
         fourLeft++;
       }; // Close while loop
     }; // Close if statement
-    if (count === 4) {
+    if (diagUpLeftCount === 4) {
       // If there are 4 in a row, return true
       return true;
     };
@@ -335,7 +337,7 @@ $(function() {
     var fourLeft = col - 3;
     var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
     var $pieceDiagonal = $("[row=" + fourDown + "] [col=" + fourLeft + "]");
-    var count = 1;
+    diagDownLeftCount = 1;
 
     if ($piecePlayed.hasClass(color) && $pieceDiagonal.hasClass(color)) {
       while (fourDown > row && fourLeft < col) {
@@ -343,13 +345,13 @@ $(function() {
         // If the piece has the right class
         if ($pieceCheck.hasClass(color)) {
           // Increment the count of the number of played pieces by 1
-          count += 1;
+          diagDownLeftCount += 1;
         }; // End inner if loop
         fourDown--;
         fourLeft++;
       }; // Close while loop
     }; // Close if statement
-    if (count === 4) {
+    if (diagDownLeftCount === 4) {
       // If there are 4 in a row, return true
       return true;
     };
@@ -362,7 +364,7 @@ $(function() {
     var fourRight = col + 3;
     var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
     var $pieceDiagonal = $("[row=" + fourDown + "] [col=" + fourRight + "]");
-    var count = 1;
+    diagDownRightCount = 1;
 
     if ($piecePlayed.hasClass(color) && $pieceDiagonal.hasClass(color)) {
       while (fourDown > row && fourRight > col) {
@@ -370,13 +372,13 @@ $(function() {
         // If the piece has the right class
         if ($pieceCheck.hasClass(color)) {
           // Increment the count of the number of played pieces by 1
-          count += 1;
+          diagDownRightCount += 1;
         }; // End inner if loop
         fourDown--;
         fourRight--;
       }; // Close while loop
     }; // Close if statement
-    if (count === 4) {
+    if (diagDownRightCount === 4) {
       // If there are 4 in a row, return true
       return true;
     };
@@ -416,6 +418,30 @@ $(function() {
         $playRowButtons.off("click");
         addPlayAgainResetButtons();
       } // end inner else incrementing wins
+      // Overall function return true
+      return true;
+    } // End if statement checking if there's a winner
+    else {
+      // If no winner return false
+      return false;
+    } // End else statement
+  }; // End check if winner func
+
+
+
+
+  var checkIfWinnerWithoutPlaying = function(row, col, color, callbackOne, callbackTwo, callbackThree, callbackFour, callbackFive, callbackSix, callbackSeven, callbackEight) {
+    var left = callbackOne(row, col, color);
+    var right = callbackTwo(row, col, color);
+    var up = callbackThree(row, col, color);
+    var down = callbackFour(row, col, color);
+    var diagUpRight = callbackFive(row, col, color);
+    var diagDownRight = callbackSix(row, col, color);
+    var diagUpLeft = callbackSeven(row, col, color);
+    var diagDownLeft = callbackEight(row, col, color);
+    var $playRowButtons = $('.play-row .column');
+    // Return true if one of the callbacks returns true
+    if (left || right || up || down || diagUpRight || diagDownRight || diagUpLeft || diagDownLeft) {
       // Overall function return true
       return true;
     } // End if statement checking if there's a winner
@@ -535,4 +561,100 @@ $(function() {
 
     $("#score").append($playAgainButton, $resetButton);
   };
-})
+
+
+  // just abstracting out some code I've repeated a bunch for get col's and rows
+  var getCol = function(num) {
+    return $("[col=" + num + "]");
+  };
+
+  var getColRow = function(col, row) {
+    return $("[col=" + col + "]"+"[row=" + row + "]");
+  };
+
+  // Function to determine where black should play
+  var determinePossibleMoves = function() {
+    var numberOfColumns = 7;
+    var numberOfRows = 6;
+    var winningArray = [];
+
+
+    // Loop through the rows and columns
+    for (var c = 0; c < numberOfColumns; c++) {
+      
+      for (var r = numberOfRows; r > 0; r--) {
+
+        // If the square is empoty
+        if (getColRow(c,r).html() === '' ) {
+
+          // Add the class so that I can check if that spot would win
+          $("[col=" + c + "]"+"[row=" + r + "]").addClass('black');
+
+          // Running this function. It returns true if there's a winner, but I'm really using it to increment the counts
+          // The counts determine how many tiles could be matched. For example, going 4 up if the tile being checked and 3 up was another
+          // Equal tile, but the middle two were empty, the count for checkUp would be 2. 
+          checkIfWinnerWithoutPlaying(r, c, 'black', checkLeft, checkRight, checkUp, checkDown, checkDiagUpRight, checkDiagDownRight, checkDiagUpLeft, checkDiagDownLeft);
+
+          // I then add each count together to get a "Total Count" for each possible square. This needs to be worked on some
+          // as currently if there is an opposite color in between it's counting that as null, where I would prefer that to punish
+          // that count somehow as there's noway to win that direction. I'm going to do this within each check function 
+          // by adding a oppositeColor = 0 if there's a wrong color tile in the way
+
+          var totalCount = rightCount+leftCount+downCount+upCount+diagDownLeftCount+diagUpLeftCount+diagDownRightCount+diagUpRightCount;
+          
+          // Pushes the position being checked into an array with the total
+          winningArray.push([c,r,totalCount]);
+
+          // Removing the class so it doesn't accidentally get played
+          $("[col=" + c + "]"+"[row=" + r + "]").removeClass('black');
+
+          // Break the nested loop so it goes onto the next column
+          break;
+        }; // End if loop
+
+      }; // Close row for loop
+
+    }; // Close column for loop
+  
+  return winningArray;
+
+  }; // Close function
+
+  // This function is for looping through the array of possible moves and determining the best of those moves
+  var loopThroughPossibleMoves = function(a) {
+    // Set a baseline to compare against
+
+    var col = a[0][0];
+    var row = a[0][1];
+    var count = a[0][2];
+
+    // Loop through the array
+    for (var i = 0; i < a.length; i++) {
+      // Add the class to the location it's on so that...
+      $("[col=" + a[i][0] + "]"+"[row=" + a[i][1] + "]").addClass('black');
+
+      // If the location being checked would win
+      if (checkIfWinnerWithoutPlaying(a[i][1], a[i][0], 'black', checkLeft, checkRight, checkUp, checkDown, checkDiagUpRight, checkDiagDownRight, checkDiagUpLeft, checkDiagDownLeft)) {
+        // Win the game at that square OR something here...
+        console.log("Would win at row: "+a[i][1]+" and col: "+a[i][0]);
+        // Break the loop because the game is over
+        break;
+      }
+      // Else, if the position's it's at has a score that's higher than the baseline
+      else if (a[i][2] > count) {
+        // Say that position is better
+        col = a[i][0];
+        row = a[i][1];
+        count = a[i][2];
+      }; // Close If Statement
+
+      // Remove the class
+      $("[col=" + a[i][0] + "]"+"[row=" + a[i][1] + "]").removeClass('black');
+    }; // Close For Loop
+
+    // Say what spot the computer should play at
+    console.log("Should play at row: "+row+" and col: "+col);
+  }; // Close function;
+
+
+// })
