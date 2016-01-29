@@ -173,6 +173,7 @@
       var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
       var $pieceFourRight = $("[row=" + row + "] [col=" + fourRight + "]");
       rightCount = 1;
+      blockedRight = 1;
       // check red
       if ($piecePlayed.hasClass(color) && $pieceFourRight.hasClass(color)) {
         // Go Right To Left checking 4 pieces
@@ -183,9 +184,14 @@
           if ($pieceRight.hasClass(color)) {
             // Increment the count of the number of played pieces by 1
             rightCount += 1;
+          } else if (color === 'black' && $pieceRight.hasClass('red')) {
+            blockedRight = 0;
+          } else if (color === 'red' && $pieceRight.hasClass('black')) {
+            blockedRight = 0;
           }; // End inner if loop
         }; // End For Loop
       }; // end if loop
+      rightCount = rightCount * blockedRight;
       if (rightCount === 4) {
         // If there are 4 in a row, return true
         return true;
@@ -201,6 +207,7 @@
       var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
       var $pieceFourLeft = $("[row=" + row + "] [col=" + fourLeft + "]");
       leftCount = 1;
+      blockedLeft = 1;
 
       // check if first and last position needed have the color class needed
       if ($piecePlayed.hasClass(color) && $pieceFourLeft.hasClass(color)) {
@@ -212,9 +219,14 @@
           if ($pieceLeft.hasClass(color)) {
             // Increment the count of the number of played pieces by 1
             leftCount += 1;
+          } else if (color === 'black' && $pieceLeft.hasClass('red')) {
+            blockedLeft = 0;
+          } else if (color === 'red' && $pieceLeft.hasClass('black')) {
+            blockedLeft = 0;
           }; // End inner if loop
         }; // End For Loop
       }; // end if loop
+      leftCount = leftCount * blockedLeft;
       if (leftCount === 4) {
         // If there are 4 in a row, return true
         return true;
@@ -229,6 +241,7 @@
       var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
       var $pieceFourUp = $("[row=" + fourUp + "] [col=" + col + "]");
       upCount = 1;
+      blockedUp = 1;
 
       // check if first and last position needed have the color class needed
       if ($piecePlayed.hasClass(color) && $pieceFourUp.hasClass(color)) {
@@ -240,9 +253,14 @@
           if ($pieceUp.hasClass(color)) {
             // Increment the count of the number of played pieces by 1
             upCount += 1;
+          } else if (color === 'black' && $pieceUp.hasClass('red')) {
+            blockedUp = 0;
+          } else if (color === 'red' && $pieceUp.hasClass('black')) {
+            blockedUp = 0;
           }; // End inner if loop
         }; // End For Loop
       }; // end if loop
+      upCount = upCount * blockedUp;
       if (upCount === 4) {
         // If there are 4 in a row, return true
         return true;
@@ -256,6 +274,7 @@
       var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
       var $pieceFourDown = $("[row=" + fourDown + "] [col=" + col + "]");
       downCount = 1;
+      blockedDown = 1;
 
       // check if first and last position needed have the color class needed
       if ($piecePlayed.hasClass(color) && $pieceFourDown.hasClass(color)) {
@@ -267,9 +286,14 @@
           if ($pieceDown.hasClass(color)) {
             // Increment the count of the number of played pieces by 1
             downCount += 1;
+          } else if (color === 'black' && $pieceDown.hasClass('red')) {
+            blockedDown = 0;
+          } else if (color === 'red' && $pieceDown.hasClass('black')) {
+            blockedDown = 0;
           }; // End inner if loop
         }; // End For Loop
       }; // end if loop
+      downCount = downCount * blockedDown;
       if (downCount === 4) {
         // If there are 4 in a row, return true
         return true;
@@ -284,6 +308,7 @@
     var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
     var $pieceDiagonal = $("[row=" + fourUp + "] [col=" + fourRight + "]");
     diagUpRightCount = 1;
+    blockedDiagUpRight = 1;
 
     if ($piecePlayed.hasClass(color) && $pieceDiagonal.hasClass(color)) {
       while (fourUp < row && fourRight > col) {
@@ -291,12 +316,18 @@
         // If the piece has the right class
         if ($pieceCheck.hasClass(color)) {
           // Increment the count of the number of played pieces by 1
-          diagUpRightCount += 1;
+          blockedDiagUpRight += 1;
+        } else if (color === 'black' && $pieceCheck.hasClass('red')) {
+            diagUpRightCount = 0;
+        } else if (color === 'red' && $pieceCheck.hasClass('black')) {
+            blockedDiagUpRight = 0;
         }; // End inner if loop
+        
         fourUp++;
         fourRight--;
       }; // Close while loop
     }; // Close if statement
+    diagUpRightCount = diagUpRightCount * blockedDiagUpRight;
     if (diagUpRightCount === 4) {
       // If there are 4 in a row, return true
       return true;
@@ -311,6 +342,7 @@
     var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
     var $pieceDiagonal = $("[row=" + fourUp + "] [col=" + fourLeft + "]");
     diagUpLeftCount = 1;
+    blockedDiagUpLeft = 1;
 
     if ($piecePlayed.hasClass(color) && $pieceDiagonal.hasClass(color)) {
       while (fourUp < row && fourLeft < col) {
@@ -319,11 +351,16 @@
         if ($pieceCheck.hasClass(color)) {
           // Increment the count of the number of played pieces by 1
           diagUpLeftCount += 1;
-        }; // End inner if loop
+        } else if (color === 'black' && $pieceCheck.hasClass('red')) {
+            blockedDiagUpLeft = 0;
+        } else if (color === 'red' && $pieceCheck.hasClass('black')) {
+            blockedDiagUpLeft = 0;
+        };  // End inner if loop
         fourUp++;
         fourLeft++;
       }; // Close while loop
     }; // Close if statement
+    diagUpLeftCount = diagUpLeftCount * blockedDiagUpLeft;
     if (diagUpLeftCount === 4) {
       // If there are 4 in a row, return true
       return true;
@@ -338,6 +375,7 @@
     var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
     var $pieceDiagonal = $("[row=" + fourDown + "] [col=" + fourLeft + "]");
     diagDownLeftCount = 1;
+    blockedDiagDownLeft = 1;
 
     if ($piecePlayed.hasClass(color) && $pieceDiagonal.hasClass(color)) {
       while (fourDown > row && fourLeft < col) {
@@ -346,11 +384,16 @@
         if ($pieceCheck.hasClass(color)) {
           // Increment the count of the number of played pieces by 1
           diagDownLeftCount += 1;
-        }; // End inner if loop
+        } else if (color === 'black' && $pieceCheck.hasClass('red')) {
+            blockedDiagDownLeft = 0;
+        } else if (color === 'red' && $pieceCheck.hasClass('black')) {
+            blockedDiagDownLeft = 0;
+        };  // End inner if loop
         fourDown--;
         fourLeft++;
       }; // Close while loop
     }; // Close if statement
+    diagDownLeftCount = diagDownLeftCount * blockedDiagDownLeft;
     if (diagDownLeftCount === 4) {
       // If there are 4 in a row, return true
       return true;
@@ -365,6 +408,7 @@
     var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
     var $pieceDiagonal = $("[row=" + fourDown + "] [col=" + fourRight + "]");
     diagDownRightCount = 1;
+    blockedDiagDownRight = 1;
 
     if ($piecePlayed.hasClass(color) && $pieceDiagonal.hasClass(color)) {
       while (fourDown > row && fourRight > col) {
@@ -373,11 +417,16 @@
         if ($pieceCheck.hasClass(color)) {
           // Increment the count of the number of played pieces by 1
           diagDownRightCount += 1;
-        }; // End inner if loop
+        } else if (color === 'black' && $pieceCheck.hasClass('red')) {
+            blockedDiagDownRight = 0;
+        } else if (color === 'red' && $pieceCheck.hasClass('black')) {
+            blockedDiagDownRight = 0;
+        };  // End inner if loop
         fourDown--;
         fourRight--;
       }; // Close while loop
     }; // Close if statement
+    diagDownRightCount = blockedDiagDownRight * blockedDiagDownRight;
     if (diagDownRightCount === 4) {
       // If there are 4 in a row, return true
       return true;
@@ -572,8 +621,8 @@
     return $("[col=" + col + "]"+"[row=" + row + "]");
   };
 
-  // Function to determine where black should play
-  var determinePossibleMoves = function() {
+  // Function to determine where x color should play. Expecting a string value
+  var determinePossibleMoves = function(color) {
     var numberOfColumns = 7;
     var numberOfRows = 6;
     var winningArray = [];
@@ -588,12 +637,12 @@
         if (getColRow(c,r).html() === '' ) {
 
           // Add the class so that I can check if that spot would win
-          $("[col=" + c + "]"+"[row=" + r + "]").addClass('black');
+          $("[col=" + c + "]"+"[row=" + r + "]").addClass(color);
 
           // Running this function. It returns true if there's a winner, but I'm really using it to increment the counts
           // The counts determine how many tiles could be matched. For example, going 4 up if the tile being checked and 3 up was another
           // Equal tile, but the middle two were empty, the count for checkUp would be 2. 
-          checkIfWinnerWithoutPlaying(r, c, 'black', checkLeft, checkRight, checkUp, checkDown, checkDiagUpRight, checkDiagDownRight, checkDiagUpLeft, checkDiagDownLeft);
+          checkIfWinnerWithoutPlaying(r, c, color, checkLeft, checkRight, checkUp, checkDown, checkDiagUpRight, checkDiagDownRight, checkDiagUpLeft, checkDiagDownLeft);
 
           // I then add each count together to get a "Total Count" for each possible square. This needs to be worked on some
           // as currently if there is an opposite color in between it's counting that as null, where I would prefer that to punish
@@ -606,7 +655,7 @@
           winningArray.push([c,r,totalCount]);
 
           // Removing the class so it doesn't accidentally get played
-          $("[col=" + c + "]"+"[row=" + r + "]").removeClass('black');
+          $("[col=" + c + "]"+"[row=" + r + "]").removeClass(color);
 
           // Break the nested loop so it goes onto the next column
           break;
@@ -620,8 +669,9 @@
 
   }; // Close function
 
-  // This function is for looping through the array of possible moves and determining the best of those moves
-  var loopThroughPossibleMoves = function(a) {
+  // This function is for looping through the array of possible moves and determining the best of those moves.
+  // This function could be used as well to block an opposing move
+  var loopThroughPossibleMoves = function(a, color) {
     // Set a baseline to compare against
 
     var col = a[0][0];
@@ -631,14 +681,15 @@
     // Loop through the array
     for (var i = 0; i < a.length; i++) {
       // Add the class to the location it's on so that...
-      $("[col=" + a[i][0] + "]"+"[row=" + a[i][1] + "]").addClass('black');
+      $("[col=" + a[i][0] + "]"+"[row=" + a[i][1] + "]").addClass(color);
 
       // If the location being checked would win
-      if (checkIfWinnerWithoutPlaying(a[i][1], a[i][0], 'black', checkLeft, checkRight, checkUp, checkDown, checkDiagUpRight, checkDiagDownRight, checkDiagUpLeft, checkDiagDownLeft)) {
+      if (checkIfWinnerWithoutPlaying(a[i][1], a[i][0], color, checkLeft, checkRight, checkUp, checkDown, checkDiagUpRight, checkDiagDownRight, checkDiagUpLeft, checkDiagDownLeft)) {
         // Win the game at that square OR something here...
-        console.log("Would win at row: "+a[i][1]+" and col: "+a[i][0]);
+        
+        $("[col=" + a[i][0] + "]"+"[row=" + a[i][1] + "]").removeClass(color);
         // Break the loop because the game is over
-        break;
+        return console.log("Would win at row: "+a[i][1]+" and col: "+a[i][0]);
       }
       // Else, if the position's it's at has a score that's higher than the baseline
       else if (a[i][2] > count) {
@@ -646,14 +697,15 @@
         col = a[i][0];
         row = a[i][1];
         count = a[i][2];
-      }; // Close If Statement
-
-      // Remove the class
-      $("[col=" + a[i][0] + "]"+"[row=" + a[i][1] + "]").removeClass('black');
+        $("[col=" + a[i][0] + "]"+"[row=" + a[i][1] + "]").removeClass(color);
+        
+      } else {
+        $("[col=" + a[i][0] + "]"+"[row=" + a[i][1] + "]").removeClass(color);
+      }
     }; // Close For Loop
 
     // Say what spot the computer should play at
-    console.log("Should play at row: "+row+" and col: "+col);
+    return console.log("Should play at row: "+row+" and col: "+col);
   }; // Close function;
 
 
