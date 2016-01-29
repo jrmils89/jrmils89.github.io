@@ -6,8 +6,6 @@ var $playRowButtons = $('.play-row .column');
 var $header = $('.game-header');
 	
 var $body = $('body');
-// Append HTML el's to the body
-$gameBoardContainer.appendTo($body);
 
 // Setup scoring mechanism
 var redWins = 0;
@@ -15,10 +13,42 @@ var blackWins = 0;
 var ties = 0;
 
 var playerTurn = true;
+// holder vars for player names
+var playerOneName;
+var playerTwoName;
+
+// Get player names function
+var getPlayerNames = function() {
+	playerOneName = $("#player-one").val()
+	playerTwoName = $("#player-two").val()
+};
 
 // Function to make the board HTML el's
 var makeBoard = function() {
 
+	// Setup the player names and scores
+	var $scoreDiv = $("<div>").attr("id", "score");
+	var $playerOneP = $("<p>").addClass("player-name").html("Red Player: ");
+	var $playerTwoP = $("<p>").addClass("player-name").html("Black Player: ");
+	var $pOneName = $("<span>").html(playerOneName);
+	var $pTwoName = $("<span>").html(playerTwoName);
+
+	var $playerOneScoreP = $("<p>").addClass("player-score").html("Red Wins: ");
+	var $playerTwoScoreP = $("<p>").addClass("player-score").html("Black Wins: ");
+	var $pOneScore = $("<span>").html(redWins);
+	var $pTwoScore = $("<span>").html(blackWins);
+
+	$pOneName.appendTo($playerOneP);
+	$pTwoName.appendTo($playerTwoP);
+	$pOneScore.appendTo($playerOneScoreP);
+	$pTwoScore.appendTo($playerTwoScoreP);
+
+	$scoreDiv.append($playerOneP, $playerTwoP, $playerOneScoreP, $playerTwoScoreP)
+
+	$scoreDiv.appendTo($body);
+
+	// Append HTML el's to the body
+	$gameBoardContainer.appendTo($body);
 	// Loop through and make 7 rows. 
 	for (var i = 0;  i < 7; i++) {	
 		// Create a row for players to click and drop their pieces
@@ -370,12 +400,16 @@ var checkIfWinner = function(row,col,color,callbackOne,callbackTwo,callbackThree
 		if (color === 'red') {
 			// Add a win to red
 			redWins += 1;
+			$('.player-score span').eq(0).html(redWins);
 			$playRowButtons.off("click");
+			addPlayAgainResetButtons();
 		} // end first if incrementing wins
 		else {
 			// Add a win to black
 			blackWins += 1;
+			$('.player-score span').eq(1).html(blackWins);
 			$playRowButtons.off("click");
+			addPlayAgainResetButtons();
 		} // end inner else incrementing wins
 		// Overall function return true
 		return true;
@@ -396,6 +430,7 @@ var isTie = function(isWinner) {
 		$header.html('Womp Womp There Was A Tie...');
 		ties += 1;
 		$playRowButtons.off("click");
+		addPlayAgainResetButtons();
 		return true;
 	};
 	return false;
@@ -412,11 +447,11 @@ var initialGameSetup = function() {
 var playAgain = function() {
 	// Remove old info
 	$gameBoardContainer.remove();
-
+	$('#score').remove();
 	// Set default els back to default
 	$gameBoardContainer = $('<div>').attr('id','game-board-container').addClass('board');
 	$playRowButtons = $('.play-row .column');
-	$header = $('.game-header');
+	$header = $('.game-header').html("Connect Four");
 	// Append HTML el's to the body
 	$gameBoardContainer.appendTo($body);
 
@@ -427,17 +462,55 @@ var playAgain = function() {
 	initialGameSetup();
 };
 
+
+
+
 // Reset the game, while also resetting the score
 var resetGame = function() {
 	redWins = 0;
 	blackWins = 0;
 	ties = 0;
-	playAgain();
+
+	// Make the overlay visible again. The overlay makes the play button which intiates the intial game setup
+	// So we don't need to call that funciton here anymore
+	$("#overlay").removeAttr("style");
+	$("#overlay").children().removeAttr("style");
+
+	// Remove the old gameplay and scoreboard
+	$gameBoardContainer.remove();
+	$('#score').remove();
+
+	// Create some new vars
+	$gameBoardContainer = $('<div>').attr('id','game-board-container').addClass('board');
+	$playRowButtons = $('.play-row .column');
+
+	// Resetting the header text
+	$header = $('.game-header').html("Connect Four");
+	// Append HTML el's to the body
+	$gameBoardContainer.appendTo($body);
 };
 
 
-initialGameSetup();
+// Add Player names and 
+$("button.play-button").click( function() {
+	// Get the player names
+	getPlayerNames();
+	// Setup the board
+	initialGameSetup();
+	// Hide the elements in the overlay
+	$(this).siblings().fadeOut(200);
+	$(this).parent().fadeOut(200);
+});
 
+var addPlayAgainResetButtons = function() {
+	var $playAgainButton = $("<button>").attr("id","play-again").html("Play Again");
+	var $resetButton = $("<button>").attr("id","reset-button").html("Reset Game");
+
+	$playAgainButton.click(playAgain);
+	$resetButton.click(resetGame);
+
+	$("#score").append($playAgainButton, $resetButton);
+};
 
 
 
