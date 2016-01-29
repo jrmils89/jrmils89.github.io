@@ -1,15 +1,18 @@
 // $(function() {
 
 // Create some HTML el's / grab needed el's
-var $body = $('body');
 var $gameBoardContainer = $('<div>').attr('id','game-board-container').addClass('board');
 var $playRowButtons = $('.play-row .column');
 var $header = $('.game-header');
-var redWins = 0;
-var blackWins = 0;
-
+	
+var $body = $('body');
 // Append HTML el's to the body
 $gameBoardContainer.appendTo($body);
+
+// Setup scoring mechanism
+var redWins = 0;
+var blackWins = 0;
+var ties = 0;
 
 var playerTurn = true;
 
@@ -55,12 +58,12 @@ var setStyles = function() {
 
 	// Dynamically calculate the width and length based on the number of rows and columns existing
 
-	var width = 100 / ($columns.length / ($rows.length + $playRow.length));
+	var width = 'calc('+100 / ($columns.length / ($rows.length + $playRow.length))+'% - 2%)';
 	var height = 100 / ($rows.length + $playRow.length);
 
 	// Set the height and width for the appropriate rows and columns via a html css.
 	// Doing this here so it can calcualte them dynamically based on how many rows/columns exist
-	$columns.css('width', width+'%');	 
+	$columns.css('width', width);	 
 	$rows.css('height', height+'%');
 	$playRow.css('height', height+'%')
 }
@@ -68,7 +71,7 @@ var setStyles = function() {
 
 var setDropSquaresText = function() {
 	// Set the text of the drop piece button to an icon
-	$('.play-row .column').html('&#xe806')
+	$('.play-row .column').html(' ')
 };
 
 var setDropSquaresClick = function() {
@@ -94,7 +97,7 @@ var setDropSquaresClick = function() {
 					// If it's player = True's true ('Red'))
 					if (playerTurn) {
 						// Play Red
-						$cols.eq(i).html('&#xE803');
+						$cols.eq(i).html(' ');
 						$cols.eq(i).addClass('red');
 						// Get the row and column numbers played
 						var $colNum = parseInt($cols.eq(i).attr('col'));
@@ -103,18 +106,22 @@ var setDropSquaresClick = function() {
 						var colorPlayed = 'red';
 						// Check the winner and set it to var (so we can use it later perhaps)
 						var winner = checkIfWinner($rowNum,$colNum,colorPlayed,checkLeft,checkRight,checkUp,checkDown,checkDiagUpRight,checkDiagDownRight,checkDiagUpLeft,checkDiagDownLeft);
+						// Check to see if there's a tie
+						isTie(winner);
 						// Change player's turn
 						playerTurn = !playerTurn;
 						// Break the loop since it doesn't need to keep playing up the empty spaces
 						break;
 					} else {
 						// Doing the same thing for black
-						$cols.eq(i).html('&#xE802');
+						$cols.eq(i).html(' ');
 						$cols.eq(i).addClass('black');
 						var $colNum = parseInt($cols.eq(i).attr('col'));
 						var $rowNum = parseInt($cols.eq(i).attr('row'));
 						var colorPlayed = 'black';
 						var winner = checkIfWinner($rowNum,$colNum,colorPlayed,checkLeft,checkRight,checkUp,checkDown,checkDiagUpRight,checkDiagDownRight,checkDiagUpLeft,checkDiagDownLeft);
+						isTie(winner);
+
 						playerTurn = !playerTurn;
 						break;
 					}
@@ -354,19 +361,21 @@ var checkIfWinner = function(row,col,color,callbackOne,callbackTwo,callbackThree
 	var diagDownRight = callbackSix(row,col,color);
 	var diagUpLeft = callbackSeven(row,col,color);
 	var diagDownLeft = callbackEight(row,col,color);
-
+	var $playRowButtons = $('.play-row .column');
 	// Return true if one of the callbacks returns true
 	if (left || right || up || down || diagUpRight || diagDownRight || diagUpLeft || diagDownLeft) {
 		// Set the header to let the user know someone won!
-		$header.html('Congrats! ' + color.toUpperCase() + ' won!')
+		$header.html('Congrats! ' + color.toUpperCase() + ' won!');
 
 		if (color === 'red') {
 			// Add a win to red
 			redWins += 1;
+			$playRowButtons.off("click");
 		} // end first if incrementing wins
 		else {
 			// Add a win to black
 			blackWins += 1;
+			$playRowButtons.off("click");
 		} // end inner else incrementing wins
 		// Overall function return true
 		return true;
@@ -378,10 +387,58 @@ var checkIfWinner = function(row,col,color,callbackOne,callbackTwo,callbackThree
 }; // End check if winner func
 
 
-makeBoard();
-setStyles();
-setDropSquaresText();
-setDropSquaresClick();
+var isTie = function(isWinner) {
+	var playerPlays = $('.red').length + $('.black').length;
+	var columns = $('.column').length - $('.play-row .column').length;
+	var $playRowButtons = $('.play-row .column');
+
+	if (playerPlays === columns && isWinner === false) {
+		$header.html('Womp Womp There Was A Tie...');
+		ties += 1;
+		$playRowButtons.off("click");
+		return true;
+	};
+	return false;
+};
+
+var initialGameSetup = function() {
+	makeBoard();
+	setStyles();
+	setDropSquaresText();
+	setDropSquaresClick();
+};
+
+// Reset the board without resetting the score
+var playAgain = function() {
+	// Remove old info
+	$gameBoardContainer.remove();
+
+	// Set default els back to default
+	$gameBoardContainer = $('<div>').attr('id','game-board-container').addClass('board');
+	$playRowButtons = $('.play-row .column');
+	$header = $('.game-header');
+	// Append HTML el's to the body
+	$gameBoardContainer.appendTo($body);
+
+	// Set player turn back to true
+	playerTurn = true;
+
+	// Run initial game setup function again
+	initialGameSetup();
+};
+
+// Reset the game, while also resetting the score
+var resetGame = function() {
+	redWins = 0;
+	blackWins = 0;
+	ties = 0;
+	playAgain();
+};
+
+
+initialGameSetup();
+
+
 
 
 
