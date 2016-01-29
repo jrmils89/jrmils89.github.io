@@ -142,7 +142,7 @@ h1 {
 
 #overlay input {
 	margin: 1em;
-	height: 5%;
+	height: 2em;
 	width: 20%;
 	border: solid 1px black;
 	text-align: center;
@@ -152,6 +152,7 @@ h1 {
 #overlay button {
 	margin: 1em;
 	width: 15%;
+	height: 2em;
 	border: solid 1px #ffcc5c;
 	background-color: #ffeead;
 	font-family: 'PT Sans Narrow', sans-serif;
