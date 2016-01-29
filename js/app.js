@@ -58,7 +58,7 @@ var setStyles = function() {
 
 	// Dynamically calculate the width and length based on the number of rows and columns existing
 
-	var width = 'calc('+100 / ($columns.length / ($rows.length + $playRow.length))+'% - 2%)';
+	var width = 'calc('+100 / ($columns.length / ($rows.length + $playRow.length))+'%)';
 	var height = 100 / ($rows.length + $playRow.length);
 
 	// Set the height and width for the appropriate rows and columns via a html css.
