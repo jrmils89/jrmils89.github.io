@@ -516,6 +516,7 @@ $(function() {
     // So we don't need to call that funciton here anymore
     $("#overlay").removeAttr("style");
     $("#overlay").children().removeAttr("style");
+    $("#computer").attr('checked', false);
 
     // Remove the old gameplay and scoreboard
     $gameBoardContainer.remove();
