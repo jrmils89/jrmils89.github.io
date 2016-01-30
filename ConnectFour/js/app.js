@@ -24,6 +24,8 @@ $(function() {
     if ($(this)[0].checked) {
       playAgainstComputer = true;
       playerTwoName = 'A.I.';
+    } else {
+      playAgainstComputer = false;
     }
   })
 
@@ -517,6 +519,7 @@ $(function() {
     $("#overlay").removeAttr("style");
     $("#overlay").children().removeAttr("style");
     $("#computer").attr('checked', false);
+    playAgainstComputer = false;
 
     // Remove the old gameplay and scoreboard
     $gameBoardContainer.remove();
