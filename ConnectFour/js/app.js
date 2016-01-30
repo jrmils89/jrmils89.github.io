@@ -17,12 +17,25 @@ $(function() {
   var playerOneName;
   var playerTwoName;
 
-  var playAgainstComputer = true;
+  var playAgainstComputer = false;
+
+  $("#computer").click(function() {
+    $("#player-two").toggle();
+    if ($(this)[0].checked) {
+      playAgainstComputer = true;
+      playerTwoName = 'A.I.';
+    }
+  })
 
   // Get player names function
   var getPlayerNames = function() {
     playerOneName = $("#player-one").val()
-    playerTwoName = $("#player-two").val()
+
+    if (playAgainstComputer) {
+      playerTwoName = 'A.I.';
+    } else {
+      playerTwoName = $("#player-two").val();  
+    }  
   };
 
   // Function to make the board HTML el's
@@ -670,13 +683,13 @@ $(function() {
     var blackMove = callbackTwo(possibleMoves, 'black')
 
     if (color === 'black' && blackMove.wins) {
-      console.log("Black Can Win");
+      // console.log("Black Can Win");
       return blackMove;
     } else if (color === 'black' && redMove.wins) {
-      console.log("Black Needs To Block");
+      // console.log("Black Needs To Block");
       return redMove
     } else if (color === 'red' && redMove.wins) {
-      console.log("Red Can Win");
+      // console.log("Red Can Win");
       return redMove;
     } else if (color === 'black') {
       return blackMove;

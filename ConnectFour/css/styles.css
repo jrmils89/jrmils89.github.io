@@ -140,7 +140,7 @@ h1 {
 	display: none;
 }
 
-#overlay input {
+input.player-input {
 	margin: 1em;
 	height: 2em;
 	width: 20%;
@@ -148,6 +148,20 @@ h1 {
 	text-align: center;
 	font-family: 'PT Sans Narrow', sans-serif;
 }
+
+input.checkbox {
+	vertical-align: middle;
+	margin-right: .2em;
+	font-family: 'PT Sans Narrow', sans-serif;
+}
+
+label {
+	vertical-align: top;
+	height: 2em;
+	color: #ff6f69;
+	font-size: 1.2em;	
+}
+
 
 #overlay button {
 	margin: 1em;
