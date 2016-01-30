@@ -16,23 +16,55 @@ $(function() {
   // holder vars for player names
   var playerOneName;
   var playerTwoName;
-
+  // Default flag to determine whether user should player computer or not
   var playAgainstComputer = false;
 
+  // Adding click event to the checkbox for the user to choose to play against the computer
   $("#computer").click(function() {
+    // Removes the player two button on click
     $("#player-two").toggle();
+
+    // If they click, call the player two AI and set play against computer flag to true
     if ($(this)[0].checked) {
       playAgainstComputer = true;
       playerTwoName = 'A.I.';
     } else {
+      // Otherwise make sure play against computer is false
       playAgainstComputer = false;
     }
   })
 
+  // Add Player names and 
+  $("button.play-button").click(function() {
+    // Get the player names
+    getPlayerNames();
+    // Setup the board
+    initialGameSetup();
+    // Hide the elements in the overlay
+    $(this).siblings().fadeOut(200);
+    $(this).parent().fadeOut(200);
+    $('.game-header').html("It is " + playerOneName + "'s turn!");
+  });
+
+  $("input.player-input").keypress(function() {
+
+    // Run the same functions that clicking the play button does if you hit enter in the inputs
+
+    if (event.code === 'Enter') {
+      // Get the player names
+      getPlayerNames();
+      // Setup the board
+      initialGameSetup();
+      // Hide the elements in the overlay
+      $(this).siblings().fadeOut(200);
+      $(this).parent().fadeOut(200);
+      $('.game-header').html("It is " + playerOneName + "'s turn!");
+    }
+  });
+
   // Get player names function
   var getPlayerNames = function() {
     playerOneName = $("#player-one").val()
-
     if (playAgainstComputer) {
       playerTwoName = 'A.I.';
     } else {
@@ -49,27 +81,24 @@ $(function() {
     var $playerTwoP = $("<p>").addClass("player-name").html("Black Player: ");
     var $pOneName = $("<span>").html(playerOneName);
     var $pTwoName = $("<span>").html(playerTwoName);
-
     var $playerOneScoreP = $("<p>").addClass("player-score").html("Red Wins: ");
     var $playerTwoScoreP = $("<p>").addClass("player-score").html("Black Wins: ");
     var $pOneScore = $("<span>").html(redWins);
     var $pTwoScore = $("<span>").html(blackWins);
 
+    // Append HTML el's to the body
     $pOneName.appendTo($playerOneP);
     $pTwoName.appendTo($playerTwoP);
     $pOneScore.appendTo($playerOneScoreP);
     $pTwoScore.appendTo($playerTwoScoreP);
-
     $scoreDiv.append($playerOneP, $playerTwoP, $playerOneScoreP, $playerTwoScoreP)
-
     $scoreDiv.appendTo($body);
-
-    // Append HTML el's to the body
     $gameBoardContainer.appendTo($body);
     // Loop through and make 7 rows. 
     for (var i = 0; i < 7; i++) {
       // Create a row for players to click and drop their pieces
       if (i === 0) {
+        // This first row is for the button that users click to drop game pieces
         var $row = $('<div>').attr('id', 'play-row').addClass('play-row');
       } else {
         // Create the normal game play rows
@@ -156,20 +185,18 @@ $(function() {
           // Check to see if there's a tie
           isTie(winner);
           // Change player's turn
-
           playerTurn = !playerTurn;
 
-
+          // If the user is playing the computer, call the function to have the computer move if there's 
+          // No winner or tie after the last player move
           if (playAgainstComputer && !winner & !isTie(winner)) {
             setTimeout(computerPlayWrapper, 250);
-            // setTimeout(computerPlayWrapper, 500);
           }
-
 
           // Break the loop since it doesn't need to keep playing up the empty spaces
           break;
         } else {
-          // Doing the same thing for black
+          // Doing the same thing for black. Doens't call AI move since user in that case is always red
           $cols.eq(i).html(' ');
           $cols.eq(i).addClass('black');
           var $colNum = parseInt($cols.eq(i).attr('col'));
@@ -186,8 +213,12 @@ $(function() {
     } // end of for loop
   };
 
+  // Check horizontally for 4 in a row
   var checkHorizontal = function(row, col, color) {
+    // Check the piece that was played
     var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
+    // Some starter vars for use in the AI and to calculate if the 4 are blocked by an opposing piece
+    // in one direction or the other
     horizontalCount = 1;
     blockHorizontal = 1;
     var blockedLeft = 4;
@@ -196,14 +227,20 @@ $(function() {
     checkRight = 1;
     checkLeft = -1;
 
+    // Count up 3 possible places to the right
     while (checkRight < 4) {
+      // Game area to check
       var $pieceToCheck = $("[row=" + row + "] [col=" + (col + checkRight) + "]");
+      // If it's blocked
       if (color === 'red' && $pieceToCheck.hasClass('black') || color === 'black' && $pieceToCheck.hasClass('red')) {
+        // set blocked to how many over it was blocked by
         var blockedRight = checkRight;
         break;
+      // Checks for empty spaces, and doesn't increment how many in a row there are
       } else if (color === 'red' && !$pieceToCheck.hasClass('black') && !$pieceToCheck.hasClass('red') || color === 'black' && !$pieceToCheck.hasClass('black') && !$pieceToCheck.hasClass('red')) {
         horizontalCount = horizontalCount;
       } else {
+        // Else it assume the pieces are matched and increments the horizontal count by 1
         horizontalCount += 1;
       }
       checkRight++;
@@ -222,26 +259,30 @@ $(function() {
       checkLeft--;
     }
 
+    // If this is blocked less than 3 spaces in all directions than there is no way this piece can
+    // win. For exmaple in index 2 of [X,X,0,null,X,0] there is no way 0 can win horizontally since 
+    // the most in a row it could get is 2. Therefore it is blocked and blockDirection = 0
     if (blockedRight < 3 && blockedLeft > -3) {
       blockHorizontal = 0;
     }
 
+    // As long as it's not blocked, assign the direction count total to the count
     horizontalCount = horizontalCount * blockHorizontal;
     if (horizontalCount === 4) {
-      // If there are 4 in a row, return true
+      // If there are 4 in a row, return true. Meaning that this piece is a winner
       return true;
     };
     // Else return false because they did not win going right
     return false;
   }; // end check horizontal
 
+  // See the checkHorizontal function for comment on the logic, as this follows same logic
   var checkVertical = function(row, col, color) {
     var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
     verticalCount = 1;
     blockVertical = 1;
     var blockedUp = 4;
     var blockedDown = 4;
-
     checkDown = 1;
     checkUp = -1;
 
@@ -257,7 +298,6 @@ $(function() {
       }
       checkDown++;
     }
-
     while (checkUp > -4) {
       var $pieceToCheck = $("[row=" + (row + checkUp) + "] [col=" + col + "]");
       if (color === 'red' && $pieceToCheck.hasClass('black') || color === 'black' && $pieceToCheck.hasClass('red')) {
@@ -270,20 +310,17 @@ $(function() {
       }
       checkUp--;
     }
-
     if (blockedDown < 3 && blockedUp > -3) {
       blockVertical = 0;
     }
-
     verticalCount = verticalCount * blockVertical;
     if (verticalCount === 4) {
-      // If there are 4 in a row, return true
       return true;
     };
-    // Else return false because they did not win going right
     return false;
-  }; // end check vertical
+  };
 
+  // See the checkHorizontal function for comment on the logic, as this follows same logic
   var checkDiagPositive = function(row, col, color) {
     var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
     diagonalCountPositive = 1;
@@ -292,7 +329,6 @@ $(function() {
     var blockedDownDiag = 4;
     var blockedRightDiag = 4;
     var blockedLeftDiag = 4;
-
     checkDown = 1;
     checkUp = -1;
     checkRight = 1;
@@ -312,7 +348,6 @@ $(function() {
       checkUp--;
       checkRight++;
     }
-
     while (checkLeft > -4 && checkDown < 4) {
       var $pieceToCheck = $("[row=" + (row + checkDown) + "] [col=" + (col + checkLeft) + "]");
       if (color === 'red' && $pieceToCheck.hasClass('black') || color === 'black' && $pieceToCheck.hasClass('red')) {
@@ -327,21 +362,17 @@ $(function() {
       checkLeft--;
       checkDown++;
     }
-
     if (blockedUpDiag < 3 && blockedRightDiag > -3 || blockedDownDiag < 3 && blockedLeftDiag > -3) {
       blockDiagonalPostive = 0;
     }
-
     diagonalCountPositive = diagonalCountPositive * blockDiagonalPostive;
     if (diagonalCountPositive === 4) {
-      // If there are 4 in a row, return true
       return true;
     };
-    // Else return false because they did not win going right
     return false;
   };
 
-
+  // See the checkHorizontal function for comment on the logic, as this follows same logic
   var checkDiagNegative = function(row, col, color) {
     var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
     diagonalCountNegative = 1;
@@ -350,7 +381,6 @@ $(function() {
     var blockedDownDiagNeg = 4;
     var blockedRightDiagNeg = 4;
     var blockedLeftDiagNeg = 4;
-
     checkDown = 1;
     checkUp = -1;
     checkRight = 1;
@@ -370,7 +400,6 @@ $(function() {
       checkUp--;
       checkLeft--;
     }
-
     while (checkRight < 4 && checkDown < 4) {
       var $pieceToCheck = $("[row=" + (row + checkDown) + "] [col=" + (col + checkRight) + "]");
       if (color === 'red' && $pieceToCheck.hasClass('black') || color === 'black' && $pieceToCheck.hasClass('red')) {
@@ -389,41 +418,38 @@ $(function() {
     if (blockedUpDiagNeg < 3 && blockedRightDiagNeg > -3 || blockedDownDiagNeg < 3 && blockedLeftDiagNeg > -3) {
       blockDiagonalNegative = 0;
     }
-
     diagonalCountNegative = diagonalCountNegative * blockDiagonalNegative;
     if (diagonalCountNegative === 4) {
-      // If there are 4 in a row, return true
       return true;
     };
-    // Else return false because they did not win going right
     return false;
   };
 
   // Function for returning if someone one
   var checkIfWinner = function(row, col, color, callbackOne, callbackTwo, callbackThree, callbackFour) {
+    // These callbacks are expecting the checkHorizontal, checkVertical, etc functions to be passed in
     var horizontal = callbackOne(row, col, color);
     var vertical = callbackTwo(row, col, color);
     var diagPos = callbackThree(row, col, color);
     var diagNeg = callbackFour(row, col, color);
-    // var diagUpRight = callbackFive(row, col, color);
-    // var diagDownRight = callbackSix(row, col, color);
-    // var diagUpLeft = callbackSeven(row, col, color);
-    // var diagDownLeft = callbackEight(row, col, color);
     var $playRowButtons = $('.play-row .column');
+
     // Return true if one of the callbacks returns true
     if (horizontal || vertical || diagPos || diagNeg) {
-
       if (color === 'red') {
         // Add a win to red
         redWins += 1;
         // Set the header to let the user know someone won!
         $header.html('Congrats! ' + playerOneName + ' won!');
+        // Display how many wins 'red' has
         $('.player-score span').eq(0).html(redWins);
+        // Remove the click functions from the play buttons
         $playRowButtons.off("click");
+        // Add in the play again and reset game buttons
         addPlayAgainResetButtons();
       } // end first if incrementing wins
       else {
-        // Add a win to black
+        // Same logic that 'red' has
         blackWins += 1;
         $header.html('Congrats! ' + playerTwoName + ' won!');
         $('.player-score span').eq(1).html(blackWins);
@@ -441,16 +467,12 @@ $(function() {
 
 
 
-
+  // This is the same function as checkIfWinner, excpet it only return true/false and doesn't update the UI
   var checkIfWinnerWithoutPlaying = function(row, col, color, callbackOne, callbackTwo, callbackThree, callbackFour) {
     var horizontal = callbackOne(row, col, color);
     var vertical = callbackTwo(row, col, color);
     var diagPos = callbackThree(row, col, color);
     var diagNeg = callbackFour(row, col, color);
-    // var diagUpRight = callbackFive(row, col, color);
-    // var diagDownRight = callbackSix(row, col, color);
-    // var diagUpLeft = callbackSeven(row, col, color);
-    // var diagDownLeft = callbackEight(row, col, color);
     var $playRowButtons = $('.play-row .column');
     // Return true if one of the callbacks returns true
     if (horizontal || vertical || diagPos || diagNeg) {
@@ -464,25 +486,35 @@ $(function() {
   }; // End check if winner func
 
 
+  // Function to check if there is a tie. Expecting the value from checkIfWinner function to be passed in
   var isTie = function(isWinner) {
+    // Get the length of number of piece played
     var playerPlays = $('.red').length + $('.black').length;
+    // Determine how many total columns there are
     var columns = $('.column').length - $('.play-row .column').length;
     var $playRowButtons = $('.play-row .column');
 
+    // If the pieces played and the total number of columns are equal and there is no winner then there is a tie
     if (playerPlays === columns && isWinner === false) {
+      // Update UI
       $header.html('Womp Womp There Was A Tie...');
+      // Increment ties score (though not being used anywhere)
       ties += 1;
+      // Remove click functions
       $playRowButtons.off("click");
+      // Add play again and reset buttons
       addPlayAgainResetButtons();
+      // Return true for tie
       return true;
     };
+    // Otherwise false
     return false;
   };
 
+  // Wrapper funciton for initial game play setup
   var initialGameSetup = function() {
     makeBoard();
     setStyles();
-    // setDropSquaresText();
     setDropSquaresClick();
   };
 
@@ -510,15 +542,19 @@ $(function() {
 
   // Reset the game, while also resetting the score
   var resetGame = function() {
+    // Set all scores back to 0
     redWins = 0;
     blackWins = 0;
     ties = 0;
 
     // Make the overlay visible again. The overlay makes the play button which intiates the intial game setup
-    // So we don't need to call that funciton here anymore
+    // so we don't need to call that funciton here anymore. Also removes the jquery added styles
     $("#overlay").removeAttr("style");
     $("#overlay").children().removeAttr("style");
+    // Updates the play against computer button to not clicked. Needed because if you play against the computer
+    // and reset the game, the button was checked and you wouldn't be able to enter in a player two name
     $("#computer").attr('checked', false);
+    // Reset play against computer to default choice
     playAgainstComputer = false;
 
     // Remove the old gameplay and scoreboard
@@ -535,37 +571,6 @@ $(function() {
     $gameBoardContainer.appendTo($body);
   };
 
-
-  // Add Player names and 
-  $("button.play-button").click(function() {
-    // Get the player names
-    getPlayerNames();
-    // Setup the board
-    initialGameSetup();
-    // Hide the elements in the overlay
-    $(this).siblings().fadeOut(200);
-    $(this).parent().fadeOut(200);
-    $('.game-header').html("It is " + playerOneName + "'s turn!");
-  });
-
-  $("input.player-input").keypress(function() {
-
-    // Run the same functions that clicking the play button does if you hit enter in the inputs
-
-    if (event.code === 'Enter') {
-      // Get the player names
-      getPlayerNames();
-      // Setup the board
-      initialGameSetup();
-      // Hide the elements in the overlay
-      $(this).siblings().fadeOut(200);
-      $(this).parent().fadeOut(200);
-      $('.game-header').html("It is " + playerOneName + "'s turn!");
-    }
-  });
-
-
-
   var addPlayAgainResetButtons = function() {
     var $playAgainButton = $("<button>").attr("id", "play-again").html("Play Again");
     var $resetButton = $("<button>").attr("id", "reset-button").html("Reset Game");
@@ -578,24 +583,19 @@ $(function() {
 
 
   // just abstracting out some code I've repeated a bunch for get col's and rows
-  var getCol = function(num) {
-    return $("[col=" + num + "]");
-  };
-
   var getColRow = function(col, row) {
     return $("[col=" + col + "]" + "[row=" + row + "]");
   };
 
   // Function to determine where x color should play. Expecting a string value
   var determinePossibleMoves = function(color) {
+    // Instantiating some vars
     var numberOfColumns = 7;
     var numberOfRows = 6;
     var winningArray = [];
 
-
     // Loop through the rows and columns
     for (var c = 0; c < numberOfColumns; c++) {
-
       for (var r = numberOfRows; r > 0; r--) {
 
         // If the square is empoty
@@ -606,14 +606,11 @@ $(function() {
 
           // Running this function. It returns true if there's a winner, but I'm really using it to increment the counts
           // The counts determine how many tiles could be matched. For example, going 4 up if the tile being checked and 3 up was another
-          // Equal tile, but the middle two were empty, the count for checkUp would be 2. 
+          // equal tile, but the middle two were empty, the count for checkUp would be 2. 
           checkIfWinnerWithoutPlaying(r, c, color, checkHorizontal, checkVertical, checkDiagPositive, checkDiagNegative);
 
-          // I then add each count together to get a "Total Count" for each possible square. This needs to be worked on some
-          // as currently if there is an opposite color in between it's counting that as null, where I would prefer that to punish
-          // that count somehow as there's noway to win that direction. I'm going to do this within each check function 
-          // by adding a oppositeColor = 0 if there's a wrong color tile in the way
-
+          // I then add each count together to get a "Total Count" for each possible square. The higher the score the more options/closer
+          // that square is to winning
           var totalCount = horizontalCount + verticalCount + diagonalCountPositive + diagonalCountNegative;
 
           // Pushes the position being checked into an array with the total
@@ -625,20 +622,16 @@ $(function() {
           // Break the nested loop so it goes onto the next column
           break;
         }; // End if loop
-
       }; // Close row for loop
-
     }; // Close column for loop
-
     return winningArray;
-
   }; // Close function
 
   // This function is for looping through the array of possible moves and determining the best of those moves.
   // This function could be used as well to block an opposing move
   var loopThroughPossibleMoves = function(a, color) {
-    // Set a baseline to compare against
-
+    // Set a baseline to compare against. So it says the first possible move is "the best" unless another comes along
+    // to provide a better score and beat it. 
     var col = a[0][0];
     var row = a[0][1];
     var count = a[0][2];
@@ -650,10 +643,8 @@ $(function() {
 
       // If the location being checked would win
       if (checkIfWinnerWithoutPlaying(a[i][1], a[i][0], color, checkHorizontal, checkVertical, checkDiagPositive, checkDiagNegative)) {
-        // Win the game at that square OR something here...
-
         $("[col=" + a[i][0] + "]" + "[row=" + a[i][1] + "]").removeClass(color);
-        // Break the loop because the game is over
+        // Return the position of the winning squre and that it's true that it would win
         return {
           'row': a[i][1],
           'col': a[i][0],
@@ -672,7 +663,6 @@ $(function() {
         $("[col=" + a[i][0] + "]" + "[row=" + a[i][1] + "]").removeClass(color);
       }
     }; // Close For Loop
-
     // Say what spot the computer should play at
     return {
       'row': row,
@@ -681,27 +671,37 @@ $(function() {
     };
   }; // Close function;
 
+  // Function to determine if the AI needs to block or if it can play it's own place
+  // Right now this is only called like so: whereToPlay('black',determinePossibleMoves,loopThroughPossibleMoves)
+  // but it could in theory be called for 'red' if we wanted to make the AI the black piece at some point
   var whereToPlay = function(color, callbackOne, callbackTwo) {
+    // Get the possible moves for the color being passed in
     var possibleMoves = callbackOne(color);
+    // Determine the best spot for red and black
     var redMove = callbackTwo(possibleMoves, 'red');
     var blackMove = callbackTwo(possibleMoves, 'black')
 
+    // This part would need to be tweaked some if we wanted either red or black to play as the AI
+    // If black would win on it's move, play return it
     if (color === 'black' && blackMove.wins) {
-      // console.log("Black Can Win");
       return blackMove;
-    } else if (color === 'black' && redMove.wins) {
-      // console.log("Black Needs To Block");
+    } 
+    // Else if black needs to block the red move, return the red move
+    else if (color === 'black' && redMove.wins) {
       return redMove
-    } else if (color === 'red' && redMove.wins) {
-      // console.log("Red Can Win");
+    } 
+    // If red can win, return the red move
+    else if (color === 'red' && redMove.wins) {
       return redMove;
-    } else if (color === 'black') {
+    } 
+    // Or finally, if the color is black (and no one can win), return black move
+    else if (color === 'black') {
       return blackMove;
-    } else {
+    } 
+    // Else return the red move
+    else {
       return redMove;
     }
-    //call like so
-    // whereToPlay('black',determinePossibleMoves,loopThroughPossibleMoves)
   };
 
   // Function to play a piece. Follows basically the same logic as the ealier logic
@@ -723,7 +723,6 @@ $(function() {
       // Check to see if there's a tie
       isTie(winner);
       // Change player's turn
-
       playerTurn = !playerTurn;
     } else {
       // Doing the same thing for black
@@ -740,6 +739,7 @@ $(function() {
     // Example playAPiece(whereToPlay('black',determinePossibleMoves,loopThroughPossibleMoves).row,whereToPlay('black',determinePossibleMoves,loopThroughPossibleMoves).col)
   };
 
+  // Wrapper for the AI that says where to play and then plays the move
   var computerPlayWrapper = function() {
     var row = whereToPlay('black', determinePossibleMoves, loopThroughPossibleMoves).row;
     var col = whereToPlay('black', determinePossibleMoves, loopThroughPossibleMoves).col;
