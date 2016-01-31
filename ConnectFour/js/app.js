@@ -109,6 +109,7 @@ $(function() {
     var $playerTwoScoreP = $("<p>").addClass("player-score").html("Black Wins: ");
     var $pOneScore = $("<span>").html(redWins);
     var $pTwoScore = $("<span>").html(blackWins);
+    var $directions = $("<p>").html("<h2>To Play</h2>Hover over and/or click the column you wish to drop your piece into")
 
     // Append HTML el's to the body
     $pOneName.appendTo($playerOneP);
@@ -117,6 +118,7 @@ $(function() {
     $pTwoScore.appendTo($playerTwoScoreP);
     $scoreDiv.append($playerOneP, $playerTwoP, $playerOneScoreP, $playerTwoScoreP)
     $scoreDiv.appendTo($body);
+    $directions.appendTo($scoreDiv);
     $gameBoardContainer.appendTo($body);
     // Loop through and make 7 rows. 
     for (var i = 0; i < 7; i++) {
