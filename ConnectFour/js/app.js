@@ -1,4 +1,4 @@
-$(function() {
+// $(function() {
 
   // Create some HTML el's / grab needed el's
   var $gameBoardContainer = $('<div>').attr('id', 'game-board-container').addClass('board');
@@ -36,6 +36,8 @@ $(function() {
 
   // Add Player names and 
   $("button.play-button").click(function() {
+    // Remove last game
+    localStorage.removeItem('connectFourGame');
     // Get the player names
     getPlayerNames();
     // Setup the board
@@ -51,6 +53,8 @@ $(function() {
     // Run the same functions that clicking the play button does if you hit enter in the inputs
 
     if (event.code === 'Enter') {
+      // Remove last game
+      localStorage.removeItem('connectFourGame');
       // Get the player names
       getPlayerNames();
       // Setup the board
@@ -70,6 +74,26 @@ $(function() {
     } else {
       playerTwoName = $("#player-two").val();  
     }  
+  };
+
+  // If there's a stored game, add a resume button with click functionality
+  var resumeGameButton = function() {
+    // Getting a locally stored game
+    var storedGame = JSON.parse(localStorage.getItem('connectFourGame'));
+
+    if (storedGame != null) {
+      // Create button
+      var $resumeButton = $("<button>").addClass("resume-button").html("Resume Last Game");
+      // Append it
+      $resumeButton.appendTo("#overlay");
+      // On click remove the overlay
+      $resumeButton.click(function() {
+        $(this).siblings().fadeOut(200);
+        $(this).parent().fadeOut(200);
+        // And resume the game
+        resumeGame();
+      })
+    };
   };
 
   // Function to make the board HTML el's
@@ -191,8 +215,11 @@ $(function() {
           // No winner or tie after the last player move
           if (playAgainstComputer && !winner & !isTie(winner)) {
             setTimeout(computerPlayWrapper, 250);
+          } else {
+            // If the computer is not playing, store the game info
+            storeGame();
           }
-
+          
           // Break the loop since it doesn't need to keep playing up the empty spaces
           break;
         } else {
@@ -207,6 +234,8 @@ $(function() {
           isTie(winner);
 
           playerTurn = !playerTurn;
+          // Store the game state after the player plays
+          storeGame();
           break;
         }
       }; // end of if statement
@@ -554,6 +583,7 @@ $(function() {
     // Updates the play against computer button to not clicked. Needed because if you play against the computer
     // and reset the game, the button was checked and you wouldn't be able to enter in a player two name
     $("#computer").attr('checked', false);
+    $(".resume-button").remove()
     // Reset play against computer to default choice
     playAgainstComputer = false;
 
@@ -569,6 +599,8 @@ $(function() {
     $header = $('.game-header').html("It is " + playerOneName + "'s turn!");
     // Append HTML el's to the body
     $gameBoardContainer.appendTo($body);
+    // Add a resume game function if approprate
+    resumeGameButton();
   };
 
   var addPlayAgainResetButtons = function() {
@@ -701,7 +733,7 @@ $(function() {
     // Else return the red move
     else {
       return redMove;
-    }
+    };
   };
 
   // Function to play a piece. Follows basically the same logic as the ealier logic
@@ -735,8 +767,16 @@ $(function() {
       var winner = checkIfWinner($rowNum, $colNum, colorPlayed, checkHorizontal, checkVertical, checkDiagPositive, checkDiagNegative);
       isTie(winner);
       playerTurn = !playerTurn;
-    }
+    };
     // Example playAPiece(whereToPlay('black',determinePossibleMoves,loopThroughPossibleMoves).row,whereToPlay('black',determinePossibleMoves,loopThroughPossibleMoves).col)
+  };
+
+  var playPieceWithoutCheckTurn = function(row, column, color) {
+    var $piece = $("[col=" + column + "]" + "[row=" + row + "]");
+    $piece.html(' ');
+    $piece.addClass(color);
+    var winner = checkIfWinner(row, column, color, checkHorizontal, checkVertical, checkDiagPositive, checkDiagNegative);
+    isTie(winner);
   };
 
   // Wrapper for the AI that says where to play and then plays the move
@@ -744,6 +784,101 @@ $(function() {
     var row = whereToPlay('black', determinePossibleMoves, loopThroughPossibleMoves).row;
     var col = whereToPlay('black', determinePossibleMoves, loopThroughPossibleMoves).col;
     playAPiece(row, col);
-  }
+    // Store game after the computer moves
+    storeGame();
+  };
 
-})
+  var storeGame = function() {
+    // Get the game pieces
+    var $gamePieces = $('.row .column');
+    // Set some regex values
+    var redClass = /red/;
+    var blackClass = /black/;
+    // Set a holder for the local storage, with information about the game type as well
+    var storageVar = {'pieces':[], 
+    'playerTurn': playerTurn, 
+    'playAgainstComputer': playAgainstComputer, 
+    'playerOneName': playerOneName,
+    'playerTwoName': playerTwoName,
+    'redWins': redWins,
+    'blackWins': blackWins,
+    'ties': ties
+  };
+
+    // Loop through the game pieces
+    $gamePieces.each( function() {
+      var row = parseInt($(this).attr("row"));
+      var col = parseInt($(this).attr("col"));
+      var classes = $(this).attr("class");
+      // Check if they are red or black played
+      var myArrayRed = classes.match(redClass);
+      var myArrayBlack = classes.match(blackClass);
+
+      // If they are played
+      if (myArrayRed != undefined) {
+        // Set the information about that piece, where it was played, and if the game ended on that pay
+        var piece = {'row': row, 'col': col, 'color': 'red', 'gameOver':checkIfWinnerWithoutPlaying(row,col,'red',checkHorizontal, checkVertical, checkDiagPositive, checkDiagNegative)}
+        // Push it to the storage holder
+        storageVar.pieces.push(piece);
+      } else if (myArrayBlack != undefined) {
+        var piece = {'row': row, 'col': col, 'color': 'black', 'gameOver':checkIfWinnerWithoutPlaying(row,col,'black',checkHorizontal, checkVertical, checkDiagPositive, checkDiagNegative)}
+        storageVar.pieces.push(piece);
+      };
+    });
+    // Convert the holder into JSON so it can be stored properly
+    var storeValue = JSON.stringify(storageVar);
+    // Set the item in local storage
+    localStorage.setItem('connectFourGame', storeValue);
+  };
+
+  var resumeGame = function() {
+    // Get the local storage by the key
+    var storedGame = JSON.parse(localStorage.getItem('connectFourGame'));
+    // If a game exists
+    if (storedGame != null) {
+      // Set the game conditions
+      playerOneName = storedGame.playerOneName;
+      playerTwoName = storedGame.playerTwoName;
+      playerTurn = !storedGame.playerTurn;
+      redWins = storedGame.redWins;
+      blackWins = storedGame.blackWins;
+      ties = storedGame.ties;
+      playAgainstComputer = storedGame.playAgainstComputer;
+      // Say game over false by defualt, may change later
+      var gameOver = false;
+      // Call the initial game board setup functions
+      makeBoard();
+      setStyles();
+      setDropSquaresClick();
+      // Loop through the pieces
+      for (var i = 0; i < storedGame.pieces.length; i++) {
+        var row = storedGame.pieces[i].row;
+        var column = storedGame.pieces[i].col;
+        var color = storedGame.pieces[i].color;
+        // play the pieces without checking the turn
+        playPieceWithoutCheckTurn(row,column,color);
+        // If the game way over on that piece, set the game over to true
+        if (storedGame.pieces[i].gameOver === true) {
+          gameOver = true;
+        };
+      };// End for loop
+
+      // Need to do this again because when looping through the pieces it updates the score if there's a winner
+      // which we don't really want. More effecient to just do it again here as opposed to changing the function because
+      // that function is called in a bunch of different place. Ideally that function would be refactored with more time
+      redWins = storedGame.redWins;
+      blackWins = storedGame.blackWins;
+      ties = storedGame.ties;
+      $('.player-score span').eq(0).html(redWins);
+      $('.player-score span').eq(1).html(blackWins);
+
+      // Set the header properly if the game isn't over
+      if (playerTurn && !gameOver) {
+        $header.html("It is " + playerOneName + "'s turn!");  
+      } else if (!playerTurn && !gameOver) {
+        $header.html("It is " + playerTwoName + "'s turn!");  
+      };
+    };
+  };
+  resumeGameButton();
+// })
