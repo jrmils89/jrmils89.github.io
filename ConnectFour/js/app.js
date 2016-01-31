@@ -1,4 +1,4 @@
-// $(function() {
+$(function() {
 
   // Create some HTML el's / grab needed el's
   var $gameBoardContainer = $('<div>').attr('id', 'game-board-container').addClass('board');
@@ -839,7 +839,7 @@
       // Set the game conditions
       playerOneName = storedGame.playerOneName;
       playerTwoName = storedGame.playerTwoName;
-      playerTurn = !storedGame.playerTurn;
+      playerTurn = storedGame.playerTurn;
       redWins = storedGame.redWins;
       blackWins = storedGame.blackWins;
       ties = storedGame.ties;
@@ -881,4 +881,4 @@
     };
   };
   resumeGameButton();
-// })
+})
