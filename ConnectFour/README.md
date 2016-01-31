@@ -22,8 +22,11 @@ Minimax Alogorithim was chosen based on the fact that it is optimal for zero sum
 Upsides of the minimax alogorithim is that it is very good at determining the optimal move. The downside is that it is memory and computationally very intensive. It is recommended that alpha-beta pruning is implemented along with possibly limiting the depth of nodes explored. 
 
 Some resources for exploring the Minimax Alogorithim and Alpha-Beta Pruning are here:
+
 [Minimax](https://www.youtube.com/watch?v=6ELUvkSkCts)
+
 [Alpha-Beta](https://www.youtube.com/watch?v=xBXHtz4Gbdo)
+
 [Minimax & Alpha-Beta Psuedo Code From Swarthmore](https://www.cs.swarthmore.edu/~meeden/cs63/f05/minimax.html)
 
 # Other Features
