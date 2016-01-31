@@ -102,6 +102,7 @@ h1 {
 	box-sizing: border-box;
 }
 
+
 .red {
 	background-image: url('../images/red.png');
 	background-size: contain;
@@ -210,6 +211,24 @@ label {
 @media (min-width: 600px) {
 	* {
 		font-size: 18px;
+	}
+
+	.play-row .column {
+		border-radius: 50px;
+		border-color: transparent;
+		box-sizing: border-box;
+		background-color: transparent;
+		background-image: none;
+
+	}
+
+
+	#row0col0:hover, #row0col1:hover, #row0col2:hover, #row0col3:hover, #row0col4:hover, #row0col5:hover, #row0col6:hover  {
+		background-color: transparent;
+		background-image: url('../images/downArrow.svg');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
 	}
 }
 
