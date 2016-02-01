@@ -188,7 +188,11 @@ $(function() {
     var $playerOneP = $("<p>").addClass("player-name").html("Red Player: ");
     var $playerTwoP = $("<p>").addClass("player-name").html("Black Player: ");
     var $pOneName = $("<span>").html(playerOneName);
-    var $pTwoName = $("<span>").html("<a target='_blank' href='"+randomComputerNames[computerNameRandomNum].link+"'>"+playerTwoName+"</a>");
+    if (playAgainstComputer) {
+      var $pTwoName = $("<span>").html("<a target='_blank' href='"+randomComputerNames[computerNameRandomNum].link+"'>"+playerTwoName+"</a>");  
+    } else {
+      var $pTwoName = $("<span>").html(playerTwoName);  
+    }
     var $playerOneScoreP = $("<p>").addClass("player-score").html("Red Wins: ");
     var $playerTwoScoreP = $("<p>").addClass("player-score").html("Black Wins: ");
     var $pOneScore = $("<span>").html(redWins);
