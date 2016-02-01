@@ -57,3 +57,6 @@ There are few sounds. Two types of play sounds, and one type of sound for when t
 + The checkboard pieces come from this app https://play.google.com/store/apps/details?id=com.thaicheckers
 + Other Icons Retrieved From www.uxrepo.com
 + Sounds are licensed free (with credit) from http://www.freesfx.co.uk/
+
+# Other Notes
++ While the lastest project code lives [here](https://github.com/jrmils89/jrmils89.github.io/tree/master/ConnectFour), issue tracking for it happens [here](https://github.com/jrmils89/ConnectFour/issues)
