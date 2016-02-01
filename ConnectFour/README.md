@@ -44,7 +44,7 @@ When a game is completed, user has the option to either play again (using the sa
 There are few sounds. Two types of play sounds, and one type of sound for when the board is cleared. These get triggered when a piece is either played, or if the play again / reset game button are hit.
 #Future Improvement
 1. Improved AI
-	* While the AI is at least making a judgement as to where to play based on more than just randomness, if there was more time it could be heavily optimized. It does no pruning and only checks one possible move for the opposing color. 
+	* While the AI is at least making a judgement as to where to play based on more than just randomness, with more time it could be  optimized. It does no pruning and only checks one possible move for the opposing color. Does not properly check if red will win on next move. 
 2. Un-hardcoding the AI color
 	* Right now the AI is hardcoded as black, but ideally it would allow the user to choose whichever color they preferred
 3. Remote play
