@@ -49,7 +49,7 @@ $(function() {
 
   var computerNameRandomNum;
 
-  var winAt = 4;
+  // var 4 = 4;
 
   var playerTurn = true;
   // holder vars for player names
@@ -81,7 +81,7 @@ $(function() {
     localStorage.removeItem('connectFourGame');
     numberOfRows = null;
     numberOfColumns = null;
-    winAt = null;
+    // 4 = null;
     // Get the player names
     getPlayerNames();
     // Setup the board
@@ -135,13 +135,13 @@ $(function() {
       numberOfColumns = 7;
     };
 
-    if (typeof winAt === 'number'){
-      winAt = winAt;
-    } else if ($("#win-number-input").val() != '') {
-      winAt = parseInt($("#win-number-input").val());
-    } else {
-      winAt = 4;
-    };
+    // if (typeof 4 === 'number'){
+    //   4 = 4;
+    // } else if ($("#win-number-input").val() != '') {
+    //   4 = parseInt($("#win-number-input").val());
+    // } else {
+    //   4 = 4;
+    // };
   };
 
   // Functions for playing sounds when users click or clear the board
@@ -343,14 +343,14 @@ $(function() {
     // in one direction or the other
     horizontalCount = 1;
     blockHorizontal = 1;
-    var blockedLeft = winAt;
-    var blockedRight = winAt;
+    var blockedLeft = 4;
+    var blockedRight = 4;
 
     checkRight = 1;
     checkLeft = -1;
 
     // Count up 3 possible places to the right
-    while (checkRight < winAt) {
+    while (checkRight < 4) {
       // Game area to check
       var $pieceToCheck = $("[row=" + row + "] [col=" + (col + checkRight) + "]");
       // If it's blocked
@@ -368,7 +368,7 @@ $(function() {
       checkRight++;
     }
 
-    while (checkLeft > -winAt) {
+    while (checkLeft > -4) {
       var $pieceToCheck = $("[row=" + row + "] [col=" + (col + checkLeft) + "]");
       if (color === 'red' && $pieceToCheck.hasClass('black') || color === 'black' && $pieceToCheck.hasClass('red')) {
         var blockedLeft = checkLeft;
@@ -384,13 +384,13 @@ $(function() {
     // If this is blocked less than 3 spaces in all directions than there is no way this piece can
     // win. For exmaple in index 2 of [X,X,0,null,X,0] there is no way 0 can win horizontally since 
     // the most in a row it could get is 2. Therefore it is blocked and blockDirection = 0
-    if (blockedRight < (winAt - 1) && blockedLeft > (-winAt + 1)) {
+    if (blockedRight < (4 - 1) && blockedLeft > (-4 + 1)) {
       blockHorizontal = 0;
     }
 
     // As long as it's not blocked, assign the direction count total to the count
     horizontalCount = horizontalCount * blockHorizontal;
-    if (horizontalCount >= winAt) {
+    if (horizontalCount >= 4) {
       // If there are 4 in a row, return true. Meaning that this piece is a winner
       return true;
     };
@@ -403,12 +403,12 @@ $(function() {
     var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
     verticalCount = 1;
     blockVertical = 1;
-    var blockedUp = winAt;
-    var blockedDown = winAt;
+    var blockedUp = 4;
+    var blockedDown = 4;
     checkDown = 1;
     checkUp = -1;
 
-    while (checkDown < winAt) {
+    while (checkDown < 4) {
       var $pieceToCheck = $("[row=" + (row + checkDown) + "] [col=" + col + "]");
       if (color === 'red' && $pieceToCheck.hasClass('black') || color === 'black' && $pieceToCheck.hasClass('red')) {
         var blockedDown = checkDown;
@@ -420,7 +420,7 @@ $(function() {
       }
       checkDown++;
     }
-    while (checkUp > -winAt) {
+    while (checkUp > -4) {
       var $pieceToCheck = $("[row=" + (row + checkUp) + "] [col=" + col + "]");
       if (color === 'red' && $pieceToCheck.hasClass('black') || color === 'black' && $pieceToCheck.hasClass('red')) {
         var blockedUp = checkUp;
@@ -432,11 +432,11 @@ $(function() {
       }
       checkUp--;
     }
-    if (blockedDown < (winAt - 1) && blockedUp > (-winAt + 1)) {
+    if (blockedDown < (4 - 1) && blockedUp > (-4 + 1)) {
       blockVertical = 0;
     }
     verticalCount = verticalCount * blockVertical;
-    if (verticalCount >= winAt) {
+    if (verticalCount >= 4) {
       return true;
     };
     return false;
@@ -447,16 +447,16 @@ $(function() {
     var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
     diagonalCountPositive = 1;
     blockDiagonalPostive = 1;
-    var blockedUpDiag = winAt;
-    var blockedDownDiag = winAt;
-    var blockedRightDiag = winAt;
-    var blockedLeftDiag = winAt;
+    var blockedUpDiag = 4;
+    var blockedDownDiag = 4;
+    var blockedRightDiag = 4;
+    var blockedLeftDiag = 4;
     checkDown = 1;
     checkUp = -1;
     checkRight = 1;
     checkLeft = -1;
 
-    while (checkRight < winAt && checkUp > -winAt) {
+    while (checkRight < 4 && checkUp > -4) {
       var $pieceToCheck = $("[row=" + (row + checkUp) + "] [col=" + (col + checkRight) + "]");
       if (color === 'red' && $pieceToCheck.hasClass('black') || color === 'black' && $pieceToCheck.hasClass('red')) {
         var blockedUpDiag = checkUp;
@@ -470,7 +470,7 @@ $(function() {
       checkUp--;
       checkRight++;
     }
-    while (checkLeft > -winAt && checkDown < winAt) {
+    while (checkLeft > -4 && checkDown < 4) {
       var $pieceToCheck = $("[row=" + (row + checkDown) + "] [col=" + (col + checkLeft) + "]");
       if (color === 'red' && $pieceToCheck.hasClass('black') || color === 'black' && $pieceToCheck.hasClass('red')) {
         var blockedDownDiag = checkDown;
@@ -484,11 +484,11 @@ $(function() {
       checkLeft--;
       checkDown++;
     }
-    if (blockedUpDiag < (winAt - 1) && blockedRightDiag > (-winAt + 1) || blockedDownDiag < (winAt - 1) && blockedLeftDiag > (-winAt + 1)) {
+    if (blockedUpDiag < (4 - 1) && blockedRightDiag > (-4 + 1) || blockedDownDiag < (4 - 1) && blockedLeftDiag > (-4 + 1)) {
       blockDiagonalPostive = 0;
     }
     diagonalCountPositive = diagonalCountPositive * blockDiagonalPostive;
-    if (diagonalCountPositive >= winAt) {
+    if (diagonalCountPositive >= 4) {
       return true;
     };
     return false;
@@ -499,16 +499,16 @@ $(function() {
     var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
     diagonalCountNegative = 1;
     blockDiagonalNegative = 1;
-    var blockedUpDiagNeg = winAt;
-    var blockedDownDiagNeg = winAt;
-    var blockedRightDiagNeg = winAt;
-    var blockedLeftDiagNeg = winAt;
+    var blockedUpDiagNeg = 4;
+    var blockedDownDiagNeg = 4;
+    var blockedRightDiagNeg = 4;
+    var blockedLeftDiagNeg = 4;
     checkDown = 1;
     checkUp = -1;
     checkRight = 1;
     checkLeft = -1;
 
-    while (checkLeft > -winAt && checkUp > -winAt) {
+    while (checkLeft > -4 && checkUp > -4) {
       var $pieceToCheck = $("[row=" + (row + checkUp) + "] [col=" + (col + checkLeft) + "]");
       if (color === 'red' && $pieceToCheck.hasClass('black') || color === 'black' && $pieceToCheck.hasClass('red')) {
         var blockedUpDiagNeg = checkUp;
@@ -522,7 +522,7 @@ $(function() {
       checkUp--;
       checkLeft--;
     }
-    while (checkRight < winAt && checkDown < winAt) {
+    while (checkRight < 4 && checkDown < 4) {
       var $pieceToCheck = $("[row=" + (row + checkDown) + "] [col=" + (col + checkRight) + "]");
       if (color === 'red' && $pieceToCheck.hasClass('black') || color === 'black' && $pieceToCheck.hasClass('red')) {
         var blockedDownDiagNeg = checkDown;
@@ -537,11 +537,11 @@ $(function() {
       checkDown++;
     }
 
-    if (blockedUpDiagNeg < (winAt - 1) && blockedRightDiagNeg > (-winAt + 1) || blockedDownDiagNeg < (winAt - 1) && blockedLeftDiagNeg > (-winAt + 1)) {
+    if (blockedUpDiagNeg < (4 - 1) && blockedRightDiagNeg > (-4 + 1) || blockedDownDiagNeg < (4 - 1) && blockedLeftDiagNeg > (-4 + 1)) {
       blockDiagonalNegative = 0;
     }
     diagonalCountNegative = diagonalCountNegative * blockDiagonalNegative;
-    if (diagonalCountNegative >= winAt) {
+    if (diagonalCountNegative >= 4) {
       return true;
     };
     return false;
@@ -671,7 +671,7 @@ $(function() {
     redWins = 0;
     blackWins = 0;
     ties = 0;
-    winAt = null;
+    // 4 = null;
 
     // Make the overlay visible again. The overlay makes the play button which intiates the intial game setup
     // so we don't need to call that funciton here anymore. Also removes the jquery added styles
@@ -992,7 +992,7 @@ $(function() {
       'ties': ties,
       'numberOfColumns': numberOfColumns,
       'numberOfRows': numberOfRows,
-      'winAt': winAt
+      // '4': 4
     };
 
     // Loop through the game pieces
@@ -1046,7 +1046,7 @@ $(function() {
       numberOfRows = storedGame.numberOfRows;
       numberOfColumns = storedGame.numberOfColumns;
       playAgainstComputer = storedGame.playAgainstComputer;
-      winAt = storedGame.winAt;
+      // 4 = storedGame.4;
       // Say game over false by defualt, may change later
       var gameOver = false;
       // Call the initial game board setup functions
