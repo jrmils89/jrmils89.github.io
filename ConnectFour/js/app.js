@@ -10,6 +10,9 @@
   var blackWins = 0;
   var ties = 0;
 
+  var numberOfRows = 6;
+  var numberOfColumns = 7;
+
   var playerTurn = true;
   // holder vars for player names
   var playerOneName;
@@ -74,6 +77,20 @@
     }  
   };
 
+  var getNumberOfRowsAndColumns = function() {
+    if ($("#row-input").val() != '') {
+      numberOfRows = parseInt($("#row-input").val());
+    } else {
+      numberOfRows = 6;
+    };
+
+    if ($("#column-input").val() != '') {
+      numberOfColumns = parseInt($("#column-input").val());
+    } else {
+      numberOfColumns = 7;
+    };
+  };
+
   var playSound = function() {
     var audio = document.getElementById("playsound");
     audio.play();
@@ -111,7 +128,7 @@
 
   // Function to make the board HTML el's
   var makeBoard = function() {
-
+    getNumberOfRowsAndColumns();
     // Setup the player names and scores
     var $scoreDiv = $("<div>").attr("id", "score");
     var $playerOneP = $("<p>").addClass("player-name").html("Red Player: ");
@@ -133,8 +150,9 @@
     $scoreDiv.appendTo($body);
     $directions.appendTo($scoreDiv);
     $gameBoardContainer.appendTo($body);
-    // Loop through and make 7 rows. 
-    for (var i = 0; i < 7; i++) {
+    
+    // Loop through and make rows. 
+    for (var i = 0; i < numberOfRows+1; i++) {
       // Create a row for players to click and drop their pieces
       if (i === 0) {
         // This first row is for the button that users click to drop game pieces
@@ -146,8 +164,8 @@
           row: i
         }).addClass('row');
       }
-      // Loop through and make 7 columns
-      for (var j = 0; j < 7; j++) {
+      // Loop through and make columns
+      for (var j = 0; j < numberOfColumns; j++) {
         // Create the columns for the game rows
         var $column = $('<div>').attr({
           id: 'row' + i + 'col' + j,
@@ -640,9 +658,9 @@
 
   // Function to determine where x color should play. Expecting a string value
   var determinePossibleMoves = function(color) {
-    // Instantiating some vars
-    var numberOfColumns = 7;
-    var numberOfRows = 6;
+    getNumberOfRowsAndColumns();
+    // var numberOfColumns = numberOfColumns;
+    // var numberOfRows = numberOfRows;
     var potentialMoves = [];
 
     // Loop through the rows and columns

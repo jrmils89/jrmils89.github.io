@@ -147,13 +147,21 @@ h1 {
 	display: none;
 }
 
-input.player-input {
+input.player-input, input.row-input, input.column-input {
 	margin: 1em;
 	height: 2em;
 	width: 30%;
 	border: solid 1px black;
 	text-align: center;
 	font-family: 'PT Sans Narrow', sans-serif;
+}
+
+input.row-input, input.column-input {
+	background-color: transparent;
+	text-align: center;
+	border: solid 1px #FFC153;
+	height: 3em;
+	color: #FFC153;
 }
 
 input.checkbox {
@@ -248,7 +256,7 @@ label {
 	}
 
 
-	#row0col0:hover, #row0col1:hover, #row0col2:hover, #row0col3:hover, #row0col4:hover, #row0col5:hover, #row0col6:hover  {
+	#play-row div:hover  {
 		background-color: transparent;
 		background-image: url('../images/downArrow.svg');
 		background-size: contain;
