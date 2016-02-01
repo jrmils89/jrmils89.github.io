@@ -1,4 +1,4 @@
-$(function() {
+// $(function() {
 
   // Create some HTML el's / grab needed el's
   var $gameBoardContainer = $('<div>').attr('id', 'game-board-container').addClass('board');
@@ -728,9 +728,10 @@ $(function() {
     else if (color === 'red' && redMove.wins) {
       return redMove;
     } 
-    // Or finally, if the color is black (and no one can win), return black move
+    // Or finally, if the color is black (and no one can win), call the smart AI function to determine where to play
     else if (color === 'black') {
-      return blackMove;
+      // This tries to smartly play
+      return smartAI('black');
     } 
     // Else return the red move
     else {
@@ -779,6 +780,83 @@ $(function() {
     $piece.addClass(color);
     var winner = checkIfWinner(row, column, color, checkHorizontal, checkVertical, checkDiagPositive, checkDiagNegative);
     isTie(winner);
+  };
+  
+  var determineBestMove = function(a, color) {
+    // Generate a holder array
+    var potentionalNextMoves = {'potentialNextMoves':[], 'potentialThisMoves':[a]};
+    for (var i = 0; i < a.length; i++) {
+      // Add the class to the location it's on so that we can test the next set of possible moves
+      $("[col=" + a[i][0] + "]" + "[row=" + a[i][1] + "]").addClass(color);
+      // Determine the possible moves should the color play in that place
+      p = {'move': i, 'potentialMoves': determinePossibleMoves('red')};
+      // Push that info to the object
+      potentionalNextMoves.potentialNextMoves.push(p);
+      // And remove the class so it can go onto the next potention play
+      $("[col=" + a[i][0] + "]" + "[row=" + a[i][1] + "]").removeClass(color);
+    };
+    // Return all those moves
+    return potentionalNextMoves;
+  };
+
+  var determineBestOpposingMoves = function(bm) {
+    // Set a default position to compare against
+    var count = bm.potentialNextMoves[0].potentialMoves[0][2];
+    var position = 0;
+    var arrayOfMoves = [];
+
+    for (var m = 0; m < bm.potentialNextMoves.length; m++) {
+      // Set the move number of black so we know which potential black move this would be
+      position = bm.potentialNextMoves[m].move;
+      // Set the count/score
+      count =  bm.potentialNextMoves[m].potentialMoves[0][2];
+
+      // Loop through the potential red moves and see if there'd be a better move 
+      // for it if black played in this position
+      for (var s = 0; s < bm.potentialNextMoves[m].potentialMoves.length; s++) {
+        compareScore = bm.potentialNextMoves[m].potentialMoves[s][2]
+        // If there is, set the score to that score
+        if (compareScore > count) {
+          count = compareScore
+        };
+      };
+      // Push this info to it an array and then the super array
+      var a = [position, count];
+      arrayOfMoves.push(a);
+    };
+    return arrayOfMoves;
+  };
+
+  var smartAI = function(color) {
+    var pm = determinePossibleMoves(color);
+    var bm = determineBestMove(pm, color);
+    var bo = determineBestOpposingMoves(bm);
+    // Set the default value
+    var position = 0;
+    var count = bo[0][1];
+    var score = bo[0][1];
+
+    // Loop through the scores for red (ie. if the color passed in here is black)
+    // and determine which is the worst score for red 
+    for (var i = 0; i < bo.length; i++) {
+      if (bo[i][1] < count) {
+        position = i;
+        count = bo[i][1];
+      };
+    };
+    
+    // After looping through the red play and gettin the lowest value, get the black
+    // Move that corresponds to that value and set it as the play position
+    var play = bm.potentialThisMoves[0][position];
+
+    // Then return the position in the same format as its being return elsewhere so I don't have
+    // to rewrite a bunch of code in other places...
+    return {
+      'row': play[1],
+      'col': play[0],
+      // Wins is set to false by defualt because the computer move function checks winners before running the smart AI
+      'wins': false
+    };
   };
 
   // Wrapper for the AI that says where to play and then plays the move
@@ -882,5 +960,6 @@ $(function() {
       };
     };
   };
+
   resumeGameButton();
-})
+// })
