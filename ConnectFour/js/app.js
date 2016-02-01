@@ -10,8 +10,44 @@ $(function() {
   var blackWins = 0;
   var ties = 0;
 
+  var randomComputerNames = [
+      { 'name': 'Skynet',
+        'link': 'http://static.comicvine.com/uploads/original/1/18154/3876860-terminator-salvation-the-final-battle-5-cover.jpg'
+      },
+      { 'name': 'J.A.R.V.I.S',
+        'link': 'http://vignette1.wikia.nocookie.net/shield-files/images/1/13/Avengers_Age_of_Ultron_KISSTHEMGOODBYE_NET_SCREENCAPS_1080p_0646_(1).jpg/revision/latest?cb=20151017235328'
+      },
+      { 'name': 'F.R.I.D.A.Y',
+        'link': 'http://marvelcinematicuniverse.wikia.com/wiki/F.R.I.D.A.Y.'
+      },
+      { 'name': 'HAL',
+        'link': 'https://d13yacurqjgara.cloudfront.net/users/75924/screenshots/916751/hal_1x.png'
+      },
+      { 'name': 'Gideon',
+        'link': 'http://www.theflashfantr.com/wp-content/uploads/2015/05/the-flash-gideon.jpg'
+      },
+      { 'name': 'Oracle',
+        'link': 'http://dcuniverseonline.wikia.com/wiki/Oracle'
+      },
+      { 'name': 'Ultron',
+        'link': 'https://www.sideshowtoy.com/assets/products/200120-classic-ultron-on-throne/lg/200120-classic-ultron-on-throne-003.jpg'
+      },
+      { 'name': 'Joshua',
+        'link': 'http://2new4.fjcdn.com/pictures/Shall+we+play+a+game+let+s+play+a+game+roll_f88afd_5628419.jpg'
+      },
+      {'name': 'Clu',
+       'link': 'http://vignette2.wikia.nocookie.net/tron/images/9/9c/Clu_Program.png/revision/latest?cb=20130118203716'
+      },
+      {'name': 'C-3PO',
+       'link': 'http://img.lum.dolimg.com/v1/images/image_bc196054.jpeg?region=0%2C0%2C1920%2C1080&width=768'
+      }
+  ]
+  
+  
   var numberOfRows = 6;
   var numberOfColumns = 7;
+
+  var computerNameRandomNum;
 
   var winAt = 4;
 
@@ -24,16 +60,18 @@ $(function() {
 
   // Adding click event to the checkbox for the user to choose to play against the computer
   $("#computer").click(function() {
-    // Removes the player two button on click
-    $("#player-two").toggle();
-
     // If they click, call the player two AI and set play against computer flag to true
     if ($(this)[0].checked) {
       playAgainstComputer = true;
-      playerTwoName = 'A.I.';
+      $("#player-two").attr("readonly", true);
+      computerNameRandomNum = Math.floor(Math.random()*randomComputerNames.length);
+      var computerName = randomComputerNames[computerNameRandomNum].name;
+      $("#player-two").val(computerName);
+      playerTwoName = $("#player-two").val();
     } else {
       // Otherwise make sure play against computer is false
       playAgainstComputer = false;
+      $("#player-two").attr("readonly", false);
     }
   })
 
@@ -74,12 +112,8 @@ $(function() {
 
   // Get player names function
   var getPlayerNames = function() {
-    playerOneName = $("#player-one").val()
-    if (playAgainstComputer) {
-      playerTwoName = 'A.I.';
-    } else {
-      playerTwoName = $("#player-two").val();
-    }
+    playerOneName = $("#player-one").val();
+    playerTwoName = $("#player-two").val();
   };
 
   // Get the number of rows and columns based either on the user input or the stored game value
@@ -154,12 +188,12 @@ $(function() {
     var $playerOneP = $("<p>").addClass("player-name").html("Red Player: ");
     var $playerTwoP = $("<p>").addClass("player-name").html("Black Player: ");
     var $pOneName = $("<span>").html(playerOneName);
-    var $pTwoName = $("<span>").html(playerTwoName);
+    var $pTwoName = $("<span>").html("<a href='"+randomComputerNames[computerNameRandomNum].link+"'>"+playerTwoName+"</a>");
     var $playerOneScoreP = $("<p>").addClass("player-score").html("Red Wins: ");
     var $playerTwoScoreP = $("<p>").addClass("player-score").html("Black Wins: ");
     var $pOneScore = $("<span>").html(redWins);
     var $pTwoScore = $("<span>").html(blackWins);
-    var $directions = $("<p>").html("<h2>To Play</h2>Hover over and/or click the column you wish to drop your piece into")
+    var $directions = $("<p>").html("<h2>To Play</h2>Hover over and/or click the column you wish to drop your piece into<p>P.S. If you're playing against the computer try and find the easter egg :)</p>")
 
     // Append HTML el's to the body
     $pOneName.appendTo($playerOneP);
@@ -268,7 +302,7 @@ $(function() {
           // If the user is playing the computer, call the function to have the computer move if there's 
           // No winner or tie after the last player move
           if (playAgainstComputer && !winner & !isTie(winner)) {
-            setTimeout(computerPlayWrapper, 250);
+            setTimeout(computerPlayWrapper, 200);
           } else {
             // If the computer is not playing, store the game info
             storeGame();

@@ -233,6 +233,14 @@ label {
 	border-width: 2px;
 }
 
+span a {
+	color: #0074B3;
+	text-decoration: none;
+}
+
+p > p {
+	font-size: .4em;
+}
 
 @keyframes fall {
 	0% 		{transform: translateY(-900px); border: none;}
