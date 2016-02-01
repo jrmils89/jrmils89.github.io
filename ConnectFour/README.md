@@ -9,9 +9,8 @@ The user also has an option for playing against an AI/Computer player. The compu
 
 1. Determines if it needs to play a blocking move, if so, it will block your winning move. 
 2. If no blocking need is detected, it searches one level of it's possible moves
-3. After determining the state of the game and possible moves, it assigns each possible move a score based on how likely/how many
-in a row it can have while not being blocked by an opposing piece.
-4. It then plays in that slot. If there are multiple spaces with the same score, it plays the first one it finds.
+3. After determining the state of the game and possible moves, it checks the following possible scores for red and tries to minimize the score for red.
+4. If multiple equal scores are found, it plays the first one it finds.
 5. This is a very rudimentary version of minimax algorithim, which would
   * Determine the state of the board
   * Determine the optimal possible move based on a a series of next moves
@@ -21,7 +20,7 @@ Minimax Alogorithim was chosen based on the fact that it is optimal for zero sum
 
 Upsides of the minimax alogorithim is that it is very good at determining the optimal move. The downside is that it is memory and computationally very intensive. It is recommended that alpha-beta pruning is implemented along with possibly limiting the depth of nodes explored. 
 
-Some resources for exploring the Minimax Alogorithim and Alpha-Beta Pruning are here:
+Some resources explored for the Minimax Alogorithim and Alpha-Beta Pruning were here:
 
 [Minimax](https://www.youtube.com/watch?v=6ELUvkSkCts)
 
@@ -39,3 +38,4 @@ When a game is completed, user has the option to either play again (using the sa
 # Usage
 + The checkboard pieces come from this app https://play.google.com/store/apps/details?id=com.thaicheckers
 + Other Icons Retrieved From www.uxrepo.com
++ Sounds are licensed free (with credit) from http://www.freesfx.co.uk/

@@ -4,9 +4,7 @@
   var $gameBoardContainer = $('<div>').attr('id', 'game-board-container').addClass('board');
   var $playRowButtons = $('.play-row .column');
   var $header = $('.game-header');
-
   var $body = $('body');
-
   // Setup scoring mechanism
   var redWins = 0;
   var blackWins = 0;
@@ -76,6 +74,21 @@
     }  
   };
 
+  var playSound = function() {
+    var audio = document.getElementById("playsound");
+    audio.play();
+  };
+
+  var playSoundTwo = function() {
+    var audio = document.getElementById("playsound-two");
+    audio.play();
+  };
+
+  var playSoundClear = function() {
+    var audio = document.getElementById("playsound-three");
+    audio.play();
+  };
+
   // If there's a stored game, add a resume button with click functionality
   var resumeGameButton = function() {
     // Getting a locally stored game
@@ -110,7 +123,7 @@
     var $pOneScore = $("<span>").html(redWins);
     var $pTwoScore = $("<span>").html(blackWins);
     var $directions = $("<p>").html("<h2>To Play</h2>Hover over and/or click the column you wish to drop your piece into")
-
+    
     // Append HTML el's to the body
     $pOneName.appendTo($playerOneP);
     $pTwoName.appendTo($playerTwoP);
@@ -196,6 +209,7 @@
       if ($cols.eq(i).html() === '') {
         // If it's player = True's true ('Red'))
         if (playerTurn) {
+          playSound();
           // Play Red
           $cols.eq(i).html(' ');
           $cols.eq(i).addClass('red');
@@ -226,6 +240,7 @@
           break;
         } else {
           // Doing the same thing for black. Doens't call AI move since user in that case is always red
+          playSoundTwo();
           $cols.eq(i).html(' ');
           $cols.eq(i).addClass('black');
           var $colNum = parseInt($cols.eq(i).attr('col'));
@@ -552,6 +567,7 @@
   // Reset the board without resetting the score
   var playAgain = function() {
     // Remove old info
+    playSoundClear();
     $gameBoardContainer.remove();
     $('#score').remove();
     // Set default els back to default
@@ -573,6 +589,7 @@
 
   // Reset the game, while also resetting the score
   var resetGame = function() {
+    playSoundClear();
     // Set all scores back to 0
     redWins = 0;
     blackWins = 0;
@@ -743,6 +760,7 @@
   var playAPiece = function(row, column) {
     var $piece = $("[col=" + column + "]" + "[row=" + row + "]")
     if (playerTurn) {
+      playSoundTwo();
       // Play Red
       $piece.html(' ');
       $piece.addClass('red');
@@ -760,6 +778,7 @@
       // Change player's turn
       playerTurn = !playerTurn;
     } else {
+      playSoundTwo();
       // Doing the same thing for black
       $piece.html(' ');
       $piece.addClass('black');
@@ -781,7 +800,7 @@
     var winner = checkIfWinner(row, column, color, checkHorizontal, checkVertical, checkDiagPositive, checkDiagNegative);
     isTie(winner);
   };
-  
+
   var determineBestMove = function(a, color) {
     // Generate a holder array
     var potentionalNextMoves = {'potentialNextMoves':[], 'potentialThisMoves':[a]};
