@@ -49,7 +49,8 @@ There are few sounds. Two types of play sounds, and one type of sound for when t
 	* Right now the AI is hardcoded as black, but ideally it would allow the user to choose whichever color they preferred
 3. Remote play
 	* Ability to play against more than just a local user or an AI.
-4. General UI Improvement
+4. Better error handling
+5. General UI Improvement
 	* Sites can nearly always be improved visually. Pretty happy with where it is currently, but there's a few minor improvements that could be made
 
 
