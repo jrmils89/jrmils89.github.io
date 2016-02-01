@@ -299,7 +299,7 @@ $(function() {
 
     // As long as it's not blocked, assign the direction count total to the count
     horizontalCount = horizontalCount * blockHorizontal;
-    if (horizontalCount === 4) {
+    if (horizontalCount >= 4) {
       // If there are 4 in a row, return true. Meaning that this piece is a winner
       return true;
     };
@@ -345,7 +345,7 @@ $(function() {
       blockVertical = 0;
     }
     verticalCount = verticalCount * blockVertical;
-    if (verticalCount === 4) {
+    if (verticalCount >= 4) {
       return true;
     };
     return false;
@@ -397,7 +397,7 @@ $(function() {
       blockDiagonalPostive = 0;
     }
     diagonalCountPositive = diagonalCountPositive * blockDiagonalPostive;
-    if (diagonalCountPositive === 4) {
+    if (diagonalCountPositive >= 4) {
       return true;
     };
     return false;
@@ -450,7 +450,7 @@ $(function() {
       blockDiagonalNegative = 0;
     }
     diagonalCountNegative = diagonalCountNegative * blockDiagonalNegative;
-    if (diagonalCountNegative === 4) {
+    if (diagonalCountNegative >= 4) {
       return true;
     };
     return false;
@@ -626,7 +626,7 @@ $(function() {
     // Instantiating some vars
     var numberOfColumns = 7;
     var numberOfRows = 6;
-    var winningArray = [];
+    var potentialMoves = [];
 
     // Loop through the rows and columns
     for (var c = 0; c < numberOfColumns; c++) {
@@ -648,7 +648,7 @@ $(function() {
           var totalCount = horizontalCount + verticalCount + diagonalCountPositive + diagonalCountNegative;
 
           // Pushes the position being checked into an array with the total
-          winningArray.push([c, r, totalCount]);
+          potentialMoves.push([c, r, totalCount]);
 
           // Removing the class so it doesn't accidentally get played
           $("[col=" + c + "]" + "[row=" + r + "]").removeClass(color);
@@ -658,7 +658,7 @@ $(function() {
         }; // End if loop
       }; // Close row for loop
     }; // Close column for loop
-    return winningArray;
+    return potentialMoves;
   }; // Close function
 
   // This function is for looping through the array of possible moves and determining the best of those moves.
