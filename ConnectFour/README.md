@@ -1,4 +1,4 @@
-[Actual Game](jrmils89.github.io/ConnectFour/ConnectFourIndex.html)
+#[Play The Game](http://jrmils89.github.io/ConnectFour/ConnectFourIndex.html)
 
 # Tech Used
 * Javascript / JQuery
@@ -38,6 +38,8 @@ Some resources explored for the Minimax Alogorithim and Alpha-Beta Pruning were 
 # Other Features
 ### Local Storage
 The game after every move stores the game state in the browsers local storage. Upon loading of the game it will check for a previously played game and display to the user an option to resume their previous game. Local Storage was chosen over session storage so that the user could close their browser and still resume gameplay. The previously stored game is wiped out when the user chooses to play a new game. It remains stored when the user hits Play Again or Reset Game after a single game is finished.
+### Setting Rows/Columns/Win Length Size
+The user can determine how big the game board should be. They can also choose how many in a row it takes to win. For example, if the user wishes to play a 10x10 board where instead of 4 the winning number in a row is 5, they would be able to do so. Of note here, the larger the board the slower the AI becomes. The default is 6 rows, 7 columns, and 4 in a row to win.
 ### Play Again / Reset Game
 When a game is completed, user has the option to either play again (using the same two players) or to reset the game which will allow the user to set new names and have the scores reset to zero.
 ### Sounds
