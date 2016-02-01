@@ -18,7 +18,7 @@ $(function() {
         'link': 'http://vignette1.wikia.nocookie.net/shield-files/images/1/13/Avengers_Age_of_Ultron_KISSTHEMGOODBYE_NET_SCREENCAPS_1080p_0646_(1).jpg/revision/latest?cb=20151017235328'
       },
       { 'name': 'F.R.I.D.A.Y',
-        'link': 'http://marvelcinematicuniverse.wikia.com/wiki/F.R.I.D.A.Y.'
+        'link': 'http://marvel.wikia.com/wiki/Friday_%28Earth-616%29'
       },
       { 'name': 'HAL',
         'link': 'https://d13yacurqjgara.cloudfront.net/users/75924/screenshots/916751/hal_1x.png'
@@ -188,7 +188,7 @@ $(function() {
     var $playerOneP = $("<p>").addClass("player-name").html("Red Player: ");
     var $playerTwoP = $("<p>").addClass("player-name").html("Black Player: ");
     var $pOneName = $("<span>").html(playerOneName);
-    var $pTwoName = $("<span>").html("<a href='"+randomComputerNames[computerNameRandomNum].link+"'>"+playerTwoName+"</a>");
+    var $pTwoName = $("<span>").html("<a target='_blank' href='"+randomComputerNames[computerNameRandomNum].link+"'>"+playerTwoName+"</a>");
     var $playerOneScoreP = $("<p>").addClass("player-score").html("Red Wins: ");
     var $playerTwoScoreP = $("<p>").addClass("player-score").html("Black Wins: ");
     var $pOneScore = $("<span>").html(redWins);
