@@ -1,4 +1,4 @@
-// $(function() {
+$(function() {
 
   // Create some HTML el's / grab needed el's
   var $gameBoardContainer = $('<div>').attr('id', 'game-board-container').addClass('board');
@@ -77,20 +77,29 @@
     }  
   };
 
+  // Get the number of rows and columns based either on the user input or the stored game value
   var getNumberOfRowsAndColumns = function() {
-    if ($("#row-input").val() != '') {
+    
+    if (numberOfRows != 6) {
+      numberOfRows = numberOfRows;
+    }
+    else if ($("#row-input").val() != '') {
       numberOfRows = parseInt($("#row-input").val());
     } else {
       numberOfRows = 6;
     };
 
-    if ($("#column-input").val() != '') {
+    if (numberOfColumns != 7) {
+      numberOfColumns = numberOfColumns;
+    }
+    else if ($("#column-input").val() != '') {
       numberOfColumns = parseInt($("#column-input").val());
     } else {
       numberOfColumns = 7;
     };
   };
 
+  // Functions for playing sounds when users click or clear the board
   var playSound = function() {
     var audio = document.getElementById("playsound");
     audio.play();
@@ -128,6 +137,7 @@
 
   // Function to make the board HTML el's
   var makeBoard = function() {
+    // Determine how many rows and columns should be drawn
     getNumberOfRowsAndColumns();
     // Setup the player names and scores
     var $scoreDiv = $("<div>").attr("id", "score");
@@ -658,6 +668,7 @@
 
   // Function to determine where x color should play. Expecting a string value
   var determinePossibleMoves = function(color) {
+    // Determine how many rows and columns should be drawn
     getNumberOfRowsAndColumns();
     // var numberOfColumns = numberOfColumns;
     // var numberOfRows = numberOfRows;
@@ -919,7 +930,9 @@
     'playerTwoName': playerTwoName,
     'redWins': redWins,
     'blackWins': blackWins,
-    'ties': ties
+    'ties': ties,
+    'numberOfColumns': numberOfColumns,
+    'numberOfRows': numberOfRows
   };
 
     // Loop through the game pieces
@@ -960,6 +973,8 @@
       redWins = storedGame.redWins;
       blackWins = storedGame.blackWins;
       ties = storedGame.ties;
+      numberOfRows = storedGame.numberOfRows;
+      numberOfColumns = storedGame.numberOfColumns;
       playAgainstComputer = storedGame.playAgainstComputer;
       // Say game over false by defualt, may change later
       var gameOver = false;
@@ -999,4 +1014,4 @@
   };
 
   resumeGameButton();
-// })
+})
