@@ -13,6 +13,8 @@ $(function() {
   var numberOfRows = 6;
   var numberOfColumns = 7;
 
+  var winAt = 4;
+
   var playerTurn = true;
   // holder vars for player names
   var playerOneName;
@@ -39,6 +41,9 @@ $(function() {
   $("button.play-button").click(function() {
     // Remove last game
     localStorage.removeItem('connectFourGame');
+    numberOfRows = null;
+    numberOfColumns = null;
+    winAt = null;
     // Get the player names
     getPlayerNames();
     // Setup the board
@@ -73,29 +78,35 @@ $(function() {
     if (playAgainstComputer) {
       playerTwoName = 'A.I.';
     } else {
-      playerTwoName = $("#player-two").val();  
-    }  
+      playerTwoName = $("#player-two").val();
+    }
   };
 
   // Get the number of rows and columns based either on the user input or the stored game value
   var getNumberOfRowsAndColumns = function() {
-    
-    if (numberOfRows != 6) {
+
+    if (typeof numberOfRows === 'number'){
       numberOfRows = numberOfRows;
-    }
-    else if ($("#row-input").val() != '') {
+    } else if ($("#row-input").val() != '') {
       numberOfRows = parseInt($("#row-input").val());
     } else {
       numberOfRows = 6;
     };
 
-    if (numberOfColumns != 7) {
+    if (typeof numberOfColumns === 'number'){
       numberOfColumns = numberOfColumns;
-    }
-    else if ($("#column-input").val() != '') {
+    } else if ($("#column-input").val() != '') {
       numberOfColumns = parseInt($("#column-input").val());
     } else {
       numberOfColumns = 7;
+    };
+
+    if (typeof winAt === 'number'){
+      winAt = winAt;
+    } else if ($("#win-number-input").val() != '') {
+      winAt = parseInt($("#win-number-input").val());
+    } else {
+      winAt = 4;
     };
   };
 
@@ -138,7 +149,6 @@ $(function() {
   // Function to make the board HTML el's
   var makeBoard = function() {
     // Determine how many rows and columns should be drawn
-    getNumberOfRowsAndColumns();
     // Setup the player names and scores
     var $scoreDiv = $("<div>").attr("id", "score");
     var $playerOneP = $("<p>").addClass("player-name").html("Red Player: ");
@@ -150,7 +160,7 @@ $(function() {
     var $pOneScore = $("<span>").html(redWins);
     var $pTwoScore = $("<span>").html(blackWins);
     var $directions = $("<p>").html("<h2>To Play</h2>Hover over and/or click the column you wish to drop your piece into")
-    
+
     // Append HTML el's to the body
     $pOneName.appendTo($playerOneP);
     $pTwoName.appendTo($playerTwoP);
@@ -160,9 +170,9 @@ $(function() {
     $scoreDiv.appendTo($body);
     $directions.appendTo($scoreDiv);
     $gameBoardContainer.appendTo($body);
-    
+
     // Loop through and make rows. 
-    for (var i = 0; i < numberOfRows+1; i++) {
+    for (var i = 0; i < numberOfRows + 1; i++) {
       // Create a row for players to click and drop their pieces
       if (i === 0) {
         // This first row is for the button that users click to drop game pieces
@@ -263,7 +273,7 @@ $(function() {
             // If the computer is not playing, store the game info
             storeGame();
           }
-          
+
           // Break the loop since it doesn't need to keep playing up the empty spaces
           break;
         } else {
@@ -295,14 +305,14 @@ $(function() {
     // in one direction or the other
     horizontalCount = 1;
     blockHorizontal = 1;
-    var blockedLeft = 4;
-    var blockedRight = 4;
+    var blockedLeft = winAt;
+    var blockedRight = winAt;
 
     checkRight = 1;
     checkLeft = -1;
 
     // Count up 3 possible places to the right
-    while (checkRight < 4) {
+    while (checkRight < winAt) {
       // Game area to check
       var $pieceToCheck = $("[row=" + row + "] [col=" + (col + checkRight) + "]");
       // If it's blocked
@@ -310,7 +320,7 @@ $(function() {
         // set blocked to how many over it was blocked by
         var blockedRight = checkRight;
         break;
-      // Checks for empty spaces, and doesn't increment how many in a row there are
+        // Checks for empty spaces, and doesn't increment how many in a row there are
       } else if (color === 'red' && !$pieceToCheck.hasClass('black') && !$pieceToCheck.hasClass('red') || color === 'black' && !$pieceToCheck.hasClass('black') && !$pieceToCheck.hasClass('red')) {
         horizontalCount = horizontalCount;
       } else {
@@ -320,7 +330,7 @@ $(function() {
       checkRight++;
     }
 
-    while (checkLeft > -4) {
+    while (checkLeft > -winAt) {
       var $pieceToCheck = $("[row=" + row + "] [col=" + (col + checkLeft) + "]");
       if (color === 'red' && $pieceToCheck.hasClass('black') || color === 'black' && $pieceToCheck.hasClass('red')) {
         var blockedLeft = checkLeft;
@@ -336,13 +346,13 @@ $(function() {
     // If this is blocked less than 3 spaces in all directions than there is no way this piece can
     // win. For exmaple in index 2 of [X,X,0,null,X,0] there is no way 0 can win horizontally since 
     // the most in a row it could get is 2. Therefore it is blocked and blockDirection = 0
-    if (blockedRight < 3 && blockedLeft > -3) {
+    if (blockedRight < (winAt - 1) && blockedLeft > (-winAt + 1)) {
       blockHorizontal = 0;
     }
 
     // As long as it's not blocked, assign the direction count total to the count
     horizontalCount = horizontalCount * blockHorizontal;
-    if (horizontalCount >= 4) {
+    if (horizontalCount >= winAt) {
       // If there are 4 in a row, return true. Meaning that this piece is a winner
       return true;
     };
@@ -355,12 +365,12 @@ $(function() {
     var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
     verticalCount = 1;
     blockVertical = 1;
-    var blockedUp = 4;
-    var blockedDown = 4;
+    var blockedUp = winAt;
+    var blockedDown = winAt;
     checkDown = 1;
     checkUp = -1;
 
-    while (checkDown < 4) {
+    while (checkDown < winAt) {
       var $pieceToCheck = $("[row=" + (row + checkDown) + "] [col=" + col + "]");
       if (color === 'red' && $pieceToCheck.hasClass('black') || color === 'black' && $pieceToCheck.hasClass('red')) {
         var blockedDown = checkDown;
@@ -372,7 +382,7 @@ $(function() {
       }
       checkDown++;
     }
-    while (checkUp > -4) {
+    while (checkUp > -winAt) {
       var $pieceToCheck = $("[row=" + (row + checkUp) + "] [col=" + col + "]");
       if (color === 'red' && $pieceToCheck.hasClass('black') || color === 'black' && $pieceToCheck.hasClass('red')) {
         var blockedUp = checkUp;
@@ -384,11 +394,11 @@ $(function() {
       }
       checkUp--;
     }
-    if (blockedDown < 3 && blockedUp > -3) {
+    if (blockedDown < (winAt - 1) && blockedUp > (-winAt + 1)) {
       blockVertical = 0;
     }
     verticalCount = verticalCount * blockVertical;
-    if (verticalCount >= 4) {
+    if (verticalCount >= winAt) {
       return true;
     };
     return false;
@@ -399,16 +409,16 @@ $(function() {
     var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
     diagonalCountPositive = 1;
     blockDiagonalPostive = 1;
-    var blockedUpDiag = 4;
-    var blockedDownDiag = 4;
-    var blockedRightDiag = 4;
-    var blockedLeftDiag = 4;
+    var blockedUpDiag = winAt;
+    var blockedDownDiag = winAt;
+    var blockedRightDiag = winAt;
+    var blockedLeftDiag = winAt;
     checkDown = 1;
     checkUp = -1;
     checkRight = 1;
     checkLeft = -1;
 
-    while (checkRight < 4 && checkUp > -4) {
+    while (checkRight < winAt && checkUp > -winAt) {
       var $pieceToCheck = $("[row=" + (row + checkUp) + "] [col=" + (col + checkRight) + "]");
       if (color === 'red' && $pieceToCheck.hasClass('black') || color === 'black' && $pieceToCheck.hasClass('red')) {
         var blockedUpDiag = checkUp;
@@ -422,7 +432,7 @@ $(function() {
       checkUp--;
       checkRight++;
     }
-    while (checkLeft > -4 && checkDown < 4) {
+    while (checkLeft > -winAt && checkDown < winAt) {
       var $pieceToCheck = $("[row=" + (row + checkDown) + "] [col=" + (col + checkLeft) + "]");
       if (color === 'red' && $pieceToCheck.hasClass('black') || color === 'black' && $pieceToCheck.hasClass('red')) {
         var blockedDownDiag = checkDown;
@@ -436,11 +446,11 @@ $(function() {
       checkLeft--;
       checkDown++;
     }
-    if (blockedUpDiag < 3 && blockedRightDiag > -3 || blockedDownDiag < 3 && blockedLeftDiag > -3) {
+    if (blockedUpDiag < (winAt - 1) && blockedRightDiag > (-winAt + 1) || blockedDownDiag < (winAt - 1) && blockedLeftDiag > (-winAt + 1)) {
       blockDiagonalPostive = 0;
     }
     diagonalCountPositive = diagonalCountPositive * blockDiagonalPostive;
-    if (diagonalCountPositive >= 4) {
+    if (diagonalCountPositive >= winAt) {
       return true;
     };
     return false;
@@ -451,16 +461,16 @@ $(function() {
     var $piecePlayed = $("[row=" + row + "] [col=" + col + "]");
     diagonalCountNegative = 1;
     blockDiagonalNegative = 1;
-    var blockedUpDiagNeg = 4;
-    var blockedDownDiagNeg = 4;
-    var blockedRightDiagNeg = 4;
-    var blockedLeftDiagNeg = 4;
+    var blockedUpDiagNeg = winAt;
+    var blockedDownDiagNeg = winAt;
+    var blockedRightDiagNeg = winAt;
+    var blockedLeftDiagNeg = winAt;
     checkDown = 1;
     checkUp = -1;
     checkRight = 1;
     checkLeft = -1;
 
-    while (checkLeft > -4 && checkUp > -4) {
+    while (checkLeft > -winAt && checkUp > -winAt) {
       var $pieceToCheck = $("[row=" + (row + checkUp) + "] [col=" + (col + checkLeft) + "]");
       if (color === 'red' && $pieceToCheck.hasClass('black') || color === 'black' && $pieceToCheck.hasClass('red')) {
         var blockedUpDiagNeg = checkUp;
@@ -474,7 +484,7 @@ $(function() {
       checkUp--;
       checkLeft--;
     }
-    while (checkRight < 4 && checkDown < 4) {
+    while (checkRight < winAt && checkDown < winAt) {
       var $pieceToCheck = $("[row=" + (row + checkDown) + "] [col=" + (col + checkRight) + "]");
       if (color === 'red' && $pieceToCheck.hasClass('black') || color === 'black' && $pieceToCheck.hasClass('red')) {
         var blockedDownDiagNeg = checkDown;
@@ -489,11 +499,11 @@ $(function() {
       checkDown++;
     }
 
-    if (blockedUpDiagNeg < 3 && blockedRightDiagNeg > -3 || blockedDownDiagNeg < 3 && blockedLeftDiagNeg > -3) {
+    if (blockedUpDiagNeg < (winAt - 1) && blockedRightDiagNeg > (-winAt + 1) || blockedDownDiagNeg < (winAt - 1) && blockedLeftDiagNeg > (-winAt + 1)) {
       blockDiagonalNegative = 0;
     }
     diagonalCountNegative = diagonalCountNegative * blockDiagonalNegative;
-    if (diagonalCountNegative >= 4) {
+    if (diagonalCountNegative >= winAt) {
       return true;
     };
     return false;
@@ -587,6 +597,7 @@ $(function() {
 
   // Wrapper funciton for initial game play setup
   var initialGameSetup = function() {
+    getNumberOfRowsAndColumns();
     makeBoard();
     setStyles();
     setDropSquaresClick();
@@ -622,6 +633,7 @@ $(function() {
     redWins = 0;
     blackWins = 0;
     ties = 0;
+    winAt = null;
 
     // Make the overlay visible again. The overlay makes the play button which intiates the intial game setup
     // so we don't need to call that funciton here anymore. Also removes the jquery added styles
@@ -631,13 +643,15 @@ $(function() {
     // and reset the game, the button was checked and you wouldn't be able to enter in a player two name
     $("#computer").attr('checked', false);
     $(".resume-button").remove()
-    // Reset play against computer to default choice
+      // Reset play against computer to default choice
     playAgainstComputer = false;
 
     // Remove the old gameplay and scoreboard
     $gameBoardContainer.remove();
     $('#score').remove();
-
+    $("#win-number-input").val('');
+    $("#column-input").val('');
+    $("#row-input").val('');
     // Create some new vars
     $gameBoardContainer = $('<div>').attr('id', 'game-board-container').addClass('board');
     $playRowButtons = $('.play-row .column');
@@ -765,20 +779,20 @@ $(function() {
     // If black would win on it's move, play return it
     if (color === 'black' && blackMove.wins) {
       return blackMove;
-    } 
+    }
     // Else if black needs to block the red move, return the red move
     else if (color === 'black' && redMove.wins) {
       return redMove
-    } 
+    }
     // If red can win, return the red move
     else if (color === 'red' && redMove.wins) {
       return redMove;
-    } 
+    }
     // Or finally, if the color is black (and no one can win), call the smart AI function to determine where to play
     else if (color === 'black') {
       // This tries to smartly play
       return smartAI('black');
-    } 
+    }
     // Else return the red move
     else {
       return redMove;
@@ -832,12 +846,18 @@ $(function() {
 
   var determineBestMove = function(a, color) {
     // Generate a holder array
-    var potentionalNextMoves = {'potentialNextMoves':[], 'potentialThisMoves':[a]};
+    var potentionalNextMoves = {
+      'potentialNextMoves': [],
+      'potentialThisMoves': [a]
+    };
     for (var i = 0; i < a.length; i++) {
       // Add the class to the location it's on so that we can test the next set of possible moves
       $("[col=" + a[i][0] + "]" + "[row=" + a[i][1] + "]").addClass(color);
       // Determine the possible moves should the color play in that place
-      p = {'move': i, 'potentialMoves': determinePossibleMoves('red')};
+      p = {
+        'move': i,
+        'potentialMoves': determinePossibleMoves('red')
+      };
       // Push that info to the object
       potentionalNextMoves.potentialNextMoves.push(p);
       // And remove the class so it can go onto the next potention play
@@ -857,13 +877,13 @@ $(function() {
       // Set the move number of black so we know which potential black move this would be
       position = bm.potentialNextMoves[m].move;
       // Set the count/score
-      count =  bm.potentialNextMoves[m].potentialMoves[0][2];
+      count = bm.potentialNextMoves[m].potentialMoves[0][2];
 
       // Loop through the potential red moves and see if there'd be a better move 
       // for it if black played in this position
       for (var s = 0; s < bm.potentialNextMoves[m].potentialMoves.length; s++) {
         compareScore = bm.potentialNextMoves[m].potentialMoves[s][2]
-        // If there is, set the score to that score
+          // If there is, set the score to that score
         if (compareScore > count) {
           count = compareScore
         };
@@ -892,7 +912,7 @@ $(function() {
         count = bo[i][1];
       };
     };
-    
+
     // After looping through the red play and gettin the lowest value, get the black
     // Move that corresponds to that value and set it as the play position
     var play = bm.potentialThisMoves[0][position];
@@ -923,20 +943,22 @@ $(function() {
     var redClass = /red/;
     var blackClass = /black/;
     // Set a holder for the local storage, with information about the game type as well
-    var storageVar = {'pieces':[], 
-    'playerTurn': playerTurn, 
-    'playAgainstComputer': playAgainstComputer, 
-    'playerOneName': playerOneName,
-    'playerTwoName': playerTwoName,
-    'redWins': redWins,
-    'blackWins': blackWins,
-    'ties': ties,
-    'numberOfColumns': numberOfColumns,
-    'numberOfRows': numberOfRows
-  };
+    var storageVar = {
+      'pieces': [],
+      'playerTurn': playerTurn,
+      'playAgainstComputer': playAgainstComputer,
+      'playerOneName': playerOneName,
+      'playerTwoName': playerTwoName,
+      'redWins': redWins,
+      'blackWins': blackWins,
+      'ties': ties,
+      'numberOfColumns': numberOfColumns,
+      'numberOfRows': numberOfRows,
+      'winAt': winAt
+    };
 
     // Loop through the game pieces
-    $gamePieces.each( function() {
+    $gamePieces.each(function() {
       var row = parseInt($(this).attr("row"));
       var col = parseInt($(this).attr("col"));
       var classes = $(this).attr("class");
@@ -947,11 +969,21 @@ $(function() {
       // If they are played
       if (myArrayRed != undefined) {
         // Set the information about that piece, where it was played, and if the game ended on that pay
-        var piece = {'row': row, 'col': col, 'color': 'red', 'gameOver':checkIfWinnerWithoutPlaying(row,col,'red',checkHorizontal, checkVertical, checkDiagPositive, checkDiagNegative)}
-        // Push it to the storage holder
+        var piece = {
+            'row': row,
+            'col': col,
+            'color': 'red',
+            'gameOver': checkIfWinnerWithoutPlaying(row, col, 'red', checkHorizontal, checkVertical, checkDiagPositive, checkDiagNegative)
+          }
+          // Push it to the storage holder
         storageVar.pieces.push(piece);
       } else if (myArrayBlack != undefined) {
-        var piece = {'row': row, 'col': col, 'color': 'black', 'gameOver':checkIfWinnerWithoutPlaying(row,col,'black',checkHorizontal, checkVertical, checkDiagPositive, checkDiagNegative)}
+        var piece = {
+          'row': row,
+          'col': col,
+          'color': 'black',
+          'gameOver': checkIfWinnerWithoutPlaying(row, col, 'black', checkHorizontal, checkVertical, checkDiagPositive, checkDiagNegative)
+        }
         storageVar.pieces.push(piece);
       };
     });
@@ -976,6 +1008,7 @@ $(function() {
       numberOfRows = storedGame.numberOfRows;
       numberOfColumns = storedGame.numberOfColumns;
       playAgainstComputer = storedGame.playAgainstComputer;
+      winAt = storedGame.winAt;
       // Say game over false by defualt, may change later
       var gameOver = false;
       // Call the initial game board setup functions
@@ -988,12 +1021,12 @@ $(function() {
         var column = storedGame.pieces[i].col;
         var color = storedGame.pieces[i].color;
         // play the pieces without checking the turn
-        playPieceWithoutCheckTurn(row,column,color);
+        playPieceWithoutCheckTurn(row, column, color);
         // If the game way over on that piece, set the game over to true
         if (storedGame.pieces[i].gameOver === true) {
           gameOver = true;
         };
-      };// End for loop
+      }; // End for loop
 
       // Need to do this again because when looping through the pieces it updates the score if there's a winner
       // which we don't really want. More effecient to just do it again here as opposed to changing the function because
@@ -1006,9 +1039,9 @@ $(function() {
 
       // Set the header properly if the game isn't over
       if (playerTurn && !gameOver) {
-        $header.html("It is " + playerOneName + "'s turn!");  
+        $header.html("It is " + playerOneName + "'s turn!");
       } else if (!playerTurn && !gameOver) {
-        $header.html("It is " + playerTwoName + "'s turn!");  
+        $header.html("It is " + playerTwoName + "'s turn!");
       };
     };
   };

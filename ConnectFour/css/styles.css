@@ -147,7 +147,7 @@ h1 {
 	display: none;
 }
 
-input.player-input, input.row-input, input.column-input {
+input.player-input, input.row-input, input.column-input, input.win-number-input {
 	margin: 1em;
 	height: 2em;
 	width: 30%;
@@ -156,7 +156,7 @@ input.player-input, input.row-input, input.column-input {
 	font-family: 'PT Sans Narrow', sans-serif;
 }
 
-input.row-input, input.column-input {
+input.row-input, input.column-input, input.win-number-input {
 	background-color: transparent;
 	text-align: center;
 	border: solid 1px #FFC153;
