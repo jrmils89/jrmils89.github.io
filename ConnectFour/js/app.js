@@ -49,6 +49,8 @@ $(function() {
 
   var computerNameRandomNum;
 
+  var playerNameLink;
+
   // var 4 = 4;
 
   var playerTurn = true;
@@ -189,7 +191,8 @@ $(function() {
     var $playerTwoP = $("<p>").addClass("player-name").html("Black Player: ");
     var $pOneName = $("<span>").html(playerOneName);
     if (playAgainstComputer) {
-      var $pTwoName = $("<span>").html("<a target='_blank' href='"+randomComputerNames[computerNameRandomNum].link+"'>"+playerTwoName+"</a>");  
+      playerNameLink = randomComputerNames[computerNameRandomNum].link;
+      var $pTwoName = $("<span>").html("<a target='_blank' href='"+playerNameLink+"'>"+playerTwoName+"</a>");  
     } else {
       var $pTwoName = $("<span>").html(playerTwoName);  
     }
@@ -992,6 +995,9 @@ $(function() {
       'ties': ties,
       'numberOfColumns': numberOfColumns,
       'numberOfRows': numberOfRows,
+      'playerNameLink': playerNameLink,
+      'computerNameRandomNum': computerNameRandomNum,
+
       // '4': 4
     };
 
@@ -1046,6 +1052,8 @@ $(function() {
       numberOfRows = storedGame.numberOfRows;
       numberOfColumns = storedGame.numberOfColumns;
       playAgainstComputer = storedGame.playAgainstComputer;
+      computerNameRandomNum = storedGame.computerNameRandomNum;
+      playerNameLink = storedGame.playerNameLink;
       // 4 = storedGame.4;
       // Say game over false by defualt, may change later
       var gameOver = false;
