@@ -1,5 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Lato);
 
+@font-face {
+	font-family: 'fontello';
+	src: url('../fonts/icons/fontello.eot');
+  src: url('../fonts/icons/fontello.eot') format('embedded-opentype'),
+       url('../fonts/icons/fontello.woff') format('woff'),
+       url('../fonts/icons/fontello.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
 /*body {
 	background: #bcbec0;
 	background-size: cover;
@@ -159,6 +169,8 @@ a.nav-bar-link {
 
 hr {
 	opacity: .7;
+	border-color: #156FA9;
+	border-top: none;
 }
 
 
@@ -185,10 +197,12 @@ a.nav-bar-link:first-child {
 	margin-bottom: .2em;
 }
 
-span.label {
-	font-weight: bold;
-	text-transform: capitalize;
+i.icon {
+	font-family: 'fontello';
+	font-style: normal;
+	margin-right: .3em;
 }
+
 
 h1 {
 	font-size: 2.2em;
@@ -220,4 +234,9 @@ h5 {
 }
 .job-description {
 	padding-left: 3em;
+}
+
+a.unstyled-link {
+	color: inherit;
+	text-decoration: inherit;
 }
