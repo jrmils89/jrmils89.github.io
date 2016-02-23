@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Lato);
 
-body {
+/*body {
 	background: #bcbec0;
 	background-size: cover;
 	background-position: center;
@@ -48,22 +48,22 @@ header	{
   padding: 0px 10px 0px 10px;
 }
 
-/* unvisited link */
+ unvisited link
 a:link {
     color: #4B4C4C;
 }
 
-/* visited link */
+ visited link
 a:visited {
     color: #1e1e1e;
 }
 
-/* mouse over link */
+ mouse over link
 a:hover {
     color: #818181;
 }
 
-/* selected link */
+ selected link
 a:active {
     color: #4B4C4C;
 }
@@ -107,4 +107,117 @@ a:active {
 	box-shadow: 0px 0px 2px 0px #383E44;
 	}
 
+}*/
+
+
+* {
+	padding: 0;
+	margin: 0 auto;
+	box-sizing: border-box;
+	font-size: 12px;
+}
+
+body {
+	font-size: 1rem;
+	font-family: 'Lato', sans-serif;
+	text-align: center;
+	padding: 1em;
+	line-height: 1.5;
+}
+
+nav {
+	text-align: left;
+	float: left;
+	clear: both;
+	min-width: 10%;
+	list-style: none;
+	height: 100%;
+	border-right: solid 1px black;
+}
+
+section {
+	padding: .1em;
+	font-size: .7em;
+}
+
+section.body {
+	font-size: 1.2em;
+	text-align: center;
+}
+
+nav li {
+	height: 3em;
+}
+
+a.nav-bar-link {
+	color: black;
+	text-decoration: none;
+	font-size: 1em;
+	text-align: center;
+	padding: 3px;
+}
+
+hr {
+	opacity: .7;
+}
+
+
+a.nav-bar-link:first-child {
+	border-left:none;
+}
+
+.resume-header {
+	font-size: 2.5em;
+}
+
+.contact-info {
+	/*display: flex;
+	align-items: center;
+	justify-content: center;*/
+}
+
+.contact-info li {
+	display: inline-block;
+	list-style: none;
+	margin-left: .2em;
+	margin-right: .2em;
+	min-width: 25%;
+	margin-bottom: .2em;
+}
+
+span.label {
+	font-weight: bold;
+	text-transform: capitalize;
+}
+
+h1 {
+	font-size: 2.2em;
+}
+
+.skills li {
+	display: inline-block;
+	min-width: 10%;
+}
+
+.skills li:nth-child(odd) {
+	font-weight: bold;
+}
+
+.jobs, .volunteer-work {
+	text-align: left;
+}
+
+h3 {
+	font-size: 1.3em;
+}
+
+p {
+	font-size: .9em;
+}
+
+h5 {
+	text-decoration: underline;
+}
+.job-description {
+	padding-left: 3em;
 }
