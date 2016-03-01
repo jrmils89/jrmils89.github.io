@@ -183,9 +183,8 @@ a.nav-bar-link:first-child {
 }
 
 .contact-info {
-	/*display: flex;
-	align-items: center;
-	justify-content: center;*/
+	margin-top: .4em;
+	margin-bottom: .4em;
 }
 
 .contact-info li {
@@ -193,7 +192,7 @@ a.nav-bar-link:first-child {
 	list-style: none;
 	margin-left: .2em;
 	margin-right: .2em;
-	min-width: 25%;
+	min-width: 12%;
 	margin-bottom: .2em;
 }
 
@@ -210,12 +209,12 @@ h1 {
 
 .skills li {
 	display: inline-block;
-	min-width: 10%;
+	min-width: 8%;
 }
 
-.skills li:nth-child(odd) {
+/*.skills li:nth-child(odd) {
 	font-weight: bold;
-}
+}*/
 
 .jobs, .volunteer-work {
 	text-align: left;
@@ -239,4 +238,12 @@ h5 {
 a.unstyled-link {
 	color: inherit;
 	text-decoration: inherit;
+}
+
+.right {
+	float: right;
+}
+
+h3:nth-child(1n+2) {
+	margin-top: .3em;
 }
