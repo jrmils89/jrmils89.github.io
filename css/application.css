@@ -190,9 +190,8 @@ a.nav-bar-link:first-child {
 .contact-info li {
 	display: inline-block;
 	list-style: none;
-	margin-left: .2em;
-	margin-right: .2em;
-	min-width: 12%;
+	margin-left: .4em;
+	margin-right: .4em;
 	margin-bottom: .2em;
 }
 
@@ -209,7 +208,8 @@ h1 {
 
 .skills li {
 	display: inline-block;
-	min-width: 8%;
+	margin-left: .4em;
+	margin-right: .4em;
 }
 
 /*.skills li:nth-child(odd) {
