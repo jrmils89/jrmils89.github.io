@@ -10,6 +10,17 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'Exo';
+	src: url('../fonts/exo/Exo-Regular.otf');
+}
+
+@font-face {
+	font-family: 'Exo';
+	src: url('../fonts/exo/Exo-Bold.otf');
+	font-weight: bold;
+}
+
 /*body {
 	background: #bcbec0;
 	background-size: cover;
@@ -129,7 +140,7 @@ a:active {
 
 body {
 	font-size: 1rem;
-	font-family: 'Lato', sans-serif;
+	font-family: 'Exo', sans-serif;
 	text-align: center;
 	padding: .5em;
 	line-height: 1.3;
