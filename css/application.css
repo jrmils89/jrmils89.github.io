@@ -21,116 +21,6 @@
 	font-weight: bold;
 }
 
-/*body {
-	background: #bcbec0;
-	background-size: cover;
-	background-position: center;
-	font-family: 'Lato', sans-serif;
-	color: #4B4C4C;
-	margin: 0px;
-	font-size: 12px;
-}
-
-img {
-	margin: 40px 0px 0px 0px;
-	border: 1px solid #E9E9E9;
-	border-radius: 20px;
-	height: 150px;
-}
-section	{
-	margin: 0 0px;
-	padding: 0px 0px;
-}
-
-header	{
-	text-align: center;
-}
-
-.about-me {
-	text-align: left;
-	float: left;
-	width: 45%;
-	background-color: #E8E9EA;
-	margin: 20px;
-	padding: 10px;
-	box-shadow: 0px 0px 2px 0px #383E44;
-}
-
-.resume {
-	float: right;
-	width: 45%;
-	background-color: #E8E9EA;
-	margin: 20px;
-	padding: 10px;
-	box-shadow: 0px 0px 2px 0px #383E44;
-}
-
-.about-me .li {
-  padding: 0px 10px 0px 10px;
-}
-
- unvisited link
-a:link {
-    color: #4B4C4C;
-}
-
- visited link
-a:visited {
-    color: #1e1e1e;
-}
-
- mouse over link
-a:hover {
-    color: #818181;
-}
-
- selected link
-a:active {
-    color: #4B4C4C;
-}
-
-.nav-bar {
-	background: #6699CC;
-	font-family: 'Lato', sans-serif;
-	vertical-align: middle;
-	padding: 5px;
-	height: 30px;
-}
-.nav-bar .item {
-	display: inline;
-	padding: 5px 5px 5px 5px;
-	font-family: 'Lato', sans-serif;
-}
-
-.image-logo {
-	height: 25px;
-	margin: 0px 0px 0px 0px;
-	border: 1px solid #E9E9E9;
-	border-radius: 5px;
-}
-
-@media (max-width: 1200px) {
-	.resume {
-	float: none;
-	width: 90%;
-	background-color: #E8E9EA;
-	margin: 20px auto;
-	padding: 10px;
-	box-shadow: 0px 0px 2px 0px #383E44;
-	}
-
-	.about-me {
-	float: none;
-	width: 90%;
-	background-color: #E8E9EA;
-	margin: 20px auto;
-	padding: 10px;
-	box-shadow: 0px 0px 2px 0px #383E44;
-	}
-
-}*/
-
-
 * {
 	padding: 0;
 	margin: 0 auto;
@@ -257,4 +147,88 @@ a.unstyled-link {
 
 h3:nth-child(1n+2) {
 	margin-top: .3em;
+}
+
+.project-container {
+	width: 19em;
+	margin: .1em;
+	display: inline-block;
+	min-height: 13em;
+	border: solid 1px black;
+	text-decoration: none;
+	color: black;
+	position: relative;
+}
+
+.gem {
+	background: url('http://images.all-free-download.com/images/graphiclarge/ruby_312068.jpg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: top;
+}
+
+.npm {
+	background: url('http://www.brihaspatitech.com/blog/wp-content/uploads/npm.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: top;
+}
+
+.comic-sides {
+	background: url('../images/projects/comic-sides.jpeg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: top;
+}
+
+.connect-four-div {
+	background: url('../images/projects/connect-four.jpeg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: top;
+}
+
+.flowly {
+	background: url('../images/projects/flowly.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: top;
+}
+
+.baseball-application {
+	background: url('../images/projects/baseball-application.jpeg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: top;
+}
+
+.project-container > .project-link {
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	text-align: center;
+	font-size: 1.2em;
+	height: inherit;
+	background: rgba(0,0,0,.6);
+	color: white
+}
+
+span.header {
+	font-weight: bold;
+	font-size: 1.2em;
+	text-decoration: underline;
+}
+
+.about-me {
+	font-size: 1em;
+}
+
+.about-me > li {
+	margin-bottom: .4em;
+}
+
+@media (max-width: 600px) {
+  nav {
+		height: 250%;
+	}
 }
