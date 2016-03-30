@@ -33,7 +33,7 @@ body {
 	font-family: 'Exo', sans-serif;
 	text-align: center;
 	padding: .5em;
-	line-height: 1.05;
+	line-height: 1.02;
 }
 
 nav {
@@ -176,6 +176,13 @@ h3:nth-child(1n+2) {
 
 .npm {
 	background: url('http://www.brihaspatitech.com/blog/wp-content/uploads/npm.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: top;
+}
+
+.pair-coder {
+	background: url('../images/projects/pair-coder.png');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: top;
