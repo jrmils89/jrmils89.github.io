@@ -112,7 +112,7 @@ div.content {
 
 .blue {
   background-color: #46668d;
-  color: black;
+  color: white;
 }
 
 a.icon-link {
@@ -196,5 +196,24 @@ a.icon-link {
   border: none;
   background-color: #46668d;
   border-top: solid 1px black;
+  color: white;
+}
+
+.blue a {
+  text-decoration: underline;
+  color: #C8B78C;
+}
+.blue a:hover {
+  text-decoration: underline;
+  color: white;
+}
+
+.blue-compliment a {
+  text-decoration: underline;
+  color: #46668d;
+}
+
+.blue-compliment a:hover {
+  text-decoration: underline;
   color: white;
 }
