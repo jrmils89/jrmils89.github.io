@@ -238,12 +238,21 @@ span.header {
 	text-decoration: underline;
 }
 
+
+.about-me > h1 {
+	text-align: center;
+}
+
 .about-me {
 	font-size: 1em;
+	text-align: left;
+	margin: 5px;
 }
 
 .about-me > li {
 	margin-bottom: .4em;
+	list-style: none;
+	line-height: 1.5;
 }
 
 @media (max-width: 600px) {
