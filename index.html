@@ -1,66 +1,85 @@
+<!DOCTYPE html>
 <html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
-	<link rel="stylesheet" type="text/css" href="css/application.css">
-  <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-  <title>Jesse Mills</title>
-</head>
-<body>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-68682615-1', 'auto');
-  ga('send', 'pageview');
-</script>
-<nav>
-<li>
-  <a href="/" class="nav-bar-link">Home</a>
-</li>
-<li>
-  <a href="https://github.com/jrmils89" class="nav-bar-link">GitHub</a>
-</li>
-<li>
-  <a href="https://www.linkedin.com/in/jessemills" class="nav-bar-link">LinkedIn</a>
-</li>
-<li>
-  <a href="/resume.html" class="nav-bar-link">Resume</a>
-</li>
-<li>
-  <a href="/about.html" class="nav-bar-link">About Me</a>
-</li>
-<li>
-  <a href="https://www.twitter.com/jessermills" class="nav-bar-link">Twitter</a>
-</li>
-</nav>
-<section class="body">
-  <img src="images/selfies/headshot.jpg" class="headshot"  alt="">
-  <h1>Some Of My Projects!</h1>
-  <a class="project-container pair-coder" href="https://paircoder.herokuapp.com">
-    <div class="project-link"><span class="header">Live Pair Coding Application</span><br/>MEAN Stack<br/>Socket.IO<br/>CodeMirrorJS Library</div>
-  </a>
-  <a class="project-container nba" href="https://nbabasketball.herokuapp.com">
-    <div class="project-link"><span class="header">Web App Using My Rails Gem</span><br/>Angular on Rails<br/>Chart JS</div>
-  </a>
-  <a class="project-container gem" href="https://github.com/jrmils89/nba_api_wrapper">
-    <div class="project-link"><span class="header">NBA API WRAPPER GEM</span><br/>RSpec Tests<br/>Namespaced Classes</div>
-  </a>
-  <a class="project-container npm" href="https://github.com/jrmils89/nba-package">
-    <div class="project-link"><span class="header">NBA API NODE PACKAGE WRAPPER</span><br/>JSONP Helpers<br/>Tests TBD</div>
-  </a>
-  <a class="project-container comic-sides" href="https://comicsides.herokuapp.com">
-    <div class="project-link"><span class="header">COMIC SIDES</span><br/>NodeJS Server<br/>Mocha Tests<br/>Chatting App W/ Sockets<br/>AJAX Auth<br/>Charts w/ ChartJS</div>
-  </a>
-  <a class="project-container flowly" href="https://flow-ly.herokuapp.com">
-    <div class="project-link"><span class="header">FlowLy</span><br/>Canvas Drawing<br/>Single Page App<br/>Full MEAN Stack<br/>Group Project</div>
-  </a>
-  <a class="project-container connect-four-div" href="/ConnectFour/ConnectFourIndex.html">
-    <div class="project-link"><span class="header">CONNECT FOUR</span><br/>Beta Minimax Algorithm Implemented (no pruning)</div>
-  </a>
-  <a class="project-container baseball-application" href="http://www.baseballapplication.com">
-    <div class="project-link"><span class="header">BASEBALL APPLICATION</span><br/>Rails on MySQL<br/>HeatmapJS for Heatmaps</div>
-  </a>
-</section>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <title>Jesse Mills</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+    <header>
+      <img src="images/headshot.jpg" class="headshot"  alt="">
+    </header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="https://github.com/jrmils89/">Github</a>
+      <a href="https://www.linkedin.com/in/jessemills">Linkedin</a>
+      <a href="/about.html">About</a>
+      <a href="https://twitter.com/jessermills">Twitter</a>
+    </nav>
+    <section class="blue">
+      <div class="middle-content">
+        <a href="https://paircoder.herokuapp.com/">Pair Coder</a><a class="icon-link" href="https://github.com/jrmils89/PartnerCode"><i class="icon">&#xe802;</i></a>
+        <p class="summary">Create A Coding Session And Pair Code Together Live</p>
+        <p class="technologies">MongoDB | Express | AngularJS | NodeJS | Mocha Tests | Travis CI | Socket.IO | User-Agent Specfic Functionality</p>
+        <img src="images/pair-coder.png" alt="">
+      </div>
+    </section>
+    <section class="blue-compliment">
+      <div class="middle-content">
+        <a href="https://rubygems.org/gems/nba_api_wrapper">Ruby Gem: NBA API Wrapper</a><a class="icon-link" href="https://github.com/jrmils89/nba_api_wrapper"><i class="icon">&#xe802;</i></a>
+        <p class="summary">Ruby Gem Wrapping the NBA Stats Endpoints</p>
+        <p class="technologies">RSpec Tests | Travis CI</p>
+        <img src="images/nba-api-gem.png" alt="">
+      </div>
+    </section>
+    <section class="blue">
+      <div class="middle-content">
+        <a href="https://nbabasketball.herokuapp.com/">NBA Application</a><a class="icon-link" href="https://github.com/jrmils89/rails-angular-nba"><i class="icon">&#xe802;</i></a>
+        <p class="summary">Rails Application To Give The NBA API Gem A Front End</p>
+        <p class="technologies">Ruby | Rails | AngularJS | NBA API Wrapper Gem | Postgres | ChartJS</p>
+        <img src="images/nba-application.png" alt="">
+      </div>
+    </section>
+    <section class="blue-compliment">
+      <div class="middle-content">
+        <a href="https://www.npmjs.com/package/nbapackage">Node Package NBA API Wrapper</a><a class="icon-link" href="https://github.com/jrmils89/nba-package"><i class="icon">&#xe802;</i></a>
+        <p class="summary">Node Package Wrapping NBA API Stats Endpoint (smaller version of Gem)</p>
+        <img src="images/nba-package.png" alt="">
+      </div>
+    </section>
+    <section class="blue">
+      <div class="middle-content">
+        <a href="https://flow-ly.herokuapp.com//">FlowLy</a><a class="icon-link" href="https://github.com/jrmils89/unity-project"><i class="icon">&#xe802;</i></a>
+        <p class="summary">Responsive Flow Chart Creator For Web Development Concepts (Group Project)</p>
+        <p class="technologies">AngularJS | MongoDB | NodeJS | Canvas | Image Hosting | Responsive Design</p>
+        <img src="images/flowly.png" alt="">
+      </div>
+    </section>
+    <section class="blue-compliment">
+      <div class="middle-content">
+        <a href="https://comicsides.herokuapp.com">Choose Your Side</a><a class="icon-link" href="https://github.com/jrmils89/comic-side-chooser"><i class="icon">&#xe802;</i></a>
+        <p class="summary">Marvel & DC Comics Wiki And Profile Creator</p>
+        <p class="technologies">NodeJS | EJS Templates | 3rd Party API (Wikia) | Socket.IO | ChartJS | CSS Animations | MongoDB</p>
+        <img src="images/choose-your-side.png" alt="">
+      </div>
+    </section>
+    <section class="blue">
+      <div class="middle-content">
+        <a href="http://www.baseballapplication.com/">Baseball Application</a><a class="icon-link" href="https://github.com/jrmils89/BaseballApplication"><i class="icon">&#xe802;</i></a>
+        <p class="summary">Baseball Heatmap Rails Application (Built Pre-Immersive)</p>
+        <p class="technologies">Ruby | Rails | MySQL | Digital Ocean Hosted | Phusion Passenger | Ngnix | HeatmapJS</p>
+        <img src="images/baseball-application.png" alt="">
+      </div>
+    </section>
+    <section class="blue-compliment">
+      <div class="middle-content">
+        <a href="/ConnectFour/ConnectFourIndex.html">Connect Four</a><a class="icon-link" href="https://github.com/jrmils89/ConnectFour"><i class="icon">&#xe802;</i></a>
+        <p class="summary">Connect Four Game. Play versus a human or a (poor) AI</p>
+        <p class="technologies">Javascript | HTML/CSS | Minimax Alogrithm (no pruning)</p>
+        <img src="images/connect-four.png" alt="">
+      </div>
+    </section>
+  </body>
+</html>

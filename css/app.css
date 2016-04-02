@@ -1,0 +1,184 @@
+* {
+  margin: 0 auto;
+  padding: none;
+  box-sizing: border-box;
+  font-size: 18px;
+  font-family: 'Raleway',sans-serif;
+}
+
+@font-face {
+	font-family: 'fontello';
+  src: url('../icons/fontello.eot') format('embedded-opentype'),
+       url('../icons/fontello.woff') format('woff'),
+       url('../icons/fontello.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  font-size: 1rem;
+}
+
+header {
+  width: 100%;
+  text-align: center;
+}
+
+section {
+  height: 75%;
+  position: relative;
+  border-bottom: solid 1px black;
+}
+
+h1 {
+  font-size: 1.3em;
+  width: 100%;
+  text-align: center;
+  color: #ff5251;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: underline;
+  color: white;
+}
+
+nav {
+  width: 100%;
+  text-align: center;
+}
+
+nav > a {
+  color: black;
+  font-size: 1.2em;
+  padding-left: 5px;
+  display: inline-block;
+  width: 200px;
+  text-align: center;
+  padding-right: 5px;
+  text-decoration: none;
+}
+
+nav > a:hover {
+  color: #ff5251;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: black;
+}
+
+li {
+  display: inline-block;
+  list-style: circle;
+}
+
+p {
+  font-size: 0.8em;
+}
+
+section > div.middle-content {
+  position: absolute;
+  top: 50%;
+  height: calc(70% + 1.5em);
+  transform: translateY(-50%);
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+}
+
+div.content {
+  display: inline-block;
+  width: 45%;
+  height: calc(100% - 1.5em);
+  border: solid 1px white;
+}
+
+.blue-compliment {
+  background-color: #C8B78C;
+  color: black;
+}
+
+.blue {
+  background-color: #46668d;
+  color: black;
+}
+
+a.icon-link {
+  color: black;
+  text-decoration: none;
+}
+
+.icon {
+  font-family: 'fontello';
+  font-style: normal;
+  margin-left: .3em;
+}
+
+.headshot {
+	border: solid 1px black;
+	border-radius: 100px;
+}
+
+.summary {
+  font-style: italic;
+  font-size: 0.9em;
+}
+
+.technologies {
+  font-size: 0.7em;
+}
+
+#about-me-container {
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: .4em;
+  width: 100%;
+  text-align: center;
+  display: block;
+  border: none;
+  background-color: #46668d;
+  border-top: solid 1px black;
+}
+
+#about-me-container > div {
+  font-size: 1.2em;
+  display: inline-block;
+  width: 300px;
+  height: 300px;
+  border: solid 1px black;
+  clear: both;
+  margin-bottom: .4em;
+  background-color: #C8B78C;
+  padding: .2em;
+  vertical-align: top;
+
+}
+
+#about-me-container > div > h1 {
+  font-size: 1em;
+  color: black;
+}
+
+#about-me-container > div > p {
+  font-size: 0.6em;
+}
+
+#about-me-container > div > p > a {
+  font-size: 1em;
+}
+
+
+#about-me-container > div > p.summary {
+  text-decoration: underline;
+  margin-bottom: .4em;
+}
