@@ -11,6 +11,16 @@
 }
 
 @font-face {
+	font-family: 'phone';
+	src: url('../fonts/icons/phone/fontello.eot');
+  src: url('../fonts/icons/phone/fontello.eot') format('embedded-opentype'),
+       url('../fonts/icons/phone/fontello.woff') format('woff'),
+       url('../fonts/icons/phone/fontello.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
 	font-family: 'Exo';
 	src: url('../fonts/exo/Exo-Regular.otf');
 }
@@ -25,7 +35,7 @@
 	padding: 0;
 	margin: 0 auto;
 	box-sizing: border-box;
-	font-size: 11.5px;
+	font-size: 10.8px;
 }
 
 body {
@@ -103,6 +113,12 @@ a.nav-bar-link:first-child {
 
 i.icon {
 	font-family: 'fontello';
+	font-style: normal;
+	margin-right: .3em;
+}
+
+i.phone-icon {
+	font-family: 'phone';
 	font-style: normal;
 	margin-right: .3em;
 }
