@@ -43,7 +43,7 @@ body {
 	font-family: sans-serif;
 	text-align: center;
 	padding: .5em;
-	line-height: 1.02;
+	line-height: 1.3;
 }
 
 nav {
@@ -58,7 +58,7 @@ nav {
 
 section {
 	padding: .1em;
-	font-size: .7em;
+	font-size: .8em;
 }
 
 section.body {
