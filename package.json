@@ -1,0 +1,23 @@
+{
+  "name": "jrmils89.github.io",
+  "version": "1.0.0",
+  "description": "Hello World. My favorite emoji is ¯&#92;&#95;(ツ)&#95;/¯",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jrmils89/jrmils89.github.io.git"
+  },
+  "author": "Jesse Mills <jessemills1989@gmail.com> (http://www.jessermills.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jrmils89/jrmils89.github.io/issues"
+  },
+  "homepage": "https://github.com/jrmils89/jrmils89.github.io#readme",
+  "devDependencies": {
+    "lite-server": "^2.2.2"
+  }
+}
