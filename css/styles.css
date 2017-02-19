@@ -72,6 +72,11 @@ a:hover, a h6:hover {
   color: #3A506B;
 }
 
+.no-style-link {
+  text-decoration: none;
+  color: black;
+}
+
 h4 {
   font-weight: bold;
 }
@@ -81,7 +86,8 @@ h6 {
   text-transform: uppercase;
 }
 
-#experience {
+.center {
+  text-align: center;
 }
 
 p, li {
@@ -103,4 +109,42 @@ i.icon {
 
 i.phone-icon {
 	font-family: 'phone';
+}
+
+.portfolio-image {
+  height: 250px;
+  border: solid 1px black;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.caption {
+  height: 50px;
+}
+
+.caption p {
+  font-size: 1.5vh;
+}
+
+.nba-gem {
+  background: url('../images/nba-api-gem.png') no-repeat center;
+  background-size: cover;
+}
+
+.nba-app {
+  background: url('../images/nba-application.png') no-repeat center;
+  background-size: cover;
+}
+
+.pair-coder {
+  background: url('../images/pair-coder.png') no-repeat center;
+  background-size: cover;
+}
+
+.flowly {
+  background: url('../images/flowly.png') no-repeat center;
+  background-size: cover;
 }
