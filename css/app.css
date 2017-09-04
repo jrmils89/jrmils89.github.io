@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Lobster|Poiret+One');
+@import url('https://fonts.googleapis.com/css?family=Megrim|Poiret+One');
+
+@import url('https://fonts.googleapis.com/css?family=Encode+Sans+Semi+Condensed:300|Megrim');
 
 
 /*http://www.color-hex.com/color-palette/1408*/
@@ -8,18 +10,22 @@
 }
 body { 
     font-size: 1rem;
-    background-color: #e5e5e5;
-    font-family: 'Poiret One', cursive;
+    background-color: #f9f9f9;
+    font-family: 'Encode Sans Semi Condensed', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Lobster', cursive;
-    color: #d5b05a;
+    font-family: 'Megrim', cursive;
+    color: #ffb83e;
+}
+
+h5 {
+    color: #fff;
 }
 
 #welcome {
-    background-color: #5a7fd5;
-    height: 150px;
+    background-color: #3e85ff;
+    min-height: 100px;
     color: #fff;
     border-bottom: solid 1px #838996;
     margin-bottom: 2em;
@@ -50,7 +56,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card-header {
-    background-color: #5a7fd5;
+    background-color: #3e85ff;
     color: white;
     min-height: 3em;
     display: flex;
@@ -68,9 +74,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .progress-bar-success {
-    background-color: #5a7fd5;
+    background-color: #3e85ff;
 }
 
 a {
-    color: #5a7fd5;
+    color: #3e85ff;
 }
