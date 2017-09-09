@@ -1,15 +1,28 @@
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
 <head>
-  <meta charset="UTF-8">
-  <link rel="icon" type="image/png" href="img/icon.png"/>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="icon" type="image/png" href="img/icon.png" />
   <title>Jesse Mills: Resume</title>
   <link href='https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css' rel='stylesheet' type='text/css'>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+    crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js"></script>
+  <script src="js/app.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
+
+<body ng-app="ResumeApp" ng-controller="ResumeController as rsmCtrl">
   <header class="container">
     <div class="row">
       <h4>Jesse Mills</h4>
@@ -30,18 +43,19 @@
         <h6>Software Developer, H.Bloom Platform</h6>
         <p>From You Flowers</p>
         <p>New York, NY</p>
-        <p>June 2016 - Present</p>
+        <p>{{rsmCtrl.dates.hBloom.startDateReadable}} - {{rsmCtrl.dates.hBloom.endDateReadable}}</p>
         <li>Led development on first externally facing applications built around order and payment operations</li>
-        <li>Worked on developer experience improvements such as introducing front end build and automation tooling and upgrading frameworks across all areas of the stack. 
-          Helped to reduce developer on-boarding by numerous orders of magnitude and providing faster developer feedback</li>
         <li>Various internal tool development around the sales and management of our floral-based products</li>
-
+        <li>Developer experience improvements such as introducing front end build and automation tooling, upgrading frameworks
+          across all areas of the stack, and migrating shared dependencies to libraries to reduce build time. Work helped
+          to reduce developer on-boarding time and helps improve developer feedback time</li>
         <br/>
 
         <h6>Teaching Assistant, WDI-Remote</h6>
         <p>General Assembly</p>
         <p>New York, NY</p>
-        <p>December 2016 - March 2017</p>
+        <p>{{rsmCtrl.dates.gaTa.startDateReadable}} - {{rsmCtrl.dates.gaTa.endDateReadable}}</p>
+        <p>{{rsmCtrl.dates.gaTa.timeWorked}}</p>
         <li>Evening TA supporting students completing remote web development immersive</li>
         <br/>
 
@@ -49,9 +63,11 @@
         <h6>Lead Analyst (March 2013 - July 2014)</h6>
         <p>Bloomberg Sports, Stats LLC (Acquired Bloomberg Sports)</p>
         <p>New York, NY</p>
-        <p>March 2013 - October 2015</p>
+        <p>{{rsmCtrl.dates.bbgStats.startDateReadable}} - {{rsmCtrl.dates.bbgStats.endDateReadable}}</p>
+        <p>{{rsmCtrl.dates.bbgStats.timeWorked}}</p>
         <li>Led development planning and support efforts for baseball enterprise web, mobile, and desktop applications</li>
         <li>Helped on-board and customize solutions for 5 new enterprise teams across the United States and Japan</li>
+        <li>Performed custom data analysis for clients</li>
         <li>Led sprint prioritization and rollout planning and helped coordinate feature and regression testing</li>
         <br/>
 
@@ -95,6 +111,9 @@
         <h6>George Washington University</h6>
         <li>B.A. Hispanic Languages & Literatures</li>
         <li>December 2010 (Semester Early)</li>
+        <h6>General Assembly</h6>
+        <li>January 2016 - April 2016</li>
+        <li>Web Development Immersive</li>
         <h6>Pragmatic Marketing</h6>
         <li>September 2015</li>
         <li>Completed Foundations, Focus & Build Workshops</li>
@@ -104,4 +123,5 @@
   <footer>
   </footer>
 </body>
+
 </html>

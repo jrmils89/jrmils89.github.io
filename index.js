@@ -10,10 +10,10 @@ app.use(logger(':method :url :status :user-agent :remote-addr :response-time ms'
 
 app.use(express.static('./'));
 
-app.get("/", function(req, res) {
+app.get("/", function (req, res) {
     res.render('../index.html')
 })
 
-app.listen(port, function() {
+app.listen(port, function () {
     console.log("Server Started On Port " + port);
 })
