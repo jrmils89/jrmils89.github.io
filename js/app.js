@@ -158,6 +158,10 @@ myApp.controller('ResumeController', function () {
       }
     }
 
+    if (diff.days && diff.days >= 15 && !endDate) {
+      diff.months += 1;
+    }
+
     if (diff.months) {
       if (diff.months > 1) {
         monthsWorked = diff.months + " months"
@@ -166,15 +170,7 @@ myApp.controller('ResumeController', function () {
       }
     }
 
-    if (diff.days && !endDate) {
-      if (diff.days > 1) {
-        daysWorked = diff.days + " days"
-      } else {
-        daysWorked = diff.days + " day";
-      }
-    }
-
-    return yearsWorked + " " + monthsWorked + " " + daysWorked;
+    return yearsWorked + " " + monthsWorked;
   }
 
   self.dates = {
@@ -192,6 +188,11 @@ myApp.controller('ResumeController', function () {
       startDateReadable: 'March 2013',
       endDateReadable: 'October 2015',
       timeWorked: self.timeWorked('2013-03-01', '2015-10-31')
+    },
+    iyaBoard: {
+      startDateReadable: 'September 2017',
+      endDateReadable: 'Present',
+      timeWorked: self.timeWorked('2017-09-01', null)
     }
   }
 
