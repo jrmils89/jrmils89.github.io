@@ -12,13 +12,13 @@ app.use(logger(':method :url :status :user-agent :remote-addr :response-time ms'
 app.use(express.static('./'));
 
 app.get("/", function (req, res) {
-    res.render('../index.html')
+    res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 app.get("/resume", function (req, res) {
     res.sendFile(path.join(__dirname + '/resume.html'));
-  });
+});
 
-  app.listen(port, function () {
+app.listen(port, function () {
     console.log("Server Started On Port " + port);
 })
