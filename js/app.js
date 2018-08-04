@@ -174,10 +174,15 @@ myApp.controller('ResumeController', function () {
   }
 
   self.dates = {
-    hBloom: {
+    hBloomOne: {
       startDateReadable: 'June 2016',
-      endDateReadable: 'Present',
+      endDateReadable: 'March 2018',
       timeWorked: self.timeWorked('2016-06-01', null)
+    },
+    hBloomTwo: {
+      startDateReadable: 'March 2018',
+      endDateReadable: 'Present',
+      timeWorked: self.timeWorked('2018-03-01', null)
     },
     gaTa: {
       startDateReadable: 'December 2016',

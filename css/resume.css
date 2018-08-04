@@ -68,6 +68,13 @@ h6 {
   text-transform: uppercase;
 }
 
+h6 span.dates {
+  color: black;
+  text-transform: none;
+  font-weight: normal;
+  font-size: .8em;
+}
+
 .center {
   text-align: center;
 }
