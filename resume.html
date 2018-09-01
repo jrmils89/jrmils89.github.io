@@ -26,7 +26,9 @@
 <body ng-app="ResumeApp" ng-controller="ResumeController as rsmCtrl">
   <header class="container">
     <div class="row">
-      <h4>Jesse Mills</h4>
+      <div class="twelve columns">
+        <h3>Jesse Mills</h3>
+      </div>
       <p>New York, NY</p>
       <div class="row">
         <li><i class="fa fa-envelope-o"></i>jessemills1989@gmail.com</li>
@@ -35,91 +37,208 @@
         <li><i class="fa fa-github"></i><a href="https://www.github.com/jrmils89" target="_blank" class="unstyled-link">jrmils89</a></li>
       </div>
     </div>
+
   </header>
   <section class="container">
     <div class="row">
-      <div id="experience" class="eight columns">
-        <h5>Professional Work</h5>
+      <div class="twelve columns">
         <hr />
-        <h6>Development Team Lead, H.Bloom <span class="dates">({{rsmCtrl.dates.hBloomTwo.startDateReadable}} - {{rsmCtrl.dates.hBloomTwo.endDateReadable}})</span></h6>
-        <h6>Software Developer, H.Bloom <span class="dates">({{rsmCtrl.dates.hBloomOne.startDateReadable}} - {{rsmCtrl.dates.hBloomOne.endDateReadable}})</span></h6>
-        <p>From You Flowers</p>
-        <p>New York, NY</p>
-        <p>{{rsmCtrl.dates.hBloomOne.timeWorked}}</p>
-        <li>Working on all areas of the stack for all of our floral technical products supporting our sales, fulfillment, accounting, & customer experience teams</li>
-        <br/>
+        <div class="row">
+          <div class="two columns">
+            <h5>Technologies</h5>
+          </div>
+          <div class="ten columns">
+            <div class="row">
+              <div class="four columns">
+                <h6>Languages</h6>
+                <p class="tech-list-item"><strong>Proficient:</strong> Java, Scala, Javascript, SQL, HTML/CSS</p>
+                <p class="tech-list-item"><strong>Intermediate:</strong> C#, Ruby, Node.JS</p>
+                <p class="tech-list-item"><strong>Basic:</strong> Python, Typescript</p>
+              </div>
+              <div class="four columns">
+                <h6>Frameworks</h6>
+                <p class="tech-list-item"><strong>Proficient:</strong> Play! Framework, Spring, AngularJS</p>
+                <p class="tech-list-item"><strong>Intermediate:</strong> ExpressJS, Ruby on Rails, React, ASP.NET</p>
+                <p class="tech-list-item"><strong>Basic:</strong> VueJS, Angular2+</p>
+              </div>
+              <div class="four columns">
+                <h6>Other Technologies</h6>
+                <p class="tech-list-item"><strong>Proficient:</strong> MySQL, JUnit, ScalaTest, Postman/Newman Runner,
+                  Gulp, Git, Maven, Sbt,
+                  Slick, JPA,
+                  Karma/Jasmine</p>
+                <p class="tech-list-item"><strong>Intermediate:</strong> MongoDB, Mocha, RabbitMQ, Akka</p>
+                <p class="tech-list-item"><strong>Basic:</strong> Webpack</p>
+              </div>
+            </div>
+          </div>
 
-        <h6>Teaching Assistant, WDI-Remote</h6>
-        <p>General Assembly</p>
-        <p>New York, NY</p>
-        <p>{{rsmCtrl.dates.gaTa.startDateReadable}} - {{rsmCtrl.dates.gaTa.endDateReadable}}</p>
-        <p>{{rsmCtrl.dates.gaTa.timeWorked}}</p>
-        <li>Evening TA supporting students completing remote web development immersive</li>
-        <br/>
-
-        <h6>Product Manager <span class="dates">(July 2014 - October 2015)</span></h6>
-        <h6>Lead Analyst <span class="dates">(March 2013 - July 2014)</span></h6>
-        <p>Bloomberg Sports, Stats LLC (Acquired Bloomberg Sports)</p>
-        <p>New York, NY</p>
-        <p>{{rsmCtrl.dates.bbgStats.startDateReadable}} - {{rsmCtrl.dates.bbgStats.endDateReadable}}</p>
-        <p>{{rsmCtrl.dates.bbgStats.timeWorked}}</p>
-        <li>Led development planning and support efforts for baseball enterprise web, mobile, and desktop applications</li>
-        <br/>
-
-        <h5>Community & Social Justice Work</h5>
-        <hr/>
-        <h6>IYA Board Memeber</h6>
-        <p>Atlas:DIY</p>
-        <p>Brooklyn, NY</p>
-        <p>{{rsmCtrl.dates.iyaBoard.startDateReadable}} - {{rsmCtrl.dates.iyaBoard.endDateReadable}}</p>
-        <p>{{rsmCtrl.dates.iyaBoard.timeWorked}}</p>
-        <li>Serve on the immigrant youth ally board for Atlas:DIY</li>
-        <h6>Civic Hall Labs - Delta.NYC Pro Bono Tech Cohort</h6>
-        <p>August 2017 - September 2017, March 2018 - May 2018</p>
-        <li>Participated as software developer providing services to non-profits</li>
-        <h6>Open Source Contributions</h6>
-        <p>18F, BackboneJS, QuillJS</p>
-        <li>Various small open source contributions proposed as part of various meetups, with a handful of them being accepted</li>
-        <h6>Personal Projects</h6>
-        <p>Developed and hosted various personal projects for skill development</p>
-        <li>Technologies used: Node, Express, Ruby, Ruby on Rails</li>
-        
+        </div>
       </div>
-      <div id="skills" class="four columns">
-        <h5>Tech Skills</h5>
+    </div>
+    <div class="row">
+      <div id="experience" class="twelve columns">
         <hr />
-        <h6>Languages</h6>
-        <p>Proficient In:</p>
-        <li>Java, Scala, Javascript, Ruby, SQL, HTML/CSS</li>
-        <p>Familiar With:</p>
-        <li>Python, PHP, Typescript, C#</li>
-        <h6>Frameworks</h6>
-        <p>Proficient In:</p>
-        <li>Play! Framework, Spring, Express/Node, Rails, AngularJS</li>
-        <p>Familiar With:</p>
-        <li>React, VueJS, Angular2+</li>
+        <div class="row">
+          <div class="two columns">
+            <h5>Work Experience</h5>
+          </div>
+          <div class="ten columns">
+            <div class="row">
+              <div class="twelve columns">
+                <h6>Development Team Lead <span class="dates">{{rsmCtrl.dates.hBloomTwo.startDateReadable}} -
+                    {{rsmCtrl.dates.hBloomTwo.endDateReadable}}</span></h6>
+                <h6>Software Developer <span class="dates">{{rsmCtrl.dates.hBloomOne.startDateReadable}} -
+                    {{rsmCtrl.dates.hBloomOne.endDateReadable}}</span></h6>
+                <p>H.Bloom - New York, NY</p>
+                <ul>
+                  <li>Building tools to improve our sales, fulfillment, accounting, & customer experience processes</li>
+                  <li>As team lead, managing technical decision making, prioritization, and stakeholder communication
+                    for all H.Bloom development</li>
+                </ul>
+              </div>
+            </div>
+            <div class="row">
+              <div class="twelve columns">
+                <h6>Teaching Assistant, WDI-Remote <span class="dates">{{rsmCtrl.dates.gaTa.startDateReadable}} -
+                    {{rsmCtrl.dates.gaTa.endDateReadable}}</span></h6>
+                <p>General Assembly - New York, NY</p>
+                <ul>
+                  <li>Evening TA supporting students completing remote web development immersive</li>
+                </ul>
+              </div>
+            </div>
 
-        <h6>Databases & Testing</h6>
-        <p>Proficient In:</p>
-        <li>MySQL, MongoDB, JUnit, ScalaTest, Mocha, Postman/Newman Runner, Gulp, Git, Maven, Sbt, Slick, JPA, Karma/Jasmine</li>
-        <p>Familiar With:</p>
-        <li>RSpec, Chai, PhantomJS, CasperJS, Selenium, Webpack, Browserify</li>
-        <h6>Tools / Other</h6>
-        <p>Experience With:</p>
-        <li>Bash/Shell Scripting, TravisCI</li>
-        <br/>
-          <h5>Education</h5>
-        <hr />
-        <h6>George Washington University</h6>
-        <li>B.A. Hispanic Languages & Literatures</li>
-        <li>December 2010 (Semester Early)</li>
-        <h6>General Assembly</h6>
-        <li>January 2016 - April 2016</li>
-        <li>Web Development Immersive</li>
-        <h6>Pragmatic Marketing</h6>
-        <li>September 2015</li>
-        <li>Completed Foundations, Focus & Build Workshops</li>
+            <div class="row">
+              <div class="twelve columns">
+                <h6>Product Manager <span class="dates">July 2014 - October 2015</span></h6>
+                <h6>Lead Analyst <span class="dates">March 2013 - July 2014</span></h6>
+                <p>Bloomberg Sports | Stats LLC (Acquired Bloomberg Sports) - New York, NY</p>
+                <ul>
+                  <li>As product manager, led development planning and support efforts for baseball enterprise web,
+                    mobile, and desktop
+                    applications</li>
+                  <li>As lead analyst, provided statistical analysis reports to MLB clubs <a href="/links/bsports-article.pdf">(example)</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+    <div class="row">
+      <div class="twelve columns">
+        <hr />
+        <div class="row">
+          <div class="two columns">
+            <h5>Community Experience</h5>
+          </div>
+          <div class="ten columns">
+            <div class="row">
+              <div class="twelve columns">
+                <h6>IYA Board Member <span class="dates">{{rsmCtrl.dates.iyaBoard.startDateReadable}} -
+                    {{rsmCtrl.dates.iyaBoard.endDateReadable}}</span></h6>
+                <p>Atlas:DIY - Brooklyn, NY</p>
+                <ul>
+                  <li>Serve on the immigrant youth ally board for Atlas:DIY</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="twelve columns">
+                <h6>The Foundation For New York's Strongest <span class="dates">March 2018 - May 2018</span></h6>
+                <p>Delta.NYC Pro Bono Civic Hall Labs - New York, NY</p>
+                <ul>
+                  <li>Led development effort to build the first website for the foundation associated to the NYC Department of Sanitation</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="twelve columns">
+                <h6>Resilience Advocacy Project <span class="dates">August 2017 - September 2017</span></h6>
+                <p>Delta.NYC Pro Bono Civic Hall Labs - New York, NY</p>
+                <ul>
+                  <li>Provided technical support and research for survey tools</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="twelve columns">
+        <hr />
+        <div class="row">
+          <div class="two columns">
+            <h5>Open Source & Personal Projects</h5>
+          </div>
+          <div class="ten columns">
+            <div class="row">
+              <div class="twelve columns">
+                <h6>18F, BackboneJS, QuillJS</h6>
+                <ul>
+                  <li>Various small open source contributions proposed as part of various meetups, with a handful of
+                    them being
+                    accepted</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="twelve columns">
+                <h6>Personal Projects</h6>
+                <ul>
+                  <li><a href="https://github.com/jrmils89/PartnerCode">Partner Code</a> - An application using NodeJS,
+                    Express, & Websockets to share a code editor session between two or more people</li>
+                  <li><a href="https://github.com/jrmils89/nba_api_wrapper">NBA API Gem</a> - A ruby gem
+                    that wrapped public NBA API endpoints</li>
+                  <li><a href="https://github.com/jrmils89/rails-angular-nba">NBA Basketball App</a> - An
+                    application using Ruby on Rails & Angular that used my NBA API Wrapper gem</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="twelve columns">
+        <hr />
+        <div class="row">
+          <div class="two columns">
+            <h5>Education</h5>
+          </div>
+          <div class="ten columns">
+            <div class="row">
+              <div class="twelve columns">
+                <h6>The George Washington University <span class="dates">September 2007 - December 2010</span></h6>
+                <p>B.A. - Hispanic Languages & Literatures</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="twelve columns">
+                <h6>General Assembly <span class="dates">January 2016 - April 2016</span></h6>
+                <p>Web Development Immersive</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="twelve columns">
+                <h6>Pragmatic Marketing <span class="dates">September 2015</span></h6>
+                <p>Completed Foundations, Focus & Build Workshops - Seminars on Product Development and Market Analysis</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
     </div>
   </section>
   <footer>
