@@ -19,6 +19,10 @@ app.get("/resume", function (req, res) {
     res.sendFile(path.join(__dirname + '/resume.html'));
 });
 
+app.get("/photos", function (req, res) {
+    res.sendFile(path.join(__dirname + '/photos.html'));
+});
+
 app.listen(port, function () {
     console.log("Server Started On Port " + port);
 })

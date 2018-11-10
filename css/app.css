@@ -77,6 +77,10 @@ section {
     width: 100%;
 }
 
+.padding-top {
+    margin-top: 2em;
+}
+
 .text-center {
     text-align: center;
 }
@@ -111,7 +115,7 @@ section {
 section:nth-child(even) {
     background-color: #F7FFF7;
     color: #6CA6C1;
-    border-bottom: solid 1px #000;
+    /* border-bottom: solid 1px #000; */
 }
 
 section:nth-child(odd) {
@@ -119,6 +123,11 @@ section:nth-child(odd) {
     color: #F7FFF7;
     border-bottom: solid 1px #000;
     
+}
+
+.photo-caption {
+    height: 200px;
+    text-align: center;
 }
 
 p {
