@@ -73,6 +73,13 @@ section {
     padding: 1em;
 }
 
+.navbar {
+    margin-bottom: 1rem;
+}
+.bg-green {
+    background-color: #7BAE7F;
+}
+
 .full-width {
     width: 100%;
 }
@@ -156,4 +163,9 @@ a:hover, a>*:hover {
     height: auto;
     background-color: #7BAE7F;
     color: #343434;
+}
+
+.card {
+    min-height: 300px;
+    margin-bottom: 1rem;
 }

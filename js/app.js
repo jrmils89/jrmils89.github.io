@@ -202,3 +202,46 @@ myApp.controller('ResumeController', function () {
   }
 
 });
+
+myApp.controller('PhotosController', function() {
+  var self = this;
+
+  function Photo(src, caption, header) {
+    this.src = src;
+    this.caption = caption;
+    this.header = header;
+  }
+
+  var photos = [
+    new Photo('img/portraits/20180930-DSC_1669-Edit-WEB.jpg', 'caption', 'header1'),
+    new Photo('img/portraits/20180930-DSC_1669-Edit-WEB.jpg', 'caption', 'header2'),
+    new Photo('img/portraits/20180930-DSC_1669-Edit-WEB.jpg', 'caption', 'header3'),
+    new Photo('img/portraits/20180930-DSC_1669-Edit-WEB.jpg', 'caption', 'header4'),
+    new Photo('img/portraits/20180930-DSC_1669-Edit-WEB.jpg', 'caption', 'header5'),
+    new Photo('img/portraits/20180930-DSC_1669-Edit-WEB.jpg', 'caption', 'header6'),
+    new Photo('img/portraits/20180930-DSC_1669-Edit-WEB.jpg', 'caption', 'header7'),
+    new Photo('img/portraits/20180930-DSC_1669-Edit-WEB.jpg', 'caption', 'header8')
+  ];
+
+  var numOfRows =  Math.ceil(photos.length / 3);
+  var col1 = [];
+  var col2 = [];
+  var col3 = [];
+
+  for (var i = 0; i < numOfRows; i++) {
+    var zero = 0 + (3 * i);
+    var one = 1 + (3 * i);
+    var two = 2 + (3 * i);
+
+    if (photos[zero])
+      col1.push(photos[zero])
+
+    if (photos[one])
+      col2.push(photos[one])
+
+    if (photos[two])
+      col3.push(photos[two])
+  }
+
+
+})
