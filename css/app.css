@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat|Mukta');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Oswald');
 
 /*http://www.color-hex.com/color-palette/1408*/
 /* 
@@ -11,29 +11,55 @@
 */
 /* Base Styles */
 * {
-    font-size: 16px;
+    font-size: 14px;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    
-    font-family: 'Montserrat', cursive;
+    font-family: 'Open-Sans', sans-serif;
     font-weight: normal;
 }
 
+html,
+body {
+    height: 100%;
+}
+
+.top-section {
+    height: 100%;
+}
+
+.about-me-section {
+    background-color: #d6d6d6; 
+    min-height: 100%;
+    color: #474747;
+    padding: 1em;
+}
+
+
 body {
     font-size: 1rem;
-    color: #343434;
-    /* background-color: #EEF0F2; */
+    color: #d89a4a;
+    background-color: #474747;
 }
 
 /* Headers */
+header>ul {
+    width: 100%;
+}
+
+header>ul>li {
+    display: inline-block;
+    min-width: 300px;
+    text-align: right;
+}
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-    font-family: 'Mukta', sans-serif;
+    font-family: 'Oswald', sans-serif;
 }
 
 h1 {
@@ -66,7 +92,7 @@ section {
     width: 100%;
     min-height: 20em;
     /* border-top: solid 1px #000; */
-    
+
     /* box-shadow: 0px 5px 15px rgba(60, 55, 68, .2); */
     /* margin-top: 1.5em; */
     /* margin-bottom: 1.5em; */
@@ -76,6 +102,7 @@ section {
 .navbar {
     margin-bottom: 1rem;
 }
+
 .bg-green {
     background-color: #7BAE7F;
 }
@@ -86,6 +113,10 @@ section {
 
 .padding-top {
     margin-top: 2em;
+}
+
+.small {
+    font-size: .7em;
 }
 
 .text-center {
@@ -112,24 +143,11 @@ section {
 }
 
 .right {
-    float:right;
+    float: right;
 }
 
 .responsive-img {
     width: 100%;
-}
-
-section:nth-child(even) {
-    background-color: #F7FFF7;
-    color: #6CA6C1;
-    /* border-bottom: solid 1px #000; */
-}
-
-section:nth-child(odd) {
-    background-color: #6CA6C1;
-    color: #F7FFF7;
-    border-bottom: solid 1px #000;
-    
 }
 
 .photo-caption {
@@ -143,29 +161,109 @@ p {
 
 a,
 a>* {
-    color: #454851;
+    color: #d89a4a;
     text-decoration: none;
-    font-weight: 800;
+    transition-property: color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in;
 }
 
-a:hover, a>*:hover {
-    color: #73956F;
+a:hover, a:focus, a:active {
+    color: #c1c1c1;
+    text-decoration: none;
 }
 
-#header {
-    border-top: solid 1px #000;
+/* Icon Pop */
+@-webkit-keyframes hvr-icon-pop {
+    50% {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        color: #c1c1c1;
+    }
 }
 
-#footer,
-#header {
+@keyframes hvr-icon-pop {
+    50% {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        color: #c1c1c1;
+    }
+}
+
+.hvr-icon-pop {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+.hvr-icon-pop .hvr-icon {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform, color;
+    transition-property: transform, color;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+
+@-webkit-keyframes color-fade {
+    50% {
+        color: #c1c1c1;
+    }
+}
+
+@keyframes color-fade {
+    50% {
+        color: #c1c1c1;
+    }
+}
+
+.hvr-icon-pop:hover .hvr-icon,
+.hvr-icon-pop:focus .hvr-icon,
+.hvr-icon-pop:active .hvr-icon {
+    -webkit-animation-name: hvr-icon-pop;
+    animation-name: hvr-icon-pop;
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}
+
+.link-icons {
+    list-style: none;
+    clear: both;
+}
+
+.link-icons>li {
+    padding: .2em;
+}
+
+.top-section-main-content {
+    padding: .2em;
     text-align: center;
-    min-height: 0;
-    height: auto;
-    background-color: #7BAE7F;
-    color: #343434;
 }
 
-.card {
-    min-height: 300px;
-    margin-bottom: 1rem;
+.middle-align {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.bottom-align {
+    margin: 0;
+    position: absolute;
+    top: 95%;
+    left: 50%;
+    -ms-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
 }
