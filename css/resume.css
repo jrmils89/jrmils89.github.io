@@ -69,9 +69,13 @@ h4 {
   font-weight: bold;
 }
 
+h5 {
+  font-size: 1.5rem;
+}
+
 h6 {
   margin-bottom: 0rem;
-  font-size: 1.7rem;
+  font-size: 1.4rem;
 }
 
 h6 span.dates {
