@@ -176,13 +176,13 @@ myApp.controller('ResumeController', function () {
   self.dates = {
     hBloomOne: {
       startDateReadable: 'June 2016',
-      endDateReadable: 'March 2018',
-      timeWorked: self.timeWorked('2016-06-01', null)
+      endDateReadable: 'March 2019',
+      timeWorked: self.timeWorked('2016-06-01', '2019-03-01')
     },
-    hBloomTwo: {
-      startDateReadable: 'March 2018',
+    fevo: {
+      startDateReadable: 'March 2019',
       endDateReadable: 'Present',
-      timeWorked: self.timeWorked('2018-03-01', null)
+      timeWorked: self.timeWorked('2019-03-01', null)
     },
     gaTa: {
       startDateReadable: 'December 2016',
@@ -196,8 +196,8 @@ myApp.controller('ResumeController', function () {
     },
     iyaBoard: {
       startDateReadable: 'September 2017',
-      endDateReadable: 'Present',
-      timeWorked: self.timeWorked('2017-09-01', null)
+      endDateReadable: 'December 2020',
+      timeWorked: self.timeWorked('2017-09-01', '2019-12-01')
     }
   }
 

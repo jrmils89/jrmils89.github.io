@@ -12,10 +12,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="icon" type="image/png" href="img/icon.png" />
   <title>Jesse Mills: Resume</title>
-  <meta name="description" content="Resume for Jesse Mills Software Developer, Product Person, and Friend in New York City">
+  <meta name="description"
+    content="Resume for Jesse Mills Software Developer, Product Person, and Friend in New York City">
   <link href='https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css' rel='stylesheet' type='text/css'>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-    crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/resume.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js"></script>
@@ -33,8 +34,10 @@
       <div class="row">
         <li><i class="fa fa-envelope-o"></i>jessemills1989@gmail.com</li>
         <li><i class="fa fa-mobile"></i>401-523-1898</li>
-        <li><i class="fa fa-globe"></i><a href="http://www.jessermills.com" target="_blank" class="unstyled-link">www.jessermills.com</a></li>
-        <li><i class="fa fa-github"></i><a href="https://www.github.com/jrmils89" target="_blank" class="unstyled-link">jrmils89</a></li>
+        <li><i class="fa fa-globe"></i><a href="http://www.jessermills.com" target="_blank"
+            class="unstyled-link">www.jessermills.com</a></li>
+        <li><i class="fa fa-github"></i><a href="https://www.github.com/jrmils89" target="_blank"
+            class="unstyled-link">jrmils89</a></li>
       </div>
     </div>
 
@@ -49,32 +52,18 @@
           </div>
           <div class="ten columns">
             <div class="row">
-              <div class="four columns">
-                <h6>Languages</h6>
-                <p class="tech-list-item"><strong>Proficient:</strong> Java, Scala, Javascript, SQL, HTML/CSS</p>
-                <p class="tech-list-item"><strong>Intermediate:</strong> C#, Ruby, Node.JS</p>
-                <p class="tech-list-item"><strong>Basic:</strong> Python, Typescript</p>
-              </div>
-              <div class="four columns">
-                <h6>Frameworks</h6>
-                <p class="tech-list-item"><strong>Proficient:</strong> Play! Framework, Spring, AngularJS</p>
-                <p class="tech-list-item"><strong>Intermediate:</strong> ExpressJS, Ruby on Rails, React, ASP.NET</p>
-                <p class="tech-list-item"><strong>Basic:</strong> VueJS, Angular2+</p>
-              </div>
-              <div class="four columns">
-                <h6>Other Technologies</h6>
-                <p class="tech-list-item"><strong>Proficient:</strong> MySQL, JUnit, ScalaTest, Postman/Newman Runner,
-                  Gulp, Git, Maven, Sbt,
-                  Slick, JPA,
-                  Karma/Jasmine</p>
-                <p class="tech-list-item"><strong>Intermediate:</strong> MongoDB, Mocha, RabbitMQ, Akka</p>
-                <p class="tech-list-item"><strong>Basic:</strong> Webpack</p>
-              </div>
+              <p class="tech-list-item"><strong>Proficient:</strong> Scala, Javascript, Typescript, Java, Node.JS, SQL
+                (MySQL, Postgres), HTML/CSS, Play! Framework, Spring, AngularJS, React, Apollo, GraphQL, JUnit,
+                ScalaTest, Postman/Newman Runner, Gulp, Git, Maven, Sbt, Slick, JPA, Karma/Jasmine</p><br />
+              <p class="tech-list-item"><strong>Intermediate:</strong> C#, Ruby/Ruby on Rails,
+                ASP.NET, MongoDB, Mocha, RabbitMQ, Akka, Webpack</p><br />
+              <p class="tech-list-item"><strong>Basic:</strong> Python, VueJS, Angular2+</p>
             </div>
           </div>
-
         </div>
+
       </div>
+    </div>
     </div>
     <div class="row">
       <div id="experience" class="twelve columns">
@@ -86,9 +75,21 @@
           <div class="ten columns">
             <div class="row">
               <div class="twelve columns">
-                <h6>Development Team Lead <span class="dates">{{rsmCtrl.dates.hBloomTwo.startDateReadable}} -
-                    {{rsmCtrl.dates.hBloomTwo.endDateReadable}}</span></h6>
-                <h6>Software Developer <span class="dates">{{rsmCtrl.dates.hBloomOne.startDateReadable}} -
+                <h6>Software Developer / Senior Developer <span class="dates">{{rsmCtrl.dates.fevo.startDateReadable}} -
+                    {{rsmCtrl.dates.fevo.endDateReadable}}</span></h6>
+                <p>Fevo - New York, NY</p>
+                <ul>
+                  <li>Building solutions to scale revenue and operations of collective e-commerce platform, including
+                    payment and promo processing, inventory management, and increasing the funnel size</li>
+                  <li>Improving code quality, testing coverage, and general stability and performance optimizations
+                    across our stack</li>
+                </ul>
+              </div>
+            </div>
+            <div class="row">
+              <div class="twelve columns">
+                <h6>Software Developer / Development Team Lead <span
+                    class="dates">{{rsmCtrl.dates.hBloomOne.startDateReadable}} -
                     {{rsmCtrl.dates.hBloomOne.endDateReadable}}</span></h6>
                 <p>H.Bloom - New York, NY</p>
                 <ul>
@@ -118,7 +119,8 @@
                   <li>As product manager, led development planning and support efforts for baseball enterprise web,
                     mobile, and desktop
                     applications</li>
-                  <li>As lead analyst, provided statistical analysis reports to MLB clubs <a href="/links/bsports-article.pdf">(example)</a></li>
+                  <li>As lead analyst, provided statistical analysis reports to MLB clubs <a
+                      href="/links/bsports-article.pdf">(example)</a></li>
                 </ul>
               </div>
             </div>
@@ -140,7 +142,7 @@
                     {{rsmCtrl.dates.iyaBoard.endDateReadable}}</span></h6>
                 <p>Atlas:DIY - Brooklyn, NY</p>
                 <ul>
-                  <li>Serve on the immigrant youth ally board for Atlas:DIY</li>
+                  <li>Served on the immigrant youth ally board for Atlas:DIY until their closing</li>
                 </ul>
               </div>
             </div>
@@ -150,7 +152,8 @@
                 <h6>The Foundation For New York's Strongest <span class="dates">March 2018 - May 2018</span></h6>
                 <p>Delta.NYC Pro Bono Civic Hall Labs - New York, NY</p>
                 <ul>
-                  <li>Within structured 8-week program, led development effort to build the first website for the foundation associated to the NYC Department of Sanitation</li>
+                  <li>Within structured 8-week program, led development effort to build the first website for the
+                    foundation associated to the NYC Department of Sanitation</li>
                   <li>Site is live at <a href="http://nycstrongest.org/">http://nycstrongest.org/</a></li>
                 </ul>
               </div>
@@ -171,7 +174,7 @@
     </div>
 
 
-    <div class="row">
+    <!-- <div class="row">
       <div class="twelve columns">
         <hr />
         <div class="row">
@@ -206,7 +209,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="row">
       <div class="twelve columns">
@@ -231,7 +234,8 @@
             <div class="row">
               <div class="twelve columns">
                 <h6>Pragmatic Marketing <span class="dates">September 2015</span></h6>
-                <p>Completed Foundations, Focus & Build Workshops - Seminars on Product Development and Market Analysis</p>
+                <p>Completed Foundations, Focus & Build Workshops - Seminars on Product Development and Market Analysis
+                </p>
               </div>
             </div>
 
