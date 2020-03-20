@@ -1,33 +1,39 @@
-@import url('https://fonts.googleapis.com/css?family=Encode+Sans:300');
+@import url("https://fonts.googleapis.com/css?family=Encode+Sans:300");
 
 html {
   font-size: 50%;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 body {
   line-height: 1.2;
-  font-family: 'Encode Sans', Arial, sans-serif;
+  font-family: "Encode Sans", Arial, sans-serif;
   color: rgb(0, 0, 0);
-
 }
 
-header.row, header.column, header.container {
+header.row,
+header.column,
+header.container {
   text-align: center;
 }
 
 header li {
   list-style: none;
   display: inline;
-  margin: 0em .4em;
+  margin: 0em 0.4em;
 }
 
-header h1, header h2, header h3, header h4, header h5, header h6 {
-  margin-bottom: .1em;
+header h1,
+header h2,
+header h3,
+header h4,
+header h5,
+header h6 {
+  margin-bottom: 0.1em;
 }
 
 header.container {
-  padding-bottom: .5em;
+  padding-bottom: 0.5em;
 }
 
 .container {
@@ -43,17 +49,24 @@ section h6 {
   font-weight: bold;
 }
 
-h1, h2, h3, h4, h5, h6, a {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
   color: rgb(0, 0, 0);
-  margin-bottom: .9rem;
+  margin-bottom: 0.9rem;
 }
 
 a {
   font-style: italic;
 }
 
-a:hover, a h6:hover {
-  color: #3A506B;
+a:hover,
+a h6:hover {
+  color: #3a506b;
 }
 
 .no-style-link {
@@ -61,7 +74,8 @@ a:hover, a h6:hover {
   color: black;
 }
 
-h3, h6 {
+h3,
+h6 {
   text-transform: uppercase;
 }
 
@@ -82,7 +96,7 @@ h6 span.dates {
   color: black;
   text-transform: none;
   font-weight: normal;
-  font-size: .8em;
+  font-size: 0.8em;
   float: right;
 }
 
@@ -90,7 +104,8 @@ h6 span.dates {
   text-align: center;
 }
 
-p, li {
+p,
+li {
   margin-bottom: 0.1rem;
 }
 
@@ -104,16 +119,28 @@ ul li {
 }
 
 hr {
-  border-color: #1C2541;
-  margin-top: .5rem;
-  margin-bottom: .5rem;
+  border-color: #1c2541;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 i {
   font-style: normal;
-  margin-right: .3em;
+  margin-right: 0.3em;
 }
 
 .tech-list-item {
   margin-bottom: 0.2rem;
+}
+
+.resume-container {
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+}
+
+.resume {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
 }
